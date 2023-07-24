@@ -92,6 +92,36 @@
 
         .sidebar{flex: 1; 
             background-color: white;
+
+            .navbar{
+                display: flex;
+                align-items: center;
+                background-color:#a7bcff;
+                height: 50px;
+                padding: 10px;
+                justify-content: space-between;
+                color: black;
+
+
+                .logo{
+                    font-weight:bold;
+                }
+
+                .user{
+                    display: flex;
+                    gap: 10px;
+
+                    img{
+                       background-color: gray;
+                       height: 24px;
+                       width: 24px;
+                       border-radius: 50%;
+                       object-fit: cover;
+                    }
+
+                    
+                }
+            }
         }
         .chat{flex: 2;}
     }
