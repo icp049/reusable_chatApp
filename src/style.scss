@@ -28,10 +28,29 @@
             input{
                 padding: 15px;
                 border: none;
-                border-bottom: #a7bcff;
+                border-bottom: 1 px solid #a7bcff;
+                &::placeholder{
+                    color: rgb(175,175,175);
+                }
             }
+            button{
+                background-color: #7b96ec;
+                color: white;
+                padding: 10px;
+                font-weight: bold;
+                border: none;
+                cursor: pointer;
 
+
+            }
          }
+          p{
+            color: #5d5b8d;
+            font-size: 12px;
+            margin-top: 10px;
+            
+          }
+
         }
 
 }
