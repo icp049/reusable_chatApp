@@ -4,7 +4,7 @@ import React from "react"
 const Navbar = () => {
     return(
         <div className = "navbar">
-            <span className = "logo">Chat</span>
+            <span className = "logo">Chats</span>
             <div className= "user">
 
             </div>
