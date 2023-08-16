@@ -248,6 +248,12 @@
                 object-fit: cover;
               }
             }
+
+            .timestamp {
+                color: rgb(156, 152, 152);
+                font-size: 11px;
+           
+            }
             .messageContent {
               max-width: 80%;
               display: flex;
@@ -264,6 +270,8 @@
               img {
                 width: 50%;
               }
+
+            
             }
   
             &.owner {
