@@ -6,14 +6,15 @@ const Message = ({ message }) => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
-  const [timeDisplay, setTimeDisplay] = useState("Just now"); // Initial state
+  const [showTimestamp, setShowTimestamp] = useState(false);
+  const [timeDisplay, setTimeDisplay] = useState("Just now");
 
   const ref = useRef();
+  const timeoutRef = useRef(null); // To store the timeout reference
 
   useEffect(() => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
 
-    // Calculate the time difference and update time display
     const calculateTimeDifference = () => {
       const formattedTimestamp = message.date?.toDate();
       const now = new Date();
@@ -28,20 +29,34 @@ const Message = ({ message }) => {
       }
     };
 
-    calculateTimeDifference(); // Calculate initially
+    calculateTimeDifference();
 
-    // Recalculate the time difference after 1 minute
-    const interval = setInterval(calculateTimeDifference, 60000); // 1 minute in milliseconds
+    const interval = setInterval(calculateTimeDifference, 60000);
 
     return () => {
-      clearInterval(interval); // Clear interval on component unmount
+      clearInterval(interval);
     };
   }, [message]);
+
+  const handleToggleTimestamp = () => {
+    setShowTimestamp(true);
+
+    // Clear any previous timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    // Set a new timeout to hide the timestamp after 5 seconds
+    timeoutRef.current = setTimeout(() => {
+      setShowTimestamp(false);
+    }, 5000);
+  };
 
   return (
     <div
       ref={ref}
       className={`message ${message.senderId === currentUser.uid && "owner"}`}
+      onClick={handleToggleTimestamp}
     >
       <div className="messageInfo">
         <img
@@ -52,7 +67,7 @@ const Message = ({ message }) => {
           }
           alt=""
         />
-        <span className = "timestamp">{timeDisplay}</span> {/* Display formatted timestamp */}
+        {showTimestamp && <span className="timestamp">{timeDisplay}</span>}
       </div>
       <div className="messageContent">
         <p>{message.text}</p>
