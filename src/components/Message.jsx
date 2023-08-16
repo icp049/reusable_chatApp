@@ -67,13 +67,20 @@ const Message = ({ message }) => {
           }
           alt=""
         />
-        {showTimestamp && <span className="timestamp">{timeDisplay}</span>}
+        
       </div>
+
+    
+
+    
       <div className="messageContent">
         <p>{message.text}</p>
         {message.img && <img src={message.img} alt="" />}
+        {showTimestamp && <span className="timestamp">{timeDisplay}</span>}
       </div>
+     
     </div>
+    
   );
 };
 
