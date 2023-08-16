@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 
@@ -6,14 +6,37 @@ const Message = ({ message }) => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
+  const [timeDisplay, setTimeDisplay] = useState("Just now"); // Initial state
+
   const ref = useRef();
 
   useEffect(() => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
-  }, [message]);
 
-  // Format timestamp into a human-readable date and time
-  const formattedTimestamp = message.date?.toDate().toLocaleString();
+    // Calculate the time difference and update time display
+    const calculateTimeDifference = () => {
+      const formattedTimestamp = message.date?.toDate();
+      const now = new Date();
+      const timeDifferenceInSeconds = Math.floor(
+        (now - formattedTimestamp) / 1000
+      );
+
+      if (timeDifferenceInSeconds <= 60) {
+        setTimeDisplay("Just now");
+      } else {
+        setTimeDisplay(formattedTimestamp.toLocaleString());
+      }
+    };
+
+    calculateTimeDifference(); // Calculate initially
+
+    // Recalculate the time difference after 1 minute
+    const interval = setInterval(calculateTimeDifference, 60000); // 1 minute in milliseconds
+
+    return () => {
+      clearInterval(interval); // Clear interval on component unmount
+    };
+  }, [message]);
 
   return (
     <div
@@ -29,7 +52,7 @@ const Message = ({ message }) => {
           }
           alt=""
         />
-        <span>{formattedTimestamp}</span> {/* Display formatted timestamp */}
+        <span className = "timestamp">{timeDisplay}</span> {/* Display formatted timestamp */}
       </div>
       <div className="messageContent">
         <p>{message.text}</p>
