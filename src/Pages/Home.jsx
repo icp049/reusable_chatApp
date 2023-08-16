@@ -1,16 +1,11 @@
 import React from "react"
 
-const Hpme = () => {
+const Home = () => {
     return (
         <div className = "home">
             <div classname = "container">
-
-
-
-
-
-
-
+             <Sidebar />
+             
             </div>     
             </div>
     )
