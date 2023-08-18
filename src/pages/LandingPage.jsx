@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-
+import {Link} from "react-router-dom";
 
 const LandingPage = () => {
     const { currentUser } = useContext(AuthContext);
@@ -21,7 +21,15 @@ const LandingPage = () => {
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
         <h1>{getGreetingMessage()}</h1>
       </div>
+
+       <div>
+        <Link to = "message"><h1> View Messages</h1></Link>
+       </div>
+
+
     </div>
+
+    
   );
 };
 
