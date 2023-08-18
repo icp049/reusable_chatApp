@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import MyProfile from "./pages/MyProfile";
+import LandingPage from "./pages/LandingPage";
 function App() {
   const { currentUser } = useContext(AuthContext);
 
@@ -25,7 +26,7 @@ function App() {
             index
             element={
               <ProtectedRoute>
-                <MyProfile/>
+                <LandingPage/>
               </ProtectedRoute>
             }
           />
@@ -33,6 +34,13 @@ function App() {
            element = {
             <ProtectedRoute>
                 <Home/>
+              </ProtectedRoute>
+           }
+          />
+          <Route path = "myprofile"  
+           element = {
+            <ProtectedRoute>
+                <MyProfile/>
               </ProtectedRoute>
            }
           />

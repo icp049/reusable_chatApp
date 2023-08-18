@@ -58,7 +58,7 @@ const Landingpagenavbar = () => {
           columnGap="20px"
           zIndex="2"
         >
-          <Link to="">Home</Link>
+          <Link to="myprofile">My Profile</Link>
           <Link to="/message">Messages</Link>
           <Link to="">Listings</Link>
 
