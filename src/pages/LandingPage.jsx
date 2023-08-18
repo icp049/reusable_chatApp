@@ -18,22 +18,30 @@ const LandingPage = () => {
   };
 
   return (
-  
     <div>
-        <Landingpagenavbar/>
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-        <h1>{getGreetingMessage()}</h1>
+      <Landingpagenavbar />
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+        <div style={{ position: "relative", marginBottom: "20px" }}>
+          <img
+            src={currentUser.photoURL}
+            alt=""
+            style={{
+              width: "150px",
+              height: "150px",
+              borderRadius: "50%",
+              border: "2px solid #fff",
+            }}
+          />
+        </div>
+        <h1 style={{ marginBottom: "20px" }}>{getGreetingMessage()}</h1>
+        <div>
+          <Link to="message">
+            <h1>View Messages</h1>
+          </Link>
+        </div>
       </div>
-
-       <div>
-        <Link to = "message"><h1> View Messages</h1></Link>
-       </div>
-
-
     </div>
-
-    
   );
-};
+        };  
 
 export default LandingPage;
