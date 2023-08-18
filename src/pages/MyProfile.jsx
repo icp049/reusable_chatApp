@@ -10,7 +10,7 @@ const MyProfile = () => {
   const getGreetingMessage = () => {
     if (currentUser) {
       // If a user is logged in, show the greeting with the username
-      return `@ ${currentUser.displayName || "user"}!`;
+      return `@ ${currentUser.displayName || "user"}`;
     } else {
       // If no user is logged in, show a generic message
       return "Welcome!";
