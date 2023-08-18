@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
-import { auth } from "../firebase";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
+
 
 const LandingPage = () => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    // Set up an observer to listen for authentication state changes
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-    });
-
-    // Clean up the observer when the component unmounts
-    return () => unsubscribe();
-  }, []);
+    const { currentUser } = useContext(AuthContext);
 
   const getGreetingMessage = () => {
-    if (user) {
+    if (currentUser) {
       // If a user is logged in, show the greeting with the username
       return `Hi, ${user.displayName || "user"}!`;
     } else {
