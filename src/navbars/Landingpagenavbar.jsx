@@ -5,15 +5,24 @@ import {
   ExitToAppOutlined, // 1. Import the ExitToAppOutlined icon
 } from '@mui/icons-material';
 import { useNavigate, Link } from 'react-router-dom';
-
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 const Landingpagenavbar = () => {
   const navigate = useNavigate(); // Hook to access the navigation function
 
+  const { currentUser } = useContext(AuthContext);
+
   const handleLogout = () => {
-   auth.signOut().then(() => {
-      navigate("/"); // Replace "/login" with the actual path to your login page
-    });
+    if (currentUser) {
+      auth.signOut() // Assuming you have access to auth here
+        .then(() => {
+          navigate('login');
+        })
+        .catch(error => {
+          console.error('Error logging out:', error);
+        });
+    }
   };
 
   return (
@@ -50,7 +59,7 @@ const Landingpagenavbar = () => {
           zIndex="2"
         >
           <Link to="">Home</Link>
-          <Link to="/messages">Messages</Link>
+          <Link to="/message">Messages</Link>
           <Link to="">Listings</Link>
 
           <IconButton sx={{ color: "black" }}>
