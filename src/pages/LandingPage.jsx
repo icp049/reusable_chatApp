@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import {Link} from "react-router-dom";
+import Landingpagenavbar from "../navbars/Landingpagenavbar";
 
 const LandingPage = () => {
     const { currentUser } = useContext(AuthContext);
@@ -17,7 +18,9 @@ const LandingPage = () => {
   };
 
   return (
+  
     <div>
+        <Landingpagenavbar/>
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
         <h1>{getGreetingMessage()}</h1>
       </div>

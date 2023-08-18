@@ -6,8 +6,8 @@ import {
 } from '@mui/icons-material';
 import { useNavigate, Link } from 'react-router-dom';
 import { useContext } from "react";
-import { AuthContext } from "./context/AuthContext";
-
+import { AuthContext } from "../context/AuthContext";
+import {auth} from "../firebase"
 const Landingpagenavbar = () => {
   const navigate = useNavigate(); // Hook to access the navigation function
 
