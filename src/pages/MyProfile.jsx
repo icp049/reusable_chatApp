@@ -35,7 +35,7 @@ const MyProfile = () => {
         </div>
         <h1 style={{ marginBottom: "20px" }}>{getGreetingMessage()}</h1>
         <div>
-          <Link to="message">
+          <Link to="/message">
             <h1>View Messages</h1>
           </Link>
         </div>

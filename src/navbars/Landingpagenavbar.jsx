@@ -17,7 +17,7 @@ const Landingpagenavbar = () => {
     if (currentUser) {
       auth.signOut() // Assuming you have access to auth here
         .then(() => {
-          navigate('login');
+          navigate('/login');
         })
         .catch(error => {
           console.error('Error logging out:', error);
@@ -58,7 +58,7 @@ const Landingpagenavbar = () => {
           columnGap="20px"
           zIndex="2"
         >
-          <Link to="myprofile">My Profile</Link>
+          <Link to="/myprofile">My Profile</Link>
           <Link to="/message">Messages</Link>
           <Link to="">Listings</Link>
 
