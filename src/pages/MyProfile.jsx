@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import {Link} from "react-router-dom";
 import Landingpagenavbar from "../navbars/Landingpagenavbar";
 
-const LandingPage = () => {
+const MyProfile = () => {
     const { currentUser } = useContext(AuthContext);
 
   const getGreetingMessage = () => {
@@ -44,4 +44,4 @@ const LandingPage = () => {
   );
         };  
 
-export default LandingPage;
+export default MyProfile;
