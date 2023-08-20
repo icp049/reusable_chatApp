@@ -15,7 +15,7 @@
   }
   
   .formContainer {
-    background-color: #a7bcff;
+    background-color: #556dbb;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -31,14 +31,14 @@
       align-items: center;
   
       .logo {
-        color: #5d5b8d;
+        color: #78a0db;
         font-weight: bold;
         font-size: 24px;
   
       }
   
       .title {
-        color: #5d5b8d;
+        color: #0d0c31;
         font-size: 12px;
       }
   
@@ -58,7 +58,7 @@
         }
   
         button {
-          background-color: #7b96ec;
+          background-color: #3f66e9;
           color: white;
           padding: 10px;
           font-weight: bold;
@@ -70,7 +70,7 @@
           display: flex;
           align-items: center;
           gap: 10px;
-          color: #8da4f1;
+          color: #2247be;
           font-size: 12px;
           cursor: pointer;
   
@@ -107,7 +107,7 @@
   
       .sidebar {
         flex: 1;
-        background-color: #3e3c61;
+        background-color: #218bee;
         position: relative;
   
         .navbar {
