@@ -205,6 +205,58 @@ const AddNest = ({ onClose }) => {
                         />
                         Pool
                     </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="airconditioning"
+                            checked={selectedAmenities.pool}
+                            onChange={handleAmenitiesChange}
+                        />
+                        Air Conditioning
+                    </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="washer"
+                            checked={selectedAmenities.pool}
+                            onChange={handleAmenitiesChange}
+                        />
+                       Washer
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="dryer"
+                            checked={selectedAmenities.pool}
+                            onChange={handleAmenitiesChange}
+                        />
+                       Dryer
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="hotcoldshower"
+                            checked={selectedAmenities.pool}
+                            onChange={handleAmenitiesChange}
+                        />
+                      Hot & Cold Shower
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="bathtub"
+                            checked={selectedAmenities.pool}
+                            onChange={handleAmenitiesChange}
+                        />
+                       Bathtub
+                    </label>
                     {/* Add more amenities checkboxes here */}
                 </div>
 
