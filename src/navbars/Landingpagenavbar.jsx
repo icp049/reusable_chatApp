@@ -49,7 +49,9 @@ const Landingpagenavbar = () => {
           sx={{ ':hover': { cursor: "pointer" } }}
           color="blue"
         >
+          <Link to = "/" >
           NestMates
+          </Link>
         </Box>
 
         <Box
