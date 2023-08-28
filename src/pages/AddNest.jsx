@@ -54,19 +54,25 @@ const AddNest = ({ onClose }) => {
                     </Step>
                 ))}
             </Stepper>
-
             {activeStep === 0 && (
-                <Box
-                    width="400px"
-                    padding="20px"
-                    borderRadius="5px"
-                    bgcolor="white"
-                    boxShadow="0 2px 5px rgba(0, 0, 0, 0.3)"
-                    boxSizing="border-box"
-                >
-                    {/* ... (step 0 content) */}
-                </Box>
-            )}
+    <Box
+        width="400px"
+        padding="20px"
+        borderRadius="5px"
+        bgcolor="white"
+        boxShadow="0 2px 5px rgba(0, 0, 0, 0.3)"
+        boxSizing="border-box"
+    >
+        <form onSubmit= "">
+            <input required type="text" placeholder="Listing Name" />
+            <input required type="text" placeholder="Description" />
+            <textarea required placeholder="Looking for..."></textarea>
+            <input type="file" accept="image/*" multiple />
+            <button type="submit">Next</button>
+        </form>
+    </Box>
+)}
+
 
             {activeStep === 1 && (
                 <Box
