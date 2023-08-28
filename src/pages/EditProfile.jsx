@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import { AuthContext } from "../context/AuthContext";
 import Landingpagenavbar from "../navbars/Landingpagenavbar";
 import Box from "@mui/material/Box";
@@ -9,11 +11,13 @@ import Typography from "@mui/material/Typography";
 
 import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, setDoc,updateDoc } from "firebase/firestore";
+import { doc, setDoc,updateDoc, collection } from "firebase/firestore";
+
+
 
 const EditProfile = () => {
   const { currentUser } = useContext(AuthContext);
-
+  const navigate = useNavigate(); 
   // State to store the user's profile data
   const [profileData, setProfileData] = useState({
     displayName: currentUser.displayName || "",
@@ -37,23 +41,31 @@ const EditProfile = () => {
     try {
       // Get a reference to the current user's Firestore document
       const userDocRef = doc(db, "users", currentUser.uid);
-
-      // Update the fields in the document
-      await updateDoc(userDocRef, {
+  
+      // Reference to the subcollection 'profileDetails' under the user's document
+      const profileCollectionRef = collection(userDocRef, "profileDetails");
+  
+      // Reference to the specific document within 'profileDetails'
+      const profileDocRef = doc(profileCollectionRef, "your-document-id"); // Replace with your document ID
+  
+      // Use setDoc with merge: true to add/update the profile document
+      await setDoc(profileDocRef, {
         displayName: profileData.displayName,
         aboutMe: profileData.aboutMe,
         snaps: profileData.snaps,
         interests: profileData.interests,
         nestLocation: profileData.nestLocation,
         nest: profileData.nest,
-      });
-
+      }, { merge: true });
+  
       console.log("Profile data saved:", profileData);
+      navigate("/myprofile");
     } catch (error) {
       console.error("Error saving profile:", error);
     }
   };
-
+  
+  
   return (
     <Box>
       <Landingpagenavbar />
