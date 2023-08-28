@@ -30,8 +30,22 @@ const AddNest = ({ onClose }) => {
     };
 
 
+    const [selectedAmenities, setSelectedAmenities] = useState({
+        wifi: false,
+        parking: false,
+        pool: false,
+        // Add more amenities here
+    });
 
 
+
+    const handleAmenitiesChange = (event) => {
+        const { name, checked } = event.target;
+        setSelectedAmenities((prevAmenities) => ({
+            ...prevAmenities,
+            [name]: checked,
+        }));
+    };
 
 
 
@@ -151,12 +165,78 @@ const AddNest = ({ onClose }) => {
                 )}
 
                 {activeStep === 2 && (
-                    <form>
-                        {/* Amenities/Rules inputs */}
-                        <button onClick={onClose}>Cancel</button>
-                        <button type="submit">Submit</button>
-                    </form>
-                )}
+                    
+                 <form onSubmit={handleNext}>
+             
+                <div>
+                    <h2>Amenities</h2>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="wifi"
+                            checked={selectedAmenities.wifi}
+                            onChange={handleAmenitiesChange}
+                        />
+                        WiFi
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="parking"
+                            checked={selectedAmenities.parking}
+                            onChange={handleAmenitiesChange}
+                        />
+                        Parking
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="pool"
+                            checked={selectedAmenities.pool}
+                            onChange={handleAmenitiesChange}
+                        />
+                        Pool
+                    </label>
+                    {/* Add more amenities checkboxes here */}
+                </div>
+
+                <div>
+                    <h2>Rules</h2>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="wifi"
+                            checked={selectedAmenities.wifi}
+                            onChange={handleAmenitiesChange}
+                        />
+                        WiFi
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="parking"
+                            checked={selectedAmenities.parking}
+                            onChange={handleAmenitiesChange}
+                        />
+                        Parking
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="pool"
+                            checked={selectedAmenities.pool}
+                            onChange={handleAmenitiesChange}
+                        />
+                        Pool
+                    </label>
+                    {/* Add more amenities checkboxes here */}
+                </div>
+
+
+
+                <button type="submit">Next</button>
+            </form>
+            )}
             </Box>
         </Box>
     );
