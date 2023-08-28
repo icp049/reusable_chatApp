@@ -4,7 +4,7 @@ const LandingPage = () => {
     return(
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", height: "100vh" }}>
             <Landingpagenavbar/>
-            <h1 style={{ marginBottom: "20px" }}>Place University Landing Page HERE</h1>
+            <h1 style={{ marginBottom: "20px" }}>Place Nest HomePage here</h1>
         </div>
     );
 };

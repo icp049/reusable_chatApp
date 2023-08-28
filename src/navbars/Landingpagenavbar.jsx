@@ -49,7 +49,7 @@ const Landingpagenavbar = () => {
           sx={{ ':hover': { cursor: "pointer" } }}
           color="blue"
         >
-          TosmosListings
+          NestMates
         </Box>
 
         <Box
@@ -60,7 +60,7 @@ const Landingpagenavbar = () => {
         >
           <Link to="/myprofile">My Profile</Link>
           <Link to="/message">Messages</Link>
-          <Link to="">Listings</Link>
+          <Link to="">My Nest</Link>
 
           <IconButton sx={{ color: "black" }}>
             <SearchOutlined />
