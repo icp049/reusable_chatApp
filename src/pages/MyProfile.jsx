@@ -97,6 +97,15 @@ const MyProfile = () => {
             </Typography> */}
           </Box>
 
+
+          <Box>
+            <Typography variant="h5">Ian's Snaps</Typography>
+            {/* Add query result here */}
+            {/* <Typography>
+              {userDetailsQuery.data?.aboutMe || ""}
+            </Typography> */}
+          </Box>
+
           {/* Roommate Preferences */}
           <Box>
             <Typography variant="h5">Interests</Typography>
