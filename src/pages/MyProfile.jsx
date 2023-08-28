@@ -90,7 +90,7 @@ const MyProfile = () => {
         >
           {/* About Me */}
           <Box>
-            <Typography variant="h5">About Me</Typography>
+            <Typography variant="h5">Ian is...</Typography>
             {/* Add query result here */}
             {/* <Typography>
               {userDetailsQuery.data?.aboutMe || ""}
@@ -99,7 +99,7 @@ const MyProfile = () => {
 
           {/* Roommate Preferences */}
           <Box>
-            <Typography variant="h5">Roommate Preferences</Typography>
+            <Typography variant="h5">Interests</Typography>
             {/* Add query result here */}
             {/* <Typography>
               {userDetailsQuery.data?.roommatePreferences || ""}
@@ -108,7 +108,7 @@ const MyProfile = () => {
 
           {/* Interests */}
           <Box>
-            <Typography variant="h5">Interests</Typography>
+            <Typography variant="h5">NestMate Preferences</Typography>
             {/* Add query result here */}
             {/* <Typography>
               {userDetailsQuery.data?.interests || ""}
@@ -117,7 +117,16 @@ const MyProfile = () => {
 
 
           <Box>
-            <Typography variant="h5">My Nest</Typography>
+            <Typography variant="h5">Nest Location</Typography>
+            {/* Add query result here */}
+            {/* <Typography>
+              {userDetailsQuery.data?.interests || ""}
+            </Typography> */}
+          </Box>
+
+
+          <Box>
+            <Typography variant="h5">Ian's Nest</Typography>
             {/* Add query result here */}
             {/* <Typography>
               {userDetailsQuery.data?.interests || ""}
