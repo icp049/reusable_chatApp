@@ -196,6 +196,16 @@ const AddNest = ({ onClose }) => {
                         />
                         Parking
                     </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="furnished"
+                            checked={selectedAmenities.parking}
+                            onChange={handleAmenitiesChange}
+                        />
+                        Furnished
+                    </label>
                     <label>
                         <input
                             type="checkbox"
@@ -256,6 +266,28 @@ const AddNest = ({ onClose }) => {
                             onChange={handleAmenitiesChange}
                         />
                        Bathtub
+                    </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="privatebathroom"
+                            checked={selectedAmenities.pool}
+                            onChange={handleAmenitiesChange}
+                        />
+                       Private Bathroom
+                    </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="kitchen"
+                            checked={selectedAmenities.pool}
+                            onChange={handleAmenitiesChange}
+                        />
+                       Kitchen
                     </label>
                     {/* Add more amenities checkboxes here */}
                 </div>
