@@ -11,8 +11,10 @@ const AddNest = ({ onClose }) => {
     const [photos, setPhotos] = useState([]);
     const [description, setDescription] = useState("");
     const [location, setLocation] = useState("");
+    const [amenities, setAmenities] = useState("");
+    const [rules, setRules] = useState("");
 
-    const steps = ["Step 1: Information", "Step 2: Review"];
+    const steps = ["General Info", "Location", "Amenities/Rules"];
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -54,54 +56,63 @@ const AddNest = ({ onClose }) => {
                     </Step>
                 ))}
             </Stepper>
-            {activeStep === 0 && (
-    <Box
-        width="400px"
-        padding="20px"
-        borderRadius="5px"
-        bgcolor="white"
-        boxShadow="0 2px 5px rgba(0, 0, 0, 0.3)"
-        boxSizing="border-box"
-    >
-        <form onSubmit= "">
-            <input required type="text" placeholder="Listing Name" />
-            <input required type="text" placeholder="Description" />
-            <textarea required placeholder="Looking for..."></textarea>
-            <input type="file" accept="image/*" multiple />
-            <button type="submit">Next</button>
-        </form>
-    </Box>
-)}
+            
+            <Box
+                width="400px"
+                padding="20px"
+                borderRadius="5px"
+                bgcolor="white"
+                boxShadow="0 2px 5px rgba(0, 0, 0, 0.3)"
+                boxSizing="border-box"
+            >
+                {activeStep === 0 && (
+                    <form onSubmit={handleNext}>
+                        <input
+                            required
+                            type="text"
+                            placeholder="Listing Name"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                        <input
+                            required
+                            type="text"
+                            placeholder="Description"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                        <textarea
+                            required
+                            placeholder="Looking for..."
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        ></textarea>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            onChange={(e) => setPhotos(e.target.files)}
+                        />
+                        <button type="submit">Next</button>
+                    </form>
+                )}
 
+                {activeStep === 1 && (
+                    <form onSubmit={handleNext}>
+                        {/* Location inputs */}
+                        <button type="submit">Next</button>
+                    </form>
+                )}
 
-            {activeStep === 1 && (
-                <Box
-                    width="400px"
-                    padding="20px"
-                    borderRadius="5px"
-                    bgcolor="white"
-                    boxShadow="0 2px 5px rgba(0, 0, 0, 0.3)"
-                    boxSizing="border-box"
-                >
-                    {/* ... (step 1 content) */}
-                </Box>
-            )}
-
-            {activeStep === steps.length && (
-                <Box
-                    width="400px"
-                    padding="20px"
-                    borderRadius="5px"
-                    bgcolor="white"
-                    boxShadow="0 2px 5px rgba(0, 0, 0, 0.3)"
-                    boxSizing="border-box"
-                >
-                    {/* ... (submission successful content) */}
-                </Box>
-            )}
+                {activeStep === 2 && (
+                    <form onSubmit="">
+                        {/* Amenities/Rules inputs */}
+                        <button type="submit">Submit</button>
+                    </form>
+                )}
+            </Box>
         </Box>
     );
 };
-
 
 export default AddNest;
