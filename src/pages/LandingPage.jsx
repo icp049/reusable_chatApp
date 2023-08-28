@@ -45,17 +45,31 @@ const LandingPage = () => {
             </div>
             <h1 style={{ marginBottom: "20px", textAlign: "center" }}>Place Nest HomePage here</h1>
             
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-                {gridData.map(item => (
-                    <div key={item.id} style={{ border: "1px solid #ccc", borderRadius: "5px", padding: "10px", position: "relative" }}>
-                        <div style={{ height: "50px", backgroundColor: "blue", width: "100%", position: "absolute", top: "0", left: "0" }}>
-                            {/* Details about the poster */}
-                            <p style={{ color: "white", textAlign: "center", margin: "0", padding: "5px" }}>{item.posterDetails}</p>
-                        </div>
-                        <img src={item.imageUrl} alt={`Poster ${item.id}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                    </div>
-                ))}
+   
+
+<div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+    {gridData.map(item => (
+        <div key={item.id} style={{ border: "1px solid #ccc", borderRadius: "5px", padding: "10px", position: "relative" }}>
+            <div style={{ height: "50px", backgroundColor: "green", width: "100%", position: "absolute", top: "0", left: "0" }}>
+                {/* Details about the poster */}
+                <p style={{ color: "white", textAlign: "center", margin: "0", padding: "5px" }}>{item.posterDetails}</p>
             </div>
+            <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                <div style={{ flex: "1", marginBottom: "10px" }}>
+                    {/* Section for title and only photos */}
+                    <h3 style={{ margin: "0", textAlign: "center" }}>Title Here</h3>
+                    <img src={item.imageUrl} alt={`Poster ${item.id}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                </div>
+                <div style={{ backgroundColor: "blue",  color: "white", textAlign: "center" }}>
+                <h3 style={{ margin: "0", textAlign: "center" }}>Title Here</h3>
+                </div>
+            </div>
+        </div>
+    ))}
+</div>
+
+
+
             
             <div
                 style={{
