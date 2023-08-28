@@ -66,6 +66,7 @@ const MyProfile = () => {
             display: "flex",
             flexDirection: "column",
             gap: "20px",
+            paddingTop: "50px",
           }}
         >
           {/* About Me */}
