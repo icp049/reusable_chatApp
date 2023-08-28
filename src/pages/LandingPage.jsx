@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Landingpagenavbar from "../navbars/Landingpagenavbar";
+import AddNest from "./AddNest"; // Adjust the path accordingly
 
 const LandingPage = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <div style={{ position: "relative", minHeight: "100vh" }}>
             <Landingpagenavbar/>
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "80px" }}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "60px" }}>
                 <input
                     type="text"
                     placeholder="Search..."
@@ -31,9 +42,12 @@ const LandingPage = () => {
                     cursor: "pointer",
                     boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
                 }}
+                onClick={openModal}
             >
                 Add Listing
             </div>
+
+            {isModalOpen && <AddNest onClose={closeModal} />}
         </div>
     );
 };
