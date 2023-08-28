@@ -22,10 +22,10 @@ const EditProfile = () => {
   const [profileData, setProfileData] = useState({
     displayName: currentUser.displayName || "",
     aboutMe: "",
-    snaps: "",
+    
     interests: "",
     nestLocation: "",
-    nest: "",
+    
   });
 
   // Function to handle input changes
@@ -52,10 +52,8 @@ const EditProfile = () => {
       await setDoc(profileDocRef, {
         displayName: profileData.displayName,
         aboutMe: profileData.aboutMe,
-        snaps: profileData.snaps,
         interests: profileData.interests,
         nestLocation: profileData.nestLocation,
-        nest: profileData.nest,
       }, { merge: true });
   
       console.log("Profile data saved:", profileData);
@@ -127,10 +125,7 @@ const EditProfile = () => {
 
           <Box>
             <Typography variant="h5">Snaps</Typography>
-            <textarea
-              value={profileData.snaps}
-              onChange={(e) => handleInputChange("snaps", e.target.value)}
-            />
+           
           </Box>
 
           {/* Roommate Preferences */}
@@ -159,13 +154,7 @@ const EditProfile = () => {
             />
           </Box>
 
-          <Box>
-            <Typography variant="h5">Nest</Typography>
-            <textarea
-              value={profileData.nest}
-              onChange={(e) => handleInputChange("nest", e.target.value)}
-            />
-          </Box>
+          
         </Box>
       </Box>
     </Box>
