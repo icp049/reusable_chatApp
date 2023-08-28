@@ -5,7 +5,7 @@ const LandingPage = () => {
     return (
         <div style={{ position: "relative", minHeight: "100vh" }}>
             <Landingpagenavbar/>
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "60px" }}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "80px" }}>
                 <input
                     type="text"
                     placeholder="Search..."
