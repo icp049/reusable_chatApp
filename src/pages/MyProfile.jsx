@@ -56,6 +56,25 @@ const MyProfile = () => {
           <Typography variant="body1">
             {currentUser.email || "No email available"}
           </Typography>
+
+
+          <Typography variant="body1">
+              Ian Jericho Pedeglorio
+          </Typography>
+
+          <Typography variant="body1">
+              Regina, SK
+          </Typography>
+
+          <Box sx={{ marginTop: "20px" }}>
+            <Link to="/edit-profile">
+              <button>Edit My Profile</button>
+            </Link>
+          </Box>
+
+
+
+
           {/* Add more small details here */}
         </Box>
 
@@ -96,12 +115,8 @@ const MyProfile = () => {
             </Typography> */}
           </Box>
 
-          {/* Edit Profile Link */}
-          <Box sx={{ marginTop: "20px" }}>
-            <Link to="/edit-profile">
-              <button>Edit My Profile</button>
-            </Link>
-          </Box>
+         
+          
         </Box>
       </Box>
     </Box>
