@@ -114,6 +114,14 @@ const AddNest = ({ onClose }) => {
                             placeholder="Looking for..."
                         ></textarea>
                         <input
+                            type="text"
+                            placeholder="Rental Type"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Number of Occupants"
+                        />
+                        <input
                             type="file"
                             accept="image/*"
                             multiple
