@@ -3,16 +3,10 @@ import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import StepContent from "@mui/material/StepContent";
 
 const AddNest = ({ onClose }) => {
     const [activeStep, setActiveStep] = useState(0);
-    const [title, setTitle] = useState("");
     const [photos, setPhotos] = useState([]);
-    const [description, setDescription] = useState("");
-    const [location, setLocation] = useState("");
-    const [amenities, setAmenities] = useState("");
-    const [rules, setRules] = useState("");
 
     const steps = ["General Info", "Location", "Amenities/Rules"];
 
@@ -23,6 +17,34 @@ const AddNest = ({ onClose }) => {
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
+
+    const handlePhotoUpload = (event) => {
+        const newPhotos = [...photos];
+        const files = event.target.files;
+
+        for (let i = 0; i < files.length && i < 5; i++) {
+            newPhotos.push(URL.createObjectURL(files[i]));
+        }
+
+        setPhotos(newPhotos);
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     return (
         <Box
@@ -56,7 +78,7 @@ const AddNest = ({ onClose }) => {
                     </Step>
                 ))}
             </Stepper>
-            
+
             <Box
                 width="400px"
                 padding="20px"
@@ -68,31 +90,28 @@ const AddNest = ({ onClose }) => {
                 {activeStep === 0 && (
                     <form onSubmit={handleNext}>
                         <input
-                            required
                             type="text"
                             placeholder="Listing Name"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                        <input
-                            required
-                            type="text"
-                            placeholder="Description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
                         />
                         <textarea
-                            required
+                            placeholder="Description"
+                        ></textarea>
+                        <textarea
                             placeholder="Looking for..."
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
                         ></textarea>
                         <input
                             type="file"
                             accept="image/*"
                             multiple
-                            onChange={(e) => setPhotos(e.target.files)}
+                            onChange={handlePhotoUpload}
+                            // Limit the number of photos to 5
+                            max="5"
                         />
+                        <div className="photo-grid">
+                            {photos.map((photo, index) => (
+                                <img key={index} src={photo} alt={`Uploaded ${index}`} />
+                            ))}
+                        </div>
                         <button type="submit">Next</button>
                     </form>
                 )}
@@ -100,13 +119,41 @@ const AddNest = ({ onClose }) => {
                 {activeStep === 1 && (
                     <form onSubmit={handleNext}>
                         {/* Location inputs */}
+
+                        <input
+                            type="text"
+                            placeholder="Street Number"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Street Name"
+                        />
+                        <input
+                            type="text"
+                            placeholder="City"
+                        />
+                        <input
+                            type="text"
+                            placeholder="State/Province"
+                        />
+
+<input
+                            type="text"
+                            placeholder="Country"
+                        />
+
+<input
+                            type="text"
+                            placeholder="Zip Code"
+                        />
                         <button type="submit">Next</button>
                     </form>
                 )}
 
                 {activeStep === 2 && (
-                    <form onSubmit="">
+                    <form>
                         {/* Amenities/Rules inputs */}
+                        <button onClick={onClose}>Cancel</button>
                         <button type="submit">Submit</button>
                     </form>
                 )}
