@@ -213,29 +213,26 @@ const AddNest = ({ onClose }) => {
                     <label>
                         <input
                             type="checkbox"
-                            name="wifi"
-                            checked={selectedAmenities.wifi}
-                            onChange={handleAmenitiesChange}
+                          
+                           
                         />
-                        WiFi
+                        No parties
                     </label>
                     <label>
                         <input
                             type="checkbox"
-                            name="parking"
-                            checked={selectedAmenities.parking}
-                            onChange={handleAmenitiesChange}
+                           
+                            
                         />
-                        Parking
+                        Visitors Allowed
                     </label>
                     <label>
                         <input
                             type="checkbox"
-                            name="pool"
-                            checked={selectedAmenities.pool}
-                            onChange={handleAmenitiesChange}
+                          
+                           
                         />
-                        Pool
+                        No Pets
                     </label>
                     {/* Add more amenities checkboxes here */}
                 </div>
