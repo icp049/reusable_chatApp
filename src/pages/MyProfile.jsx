@@ -115,6 +115,15 @@ const MyProfile = () => {
             </Typography> */}
           </Box>
 
+
+          <Box>
+            <Typography variant="h5">My Nest</Typography>
+            {/* Add query result here */}
+            {/* <Typography>
+              {userDetailsQuery.data?.interests || ""}
+            </Typography> */}
+          </Box>
+
          
           
         </Box>
