@@ -5,13 +5,18 @@ import Landingpagenavbar from "../navbars/Landingpagenavbar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+
+
+import { auth, db, storage } from "../firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc,updateDoc } from "firebase/firestore";
+
 const EditProfile = () => {
   const { currentUser } = useContext(AuthContext);
 
   // State to store the user's profile data
   const [profileData, setProfileData] = useState({
     displayName: currentUser.displayName || "",
-    email: currentUser.email || "",
     aboutMe: "",
     snaps: "",
     interests: "",
@@ -28,10 +33,25 @@ const EditProfile = () => {
   };
 
   // Function to save profile data (you need to implement saving logic)
-  const saveProfile = () => {
-    // Implement your logic to save the profile data
-    // For example: call an API to update the user's profile
-    console.log("Profile data saved:", profileData);
+  const saveProfile = async () => {
+    try {
+      // Get a reference to the current user's Firestore document
+      const userDocRef = doc(db, "users", currentUser.uid);
+
+      // Update the fields in the document
+      await updateDoc(userDocRef, {
+        displayName: profileData.displayName,
+        aboutMe: profileData.aboutMe,
+        snaps: profileData.snaps,
+        interests: profileData.interests,
+        nestLocation: profileData.nestLocation,
+        nest: profileData.nest,
+      });
+
+      console.log("Profile data saved:", profileData);
+    } catch (error) {
+      console.error("Error saving profile:", error);
+    }
   };
 
   return (
@@ -68,13 +88,7 @@ const EditProfile = () => {
           />
           <Typography variant="h4">{`Hi, ${profileData.displayName || "there"}`}</Typography>
           {/* Small Details */}
-          <input
-            type="text"
-            value={profileData.email}
-            onChange={(e) => handleInputChange("email", e.target.value)}
-          />
-          {/* Add more small details here */}
-
+          
           <Link to="/edit-profile">
             <button onClick={saveProfile}>Save Profile</button>
           </Link>

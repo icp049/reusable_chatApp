@@ -11,6 +11,10 @@ const MyProfile = () => {
   // Add your query to fetch additional user details here
   // const userDetailsQuery = useUserDetailsQuery(currentUser.id);
 
+
+
+
+  
   const getGreetingMessage = () => {
     if (currentUser) {
       return `Hi, ${currentUser.displayName || "there"}`;
@@ -51,6 +55,7 @@ const MyProfile = () => {
               border: "2px solid #fff",
             }}
           />
+           
           <Typography variant="h4">{getGreetingMessage()}</Typography>
           {/* Small Details */}
           <Typography variant="body1">
