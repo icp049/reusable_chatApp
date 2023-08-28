@@ -32,6 +32,21 @@ const AddNest = ({ onClose }) => {
         >
             <h2>Add a New Listing</h2>
 
+            {/* Close Button */}
+            <button
+                onClick={onClose}
+                style={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    backgroundColor: "white",
+                    border: "none",
+                    cursor: "pointer",
+                }}
+            >
+                Close
+            </button>
+
             <Stepper activeStep={activeStep} orientation="horizontal">
                 {steps.map((label) => (
                     <Step key={label}>
@@ -49,48 +64,7 @@ const AddNest = ({ onClose }) => {
                     boxShadow="0 2px 5px rgba(0, 0, 0, 0.3)"
                     boxSizing="border-box"
                 >
-                    <label>Title:</label>
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        className="input-field"
-                    />
-
-                    <label>Photos (5 to 10):</label>
-                    <input
-                        type="file"
-                        accept="image/*"
-                        multiple
-                        onChange={(e) => setPhotos(Array.from(e.target.files))}
-                        style={{ marginTop: "5px" }}
-                    />
-
-                    <label>Description:</label>
-                    <textarea
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        className="input-field"
-                    ></textarea>
-
-                    <label>Location:</label>
-                    <input
-                        type="text"
-                        value={location}
-                        onChange={(e) => setLocation(e.target.value)}
-                        className="input-field"
-                    />
-
-                    <div>
-                        <button
-                            disabled={activeStep === 0}
-                            onClick={handleBack}
-                            style={{ marginRight: "10px" }}
-                        >
-                            Back
-                        </button>
-                        <button onClick={handleNext}>Next</button>
-                    </div>
+                    {/* ... (step 0 content) */}
                 </Box>
             )}
 
@@ -103,9 +77,7 @@ const AddNest = ({ onClose }) => {
                     boxShadow="0 2px 5px rgba(0, 0, 0, 0.3)"
                     boxSizing="border-box"
                 >
-                    <h3>Hello! You've completed Step 1.</h3>
-                    <p>Now you can add more content or proceed to submit.</p>
-                    <button onClick={handleNext}>Next</button>
+                    {/* ... (step 1 content) */}
                 </Box>
             )}
 
@@ -118,13 +90,12 @@ const AddNest = ({ onClose }) => {
                     boxShadow="0 2px 5px rgba(0, 0, 0, 0.3)"
                     boxSizing="border-box"
                 >
-                    <h3>Submission Successful!</h3>
-                    <p>Your listing has been added.</p>
-                    <button onClick={onClose}>Close</button>
+                    {/* ... (submission successful content) */}
                 </Box>
             )}
         </Box>
     );
 };
+
 
 export default AddNest;
