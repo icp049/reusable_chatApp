@@ -67,7 +67,7 @@ const MyProfile = () => {
           </Typography>
 
           <Box sx={{ marginTop: "20px" }}>
-            <Link to="/edit-profile">
+            <Link to="/editprofile">
               <button>Edit My Profile</button>
             </Link>
           </Box>

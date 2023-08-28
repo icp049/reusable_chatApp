@@ -7,6 +7,8 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import MyProfile from "./pages/MyProfile";
 import LandingPage from "./pages/LandingPage";
+import EditProfile from "./pages/EditProfile";
+
 function App() {
   const { currentUser } = useContext(AuthContext);
 
@@ -15,38 +17,25 @@ function App() {
       return <Navigate to="/login" />;
     }
 
-    return children
+    return children;
   };
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/">
-          <Route
-            index
-            element={
-              <ProtectedRoute>
-                <LandingPage/>
-              </ProtectedRoute>
-            }
-          />
-          <Route path = "message"  
-           element = {
-            <ProtectedRoute>
-                <Home/>
-              </ProtectedRoute>
-           }
-          />
-          <Route path = "myprofile"  
-           element = {
-            <ProtectedRoute>
-                <MyProfile/>
-              </ProtectedRoute>
-           }
-          />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          {/* Landing Page */}
+          <Route index element={<LandingPage />} />
+
+          {/* Protected Routes */}
+          <Route path="message" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+          <Route path="myprofile" element={<ProtectedRoute><MyProfile /></ProtectedRoute>} />
+          <Route path="editprofile" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
         </Route>
+
+        {/* Public Routes */}
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
