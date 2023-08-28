@@ -234,6 +234,28 @@ const AddNest = ({ onClose }) => {
                         />
                         No Pets
                     </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                          
+                           
+                        />
+                        Noise Hours
+                    </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                          
+                           
+                        />
+                        Smoking
+                    </label>
+                    
+
                     {/* Add more amenities checkboxes here */}
                 </div>
 
