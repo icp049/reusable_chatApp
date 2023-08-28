@@ -13,6 +13,21 @@ const LandingPage = () => {
         setIsModalOpen(false);
     };
 
+    // Sample data for grid boxes
+    const gridData = [
+        {
+            id: 1,
+            imageUrl: "url_to_image_1.jpg",
+            posterDetails: "Details about poster 1",
+        },
+        {
+            id: 2,
+            imageUrl: "url_to_image_2.jpg",
+            posterDetails: "Details about poster 2",
+        },
+        // ... Add more items
+    ];
+
     return (
         <div style={{ position: "relative", minHeight: "100vh" }}>
             <Landingpagenavbar/>
@@ -29,6 +44,18 @@ const LandingPage = () => {
                 />
             </div>
             <h1 style={{ marginBottom: "20px", textAlign: "center" }}>Place Nest HomePage here</h1>
+            
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+                {gridData.map(item => (
+                    <div key={item.id} style={{ border: "1px solid #ccc", borderRadius: "5px", padding: "10px", position: "relative" }}>
+                        <div style={{ height: "50px", backgroundColor: "blue", width: "100%", position: "absolute", top: "0", left: "0" }}>
+                            {/* Details about the poster */}
+                            <p style={{ color: "white", textAlign: "center", margin: "0", padding: "5px" }}>{item.posterDetails}</p>
+                        </div>
+                        <img src={item.imageUrl} alt={`Poster ${item.id}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    </div>
+                ))}
+            </div>
             
             <div
                 style={{
