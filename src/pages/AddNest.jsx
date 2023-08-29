@@ -115,6 +115,16 @@ const [selectedAmenities, setSelectedAmenities] = useState({
 
 
 
+    const handleIncludeChange = (event) => {
+        const { name, checked } = event.target;
+        setSelectedInclude((prevInclude) => ({
+            ...prevRules,
+            [name]: checked,
+        }));
+    };
+
+
+
 
 
     const handleFormSubmit = async (e) => {
