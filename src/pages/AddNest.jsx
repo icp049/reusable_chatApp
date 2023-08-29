@@ -55,6 +55,15 @@ const [selectedAmenities, setSelectedAmenities] = useState({
         
     });
 
+    const handleFormInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value,
+        }));
+    };
+
+
 
 
     const auth = getAuth();
@@ -116,15 +125,14 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             return;
           }
     
-       
-    
-          // Create a new "Posts" document in Firestore
-          await setDoc(doc(db, "Posts", user.uid), {
+          const finalFormData = {
             ...formData,
             amenities: selectedAmenities,
-            rules:selectedRules,
-            // Add more fields as needed
-          });
+            rules: selectedRules,
+        };
+    
+          // Create a new "Posts" document in Firestore
+          await setDoc(doc(db, "Posts", user.uid), finalFormData);
     
           onClose(); // Close the form after successfully creating the post
         } catch (err) {
