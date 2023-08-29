@@ -8,8 +8,8 @@ import Landingpagenavbar from "../navbars/Landingpagenavbar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import { doc, getDoc } from "firebase/firestore";
 import { db, auth } from "../firebase";
+import { doc, getDocs, getDoc, collection } from "firebase/firestore";
 
 
 const MyProfile = () => {
@@ -43,31 +43,42 @@ const MyProfile = () => {
   }, [currentUser.uid]);
 
 
-  useEffect(() => {
-    const fetchUserMyPosts = async () => {
-      try {
-        const userMyPostsCollectionRef = collection(
-          db,
-          "users",
-          currentUser.uid,
-          "myPosts"
-        );
-
-        const userMyPostsSnapshot = await getDocs(userMyPostsCollectionRef);
-
-        const userMyPostsData = userMyPostsSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        setUserMyPosts(userMyPostsData);
-      } catch (error) {
-        console.error("Error fetching user's myPosts:", error);
+  function UserPostsComponent({ currentUser }) {
+    const [userMyPosts, setUserMyPosts] = useState([]);
+  }
+    useEffect(() => {
+      const fetchUserMyPosts = async () => {
+        try {
+          // Get a reference to the user's myPosts subcollection
+          const myPostsCollectionRef = collection(db, 'users', currentUser.uid, 'myPosts');
+          const myPostsQuerySnapshot = await getDocs(myPostsCollectionRef);
+  
+          // Extract the post IDs from the myPosts documents
+          const postIds = myPostsQuerySnapshot.docs.map((doc) => doc.id);
+  
+          // Fetch post content using the IDs
+          const userMyPostsData = await Promise.all(
+            postIds.map(async (postId) => {
+              const postDocRef = doc(db, 'Posts', postId);
+              const postDoc = await getDoc(postDocRef);
+              if (postDoc.exists()) {
+                return { id: postId, ...postDoc.data() };
+              }
+              return null;
+            })
+          );
+  
+          setUserMyPosts(userMyPostsData.filter((post) => post !== null));
+        } catch (error) {
+          console.error("Error fetching user's myPosts:", error);
+        }
+      };
+  
+      if (currentUser && currentUser.uid) {
+        fetchUserMyPosts();
       }
-    };
-
-    fetchUserMyPosts();
-  }, [currentUser.uid]);
+    }, [currentUser]);
+  
   
   const getGreetingMessage = () => {
     if (currentUser) {
@@ -201,22 +212,22 @@ const MyProfile = () => {
 
 
           <Box>
-        <Typography variant="h5">Ian's Nest</Typography>
-        {userMyPosts.length > 0 ? (
-          <ul>
-            {userMyPosts.map((post) => (
-              <li key={post.id}>
-                {/* Display post content */}
-                <h3>{post.listingName}</h3>
-                <p>{post.description}</p>
-                {/* ... Other post details ... */}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No posts in Ian's Nest yet.</p>
-        )}
-      </Box>
+      <Typography variant="h5">Ian's Nest</Typography>
+      {userMyPosts.length > 0 ? (
+        <ul>
+          {userMyPosts.map((post) => (
+            <li key={post.id}>
+              {/* Display post content */}
+              <h3>{post.listingName}</h3>
+              <p>{post.description}</p>
+              {/* ... Other post details ... */}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No posts in Ian's Nest yet.</p>
+      )}
+    </Box>
 
          
           
