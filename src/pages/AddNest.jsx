@@ -291,7 +291,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             onChange={handleFormInputChange}
         >
             <option value=""> Looking for..</option>
-            {rentalTypes.map((type, index) => (
+            {lookingFor.map((type, index) => (
                 <option key={index} value={type}>
                     {type}
                 </option>
@@ -311,7 +311,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             onChange={handleFormInputChange}
         >
             <option value=""> Select Accomodation Type</option>
-            {lookingFor.map((type, index) => (
+            {rentalTypes.map((type, index) => (
                 <option key={index} value={type}>
                     {type}
                 </option>
