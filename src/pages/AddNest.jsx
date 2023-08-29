@@ -14,6 +14,23 @@ const AddNest = ({ onClose }) => {
     const [activeStep, setActiveStep] = useState(0);
     const [photos, setPhotos] = useState([]);
 
+
+   
+    const [formData, setFormData] = useState({
+        listingName: "",
+        description: "",
+        lookingFor: "",
+        rentalType: "",
+        occupants: "",
+        streetNumber: "",
+        streetName: "",
+        city: "",
+        state: "",
+        country: "",
+        zipCode: "",
+    
+    });
+
 const [selectedAmenities, setSelectedAmenities] = useState({
         wifi: false,
         parking: false,
@@ -99,27 +116,13 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             return;
           }
     
-          const formData = {
-            listingName: e.target.elements.listingName.value,
-        description: e.target.elements.description.value,
-        lookingFor: e.target.elements.lookingFor.value,
-        rentalType: e.target.elements.rentalType.value,
-        occupants: e.target.elements.occupants.value,
-        photos: photos,
-        streetNumber: e.target.elements.streetNumber.value,
-        streetName: e.target.elements.streetName.value,
-        city: e.target.elements.city.value,
-        state: e.target.elements.state.value,
-        country: e.target.elements.country.value,
-        zipCode: e.target.elements.zipCode.value,
-        amenities: selectedAmenities,
-        rules: selectedRules,
-          };
+       
     
           // Create a new "Posts" document in Firestore
           await setDoc(doc(db, "Posts", user.uid), {
             ...formData,
             amenities: selectedAmenities,
+            rules:selectedRules,
             // Add more fields as needed
           });
     
