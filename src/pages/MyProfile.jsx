@@ -145,6 +145,7 @@ const MyProfile = () => {
             {/* <Typography>
               {userDetailsQuery.data?.interests || ""}
             </Typography> */}
+            Put container boxes here later on
           </Box>
 
          
