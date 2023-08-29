@@ -149,6 +149,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 lookingFor: "",
                 rentalType: "",
                 occupants: "",
+                price: "",
                 streetNumber: "",
                 streetName: "",
                 city: "",
@@ -280,6 +281,13 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             placeholder="Number of Occupants"
             name="occupants"
             value={formData.occupants}
+            onChange={handleFormInputChange}
+        />
+         <input
+            type="text"
+            placeholder="Price per month"
+            name="price"
+            value={formData.price}
             onChange={handleFormInputChange}
         />
         <input
