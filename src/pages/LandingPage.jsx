@@ -1,9 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Landingpagenavbar from "../navbars/Landingpagenavbar";
-import AddNest from "./AddNest"; // Adjust the path accordingly
+import AddNest from "./AddNest";
+
+
+
+import { doc, getDocs, collection } from "firebase/firestore";
+import { db, auth } from "../firebase";
 
 const LandingPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [gridData, setGridData] = useState([]);
+
+    useEffect(() => {
+        // Fetch data from Firestore when component mounts
+        const fetchData = async () => {
+            try {
+                const postsCollection = collection(db, "Posts"); // Replace "Posts" with your collection name
+                const snapshot = await getDocs(postsCollection);
+                const data = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+                setGridData(data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -12,21 +37,6 @@ const LandingPage = () => {
     const closeModal = () => {
         setIsModalOpen(false);
     };
-
-    // Sample data for grid boxes
-    const gridData = [
-        {
-            id: 1,
-            imageUrl: "url_to_image_1.jpg",
-            posterDetails: "Details about poster 1",
-        },
-        {
-            id: 2,
-            imageUrl: "url_to_image_2.jpg",
-            posterDetails: "Details about poster 2",
-        },
-        // ... Add more items
-    ];
 
     return (
         <div style={{ position: "relative", minHeight: "100vh" }}>
@@ -44,33 +54,15 @@ const LandingPage = () => {
                 />
             </div>
             <h1 style={{ marginBottom: "20px", textAlign: "center" }}>Place Nest HomePage here</h1>
-            
-   
 
-<div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-    {gridData.map(item => (
-        <div key={item.id} style={{ border: "1px solid #ccc", borderRadius: "5px", padding: "10px", position: "relative" }}>
-            <div style={{ height: "50px", backgroundColor: "green", width: "100%", position: "absolute", top: "0", left: "0" }}>
-                {/* Details about the poster */}
-                <p style={{ color: "white", textAlign: "center", margin: "0", padding: "5px" }}>{item.posterDetails}</p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+                {gridData.map(item => (
+                    <div key={item.id} style={{ border: "1px solid #ccc", borderRadius: "5px", padding: "10px", position: "relative" }}>
+                        {/* ... your grid item content ... */}
+                    </div>
+                ))}
             </div>
-            <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-                <div style={{ flex: "1", marginBottom: "10px" }}>
-                    {/* Section for title and only photos */}
-                    <h3 style={{ margin: "0", textAlign: "center" }}>Title Here</h3>
-                    <img src={item.imageUrl} alt={`Poster ${item.id}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                </div>
-                <div style={{ backgroundColor: "blue",  color: "white", textAlign: "center" }}>
-                <h3 style={{ margin: "0", textAlign: "center" }}>Title Here</h3>
-                </div>
-            </div>
-        </div>
-    ))}
-</div>
 
-
-
-            
             <div
                 style={{
                     position: "fixed",
