@@ -3,10 +3,23 @@ import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
+import { getAuth, doc, setDoc } from "firebase/auth";
+import { db } from "./firebaseConfig"; // Import your Firebase Firestore instance here
 
 const AddNest = ({ onClose }) => {
     const [activeStep, setActiveStep] = useState(0);
     const [photos, setPhotos] = useState([]);
+
+const [selectedAmenities, setSelectedAmenities] = useState({
+        wifi: false,
+        parking: false,
+        pool: false,
+        
+    });
+
+
+
+    const auth = getAuth();
 
     const steps = ["General Info", "Location", "Amenities/Rules"];
 
@@ -30,13 +43,7 @@ const AddNest = ({ onClose }) => {
     };
 
 
-    const [selectedAmenities, setSelectedAmenities] = useState({
-        wifi: false,
-        parking: false,
-        pool: false,
-        // Add more amenities here
-    });
-
+    
 
 
     const handleAmenitiesChange = (event) => {
@@ -46,6 +53,50 @@ const AddNest = ({ onClose }) => {
             [name]: checked,
         }));
     };
+
+
+
+
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+    
+        try {
+          const user = auth.currentUser; // Get the currently logged-in user
+          if (!user) {
+            // Handle case where user is not logged in
+            return;
+          }
+    
+          const formData = {
+            listingName: e.target.elements.listingName.value,
+        description: e.target.elements.description.value,
+        lookingFor: e.target.elements.lookingFor.value,
+        rentalType: e.target.elements.rentalType.value,
+        occupants: e.target.elements.occupants.value,
+        photos: photos,
+        streetNumber: e.target.elements.streetNumber.value,
+        streetName: e.target.elements.streetName.value,
+        city: e.target.elements.city.value,
+        state: e.target.elements.state.value,
+        country: e.target.elements.country.value,
+        zipCode: e.target.elements.zipCode.value,
+        amenities: selectedAmenities,
+          };
+    
+          // Create a new "Posts" document in Firestore
+          await setDoc(doc(db, "Posts", user.uid), {
+            ...formData,
+            amenities: selectedAmenities,
+            // Add more fields as needed
+          });
+    
+          onClose(); // Close the form after successfully creating the post
+        } catch (err) {
+          console.error(err);
+          // Handle error if needed
+        }
+      };
 
 
 
