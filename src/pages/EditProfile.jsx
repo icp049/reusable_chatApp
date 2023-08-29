@@ -10,8 +10,10 @@ import Typography from "@mui/material/Typography";
 
 
 import { auth, db, storage } from "../firebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
 import { doc, setDoc,updateDoc, collection } from "firebase/firestore";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
+
 
 
 
@@ -66,6 +68,18 @@ const EditProfile = () => {
   // Function to save profile data (you need to implement saving logic)
   const saveProfile = async () => {
     try {
+      const storage = getStorage();
+  
+      // Upload photos and get their download URLs
+      const uploadedPhotoURLs = await Promise.all(
+        photos.map(async (photo, index) => {
+          const photoRef = storageRef(storage, `userPhotos/${currentUser.uid}/photo_${index}`);
+          const photoBlob = await fetch(photo).then((res) => res.blob());
+          await uploadBytes(photoRef, photoBlob);
+          return getDownloadURL(photoRef);
+        })
+      );
+  
       // Get a reference to the current user's Firestore document
       const userDocRef = doc(db, "users", currentUser.uid);
   
@@ -81,6 +95,7 @@ const EditProfile = () => {
         aboutMe: profileData.aboutMe,
         interests: profileData.interests,
         nestLocation: profileData.nestLocation,
+        photos: uploadedPhotoURLs, // Save the photo URLs in the document
       }, { merge: true });
   
       console.log("Profile data saved:", profileData);
@@ -89,6 +104,7 @@ const EditProfile = () => {
       console.error("Error saving profile:", error);
     }
   };
+  
   
   
   return (
