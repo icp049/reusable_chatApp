@@ -396,7 +396,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
 
 
 
-                <button type="submit">Next</button>
+                <button type="submit" onClick={handleFormSubmit}>Next</button>
             </form>
             )}
             </Box>
