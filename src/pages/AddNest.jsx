@@ -168,17 +168,21 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                         />
                         <textarea
                             placeholder="Description"
+                            name = "description"
                         ></textarea>
                         <textarea
                             placeholder="Looking for..."
+                            name = "lookingFor"
                         ></textarea>
                         <input
                             type="text"
                             placeholder="Rental Type"
+                            name = "rentalType"
                         />
                         <input
                             type="text"
                             placeholder="Number of Occupants"
+                            name = "occupants"
                         />
                         <input
                             type="file"
@@ -187,6 +191,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                             onChange={handlePhotoUpload}
                             // Limit the number of photos to 5
                             max="5"
+                            name = "photos"
                         />
                         <div className="photo-grid">
                             {photos.map((photo, index) => (
@@ -204,28 +209,34 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                         <input
                             type="text"
                             placeholder="Street Number"
+                            name = "streetNumber"
                         />
                         <input
                             type="text"
                             placeholder="Street Name"
+                            name = "streetName"
                         />
                         <input
                             type="text"
                             placeholder="City"
+                            name = "city"
                         />
                         <input
                             type="text"
                             placeholder="State/Province"
+                            name = "state"
                         />
 
 <input
                             type="text"
                             placeholder="Country"
+                            name = "country"
                         />
 
 <input
                             type="text"
                             placeholder="Zip Code"
+                            name = "zipCode"
                         />
                         <button type="submit">Next</button>
                     </form>
