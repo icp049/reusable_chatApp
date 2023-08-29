@@ -105,6 +105,8 @@ const MyProfile = () => {
 
           <Box>
             <Typography variant="h5">Ian's Snaps</Typography>
+
+            put container for photos here.... about 4 photos
             {/* Add query result here */}
             {/* <Typography>
               {userDetailsQuery.data?.aboutMe || ""}
