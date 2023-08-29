@@ -19,6 +19,19 @@ import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "fire
 
 
 const EditProfile = () => {
+
+
+
+
+
+
+
+
+
+
+
+
+
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate(); 
 
@@ -52,6 +65,38 @@ const EditProfile = () => {
 
     setPhotos(newPhotos);
 };
+
+
+useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const userDocRef = doc(db, "users", currentUser.uid);
+        const profileDocRef = doc(userDocRef, "your-document-id"); // Replace with your document ID
+        const profileDocSnapshot = await getDoc(profileDocRef);
+
+        if (profileDocSnapshot.exists()) {
+          const profileDocData = profileDocSnapshot.data();
+          setProfileData((prevData) => ({
+            ...prevData,
+            displayName: profileDocData.displayName || "",
+            aboutMe: profileDocData.aboutMe || "",
+            interests: profileDocData.interests || "",
+            nestLocation: profileDocData.nestLocation || "",
+          }));
+          
+          // Set the photos if available
+          if (profileDocData.photos) {
+            setPhotos(profileDocData.photos);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching profile data:", error);
+      }
+    };
+
+    fetchProfileData();
+  }, [currentUser.uid]);
+
 
 
 
@@ -219,3 +264,5 @@ const EditProfile = () => {
 };
 
 export default EditProfile;
+
+
