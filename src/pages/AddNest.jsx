@@ -291,7 +291,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                         <input
                             type="checkbox"
                             name="airconditioning"
-                            checked={selectedAmenities.pool}
+                            checked={selectedAmenities.airconditioning}
                             onChange={handleAmenitiesChange}
                         />
                         Air Conditioning
@@ -302,7 +302,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                         <input
                             type="checkbox"
                             name="washer"
-                            checked={selectedAmenities.pool}
+                            checked={selectedAmenities.washer}
                             onChange={handleAmenitiesChange}
                         />
                        Washer
@@ -312,7 +312,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                         <input
                             type="checkbox"
                             name="dryer"
-                            checked={selectedAmenities.pool}
+                            checked={selectedAmenities.dryer}
                             onChange={handleAmenitiesChange}
                         />
                        Dryer
@@ -322,7 +322,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                         <input
                             type="checkbox"
                             name="hotcoldshower"
-                            checked={selectedAmenities.pool}
+                            checked={selectedAmenities.shower}
                             onChange={handleAmenitiesChange}
                         />
                       Hot & Cold Shower
@@ -332,7 +332,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                         <input
                             type="checkbox"
                             name="bathtub"
-                            checked={selectedAmenities.pool}
+                            checked={selectedAmenities.bathtub}
                             onChange={handleAmenitiesChange}
                         />
                        Bathtub
@@ -343,7 +343,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                         <input
                             type="checkbox"
                             name="privatebathroom"
-                            checked={selectedAmenities.pool}
+                            checked={selectedAmenities.privatebathroom}
                             onChange={handleAmenitiesChange}
                         />
                        Private Bathroom
@@ -354,7 +354,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                         <input
                             type="checkbox"
                             name="kitchen"
-                            checked={selectedAmenities.pool}
+                            checked={selectedAmenities.kitchen}
                             onChange={handleAmenitiesChange}
                         />
                        Kitchen
