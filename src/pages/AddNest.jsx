@@ -14,7 +14,7 @@ const AddNest = ({ onClose }) => {
     const [activeStep, setActiveStep] = useState(0);
     const [photos, setPhotos] = useState([]);
 
-  
+  const rentalTypes = ["Entire Home", "Private Room", "Shared Room", "Bedspace"];
 
 
    
@@ -263,13 +263,18 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             value={formData.lookingFor}
             onChange={handleFormInputChange}
         ></textarea>
-        <input
-            type="text"
-            placeholder="Rental Type"
+        <select
             name="rentalType"
             value={formData.rentalType}
             onChange={handleFormInputChange}
-        />
+        >
+            <option value="">Select Room Type</option>
+            {roomTypes.map((type, index) => (
+                <option key={index} value={type}>
+                    {type}
+                </option>
+            ))}
+        </select>
         <input
             type="text"
             placeholder="Number of Occupants"
@@ -284,7 +289,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             onChange={handlePhotoUpload}
             // Limit the number of photos to 5
             max="5"
-            name="photos"
+            name="photos" 
         />
         <div className="photo-grid">
             {photos.map((photo, index) => (
