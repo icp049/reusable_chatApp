@@ -377,9 +377,9 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                     <label>
                         <input
                             type="checkbox"
-                            name="kitchen"
+                            name="parties"
                             checked={selectedRules.parties}
-                            onChange={handleAmenitiesChange}
+                            onChange={handleRulesChange}
                            
                         />
                         No parties
@@ -387,9 +387,9 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                     <label>
                         <input
                             type="checkbox"
-                            name="kitchen"
-                            checked={selectedAmenities.kitchen}
-                            onChange={handleAmenitiesChange}
+                            name="visitors"
+                            checked={selectedAmenities.visitors}
+                            onChange={handleRulesChange}
                             
                         />
                         Visitors Allowed
@@ -397,9 +397,9 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                     <label>
                         <input
                             type="checkbox"
-                            name="kitchen"
-                            checked={selectedAmenities.kitchen}
-                            onChange={handleAmenitiesChange}
+                            name="nopets"
+                            checked={selectedAmenities.nopets}
+                            onChange={handleRulesChange}
                            
                         />
                         No Pets
@@ -409,9 +409,9 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                     <label>
                         <input
                             type="checkbox"
-                            name="kitchen"
-                            checked={selectedAmenities.kitchen}
-                            onChange={handleAmenitiesChange}
+                            name="noisehours"
+                            checked={selectedAmenities.noisehours}
+                            onChange={handleRulesChange}
                            
                         />
                         Noise Hours
@@ -421,9 +421,9 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                     <label>
                         <input
                             type="checkbox"
-                            name="kitchen"
-                            checked={selectedAmenities.kitchen}
-                            onChange={handleAmenitiesChange}
+                            name="smoking"
+                            checked={selectedAmenities.smoking}
+                            onChange={handleRulesChange}
                            
                         />
                         Smoking
