@@ -348,10 +348,11 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             key={index}
             src={photo}
             alt={`Uploaded ${index}`}
-            style={{ width: '200px', height: 'auto', marginRight: '10px' }}
+            style={{ width: '100px', height: 'auto', marginRight: '10px' }}
         />
     ))}
 </div>
+<button type="submit">Next</button>
 
     </form>
 )}
