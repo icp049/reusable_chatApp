@@ -56,12 +56,16 @@ const LandingPage = () => {
            
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-                {gridData.map(item => (
-                    <div key={item.id} style={{ border: "1px solid #ccc", borderRadius: "5px", padding: "10px", position: "relative" }}>
-                        {/* ... your grid item content ... */}
+                {gridData.map((post) => (
+                    <div key={post.id} style={{ border: "1px solid #ccc", borderRadius: "5px", padding: "10px" }}>
+                        {/* Display post content */}
+                        <h3>{post.listingName}</h3>
+                        <p>{post.description}</p>
+                        {/* ... Other post details ... */}
                     </div>
                 ))}
             </div>
+
 
 
 
