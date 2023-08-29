@@ -1,9 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+// ... other imports ...
+
+
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import Landingpagenavbar from "../navbars/Landingpagenavbar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+
+import { doc, getDoc } from "firebase/firestore";
+import { db, auth } from "../firebase";
+
 
 const MyProfile = () => {
   const { currentUser } = useContext(AuthContext);
@@ -11,8 +18,29 @@ const MyProfile = () => {
   // Add your query to fetch additional user details here
   // const userDetailsQuery = useUserDetailsQuery(currentUser.id);
 
+  const [userProfile, setUserProfile] = useState(null);
 
 
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        // Get a reference to the user's Firestore document
+        const userDocRef = doc(db, "users", currentUser.uid, "profileDetails", "your-document-id");
+        
+        // Fetch the user's profile details
+        const userProfileDoc = await getDoc(userDocRef);
+
+        if (userProfileDoc.exists()) {
+          const userProfileData = userProfileDoc.data();
+          setUserProfile(userProfileData);
+        }
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+
+    fetchUserProfile();
+  }, [currentUser.uid]);
 
   
   const getGreetingMessage = () => {
@@ -96,48 +124,36 @@ const MyProfile = () => {
           {/* About Me */}
           <Box>
             <Typography variant="h5">Ian is...</Typography>
-            {/* Add query result here */}
-            {/* <Typography>
-              {userDetailsQuery.data?.aboutMe || ""}
-            </Typography> */}
+            <Typography>{userProfile?.aboutMe || ""}</Typography>
           </Box>
 
 
           <Box>
             <Typography variant="h5">Ian's Snaps</Typography>
 
-            put container for photos here.... about 4 photos
-            {/* Add query result here */}
-            {/* <Typography>
-              {userDetailsQuery.data?.aboutMe || ""}
-            </Typography> */}
+            <div className="photo-grid">
+            {userProfile?.photos?.map((photoURL, index) => (
+              <img key={index} src={photoURL} alt={`Uploaded ${index}`} />
+            ))}
+          </div>
           </Box>
 
           {/* Roommate Preferences */}
           <Box>
             <Typography variant="h5">Interests</Typography>
-            {/* Add query result here */}
-            {/* <Typography>
-              {userDetailsQuery.data?.roommatePreferences || ""}
-            </Typography> */}
+            <Typography>{userProfile?.interests || ""}</Typography>
           </Box>
 
           {/* Interests */}
           <Box>
             <Typography variant="h5">NestMate Preferences</Typography>
-            {/* Add query result here */}
-            {/* <Typography>
-              {userDetailsQuery.data?.interests || ""}
-            </Typography> */}
+            <Typography>{userProfile?.nest || ""}</Typography>
           </Box>
 
 
           <Box>
             <Typography variant="h5">Nest Location</Typography>
-            {/* Add query result here */}
-            {/* <Typography>
-              {userDetailsQuery.data?.interests || ""}
-            </Typography> */}
+            <Typography>{userProfile?.nestLocation || ""}</Typography>
           </Box>
 
 
