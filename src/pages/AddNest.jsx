@@ -18,6 +18,14 @@ const [selectedAmenities, setSelectedAmenities] = useState({
     });
 
 
+    const [selectedRules, setSelectedRules] = useState({
+        wifi: false,
+        parking: false,
+        pool: false,
+        
+    });
+
+
 
     const auth = getAuth();
 
