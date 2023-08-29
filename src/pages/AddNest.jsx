@@ -195,88 +195,108 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 boxShadow="0 2px 5px rgba(0, 0, 0, 0.3)"
                 boxSizing="border-box"
             >
-                {activeStep === 0 && (
-                    <form onSubmit={handleNext}>
-                        <input
-                            type="text"
-                            placeholder="Listing Name"
-                            name = "listingName"
-                        />
-                        <textarea
-                            placeholder="Description"
-                            name = "description"
-                        ></textarea>
-                        <textarea
-                            placeholder="Looking for..."
-                            name = "lookingFor"
-                        ></textarea>
-                        <input
-                            type="text"
-                            placeholder="Rental Type"
-                            name = "rentalType"
-                        />
-                        <input
-                            type="text"
-                            placeholder="Number of Occupants"
-                            name = "occupants"
-                        />
-                        <input
-                            type="file"
-                            accept="image/*"
-                            multiple
-                            onChange={handlePhotoUpload}
-                            // Limit the number of photos to 5
-                            max="5"
-                            name = "photos"
-                        />
-                        <div className="photo-grid">
-                            {photos.map((photo, index) => (
-                                <img key={index} src={photo} alt={`Uploaded ${index}`} />
-                            ))}
-                        </div>
-                        <button type="submit">Next</button>
-                    </form>
-                )}
+               {activeStep === 0 && (
+    <form onSubmit={handleNext}>
+        <input
+            type="text"
+            placeholder="Listing Name"
+            name="listingName"
+            value={formData.listingName}
+            onChange={handleFormInputChange}
+        />
+        <textarea
+            placeholder="Description"
+            name="description"
+            value={formData.description}
+            onChange={handleFormInputChange}
+        ></textarea>
+        <textarea
+            placeholder="Looking for..."
+            name="lookingFor"
+            value={formData.lookingFor}
+            onChange={handleFormInputChange}
+        ></textarea>
+        <input
+            type="text"
+            placeholder="Rental Type"
+            name="rentalType"
+            value={formData.rentalType}
+            onChange={handleFormInputChange}
+        />
+        <input
+            type="text"
+            placeholder="Number of Occupants"
+            name="occupants"
+            value={formData.occupants}
+            onChange={handleFormInputChange}
+        />
+        <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handlePhotoUpload}
+            // Limit the number of photos to 5
+            max="5"
+            name="photos"
+        />
+        <div className="photo-grid">
+            {photos.map((photo, index) => (
+                <img key={index} src={photo} alt={`Uploaded ${index}`} />
+            ))}
+        </div>
+        <button type="submit">Next</button>
+    </form>
+)}
 
-                {activeStep === 1 && (
-                    <form onSubmit={handleNext}>
-                        {/* Location inputs */}
+{activeStep === 1 && (
+    <form onSubmit={handleNext}>
+        {/* Location inputs */}
+        <input
+            type="text"
+            placeholder="Street Number"
+            name="streetNumber"
+            value={formData.streetNumber}
+            onChange={handleFormInputChange}
+        />
+        <input
+            type="text"
+            placeholder="Street Name"
+            name="streetName"
+            value={formData.streetName}
+            onChange={handleFormInputChange}
+        />
+        <input
+            type="text"
+            placeholder="City"
+            name="city"
+            value={formData.city}
+            onChange={handleFormInputChange}
+        />
+        <input
+            type="text"
+            placeholder="State/Province"
+            name="state"
+            value={formData.state}
+            onChange={handleFormInputChange}
+        />
+        <input
+            type="text"
+            placeholder="Country"
+            name="country"
+            value={formData.country}
+            onChange={handleFormInputChange}
+        />
+        <input
+            type="text"
+            placeholder="Zip Code"
+            name="zipCode"
+            value={formData.zipCode}
+            onChange={handleFormInputChange}
+        />
+        <button type="submit">Next</button>
+    </form>
+)}
 
-                        <input
-                            type="text"
-                            placeholder="Street Number"
-                            name = "streetNumber"
-                        />
-                        <input
-                            type="text"
-                            placeholder="Street Name"
-                            name = "streetName"
-                        />
-                        <input
-                            type="text"
-                            placeholder="City"
-                            name = "city"
-                        />
-                        <input
-                            type="text"
-                            placeholder="State/Province"
-                            name = "state"
-                        />
-
-<input
-                            type="text"
-                            placeholder="Country"
-                            name = "country"
-                        />
-
-<input
-                            type="text"
-                            placeholder="Zip Code"
-                            name = "zipCode"
-                        />
-                        <button type="submit">Next</button>
-                    </form>
-                )}
 
                 {activeStep === 2 && (
                     
