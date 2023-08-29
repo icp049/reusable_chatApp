@@ -82,6 +82,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
         country: e.target.elements.country.value,
         zipCode: e.target.elements.zipCode.value,
         amenities: selectedAmenities,
+        rules: selectedRules,
           };
     
           // Create a new "Posts" document in Firestore
