@@ -5,7 +5,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import { auth, db, storage} from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, setDoc, collection } from "firebase/firestore";
+import { doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 
@@ -13,6 +13,8 @@ import { getAuth } from "firebase/auth";
 const AddNest = ({ onClose }) => {
     const [activeStep, setActiveStep] = useState(0);
     const [photos, setPhotos] = useState([]);
+
+  
 
 
    
@@ -119,6 +121,11 @@ const [selectedAmenities, setSelectedAmenities] = useState({
         e.preventDefault();
     
         try {
+            const user = auth.currentUser;
+            if (!user) {
+                return;
+            }
+
             const finalFormData = {
                 ...formData,
                 photos: photos,
@@ -129,6 +136,11 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             // Create a new "Posts" document in Firestore
             const newPostRef = doc(collection(db, "Posts"));
             await setDoc(newPostRef, finalFormData);
+
+            const myPostsCollectionRef = collection(db, "users", user.uid, "myPosts");
+
+            // Add the newly created post's ID to the "myPosts" subcollection
+            await addDoc(myPostsCollectionRef, { postId: newPostRef.id });
     
             // Clear the form data after submitting
             setFormData({
