@@ -129,14 +129,31 @@ const MyProfile = () => {
 
 
           <Box>
-            <Typography variant="h5">Ian's Snaps</Typography>
+  <Typography variant="h5">Ian's Snaps</Typography>
+  <div
+    className="photo-grid"
+    sx={{
+      display: "grid",
+      gridTemplateColumns: "repeat(3, 1fr)", // Adjust the number of columns
+      gap: "10px", // Adjust the gap between photos
+    }}
+  >
+    {userProfile?.photos?.map((photoURL, index) => (
+      <img
+        key={index}
+        src={photoURL}
+        alt={`Uploaded ${index}`}
+        style={{
+          maxWidth: "250px",
+          height: "auto",
+          borderRadius: "10px",
+          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)", // Add a subtle shadow
+        }}
+      />
+    ))}
+  </div>
+</Box>
 
-            <div className="photo-grid">
-            {userProfile?.photos?.map((photoURL, index) => (
-              <img key={index} src={photoURL} alt={`Uploaded ${index}`} />
-            ))}
-          </div>
-          </Box>
 
           {/* Roommate Preferences */}
           <Box>
