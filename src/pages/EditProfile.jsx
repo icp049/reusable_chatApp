@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 
 import { auth, db, storage } from "../firebase";
 
-import { doc, setDoc,updateDoc, collection } from "firebase/firestore";
+import { doc, setDoc,updateDoc, collection, getDoc } from "firebase/firestore";
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
@@ -71,9 +71,9 @@ useEffect(() => {
     const fetchProfileData = async () => {
       try {
         const userDocRef = doc(db, "users", currentUser.uid);
-        const profileDocRef = doc(userDocRef, "your-document-id"); // Replace with your document ID
+        const profileDocRef = doc(userDocRef, "profileDetails"); // Use the correct collection name
         const profileDocSnapshot = await getDoc(profileDocRef);
-
+  
         if (profileDocSnapshot.exists()) {
           const profileDocData = profileDocSnapshot.data();
           setProfileData((prevData) => ({
@@ -83,7 +83,7 @@ useEffect(() => {
             interests: profileDocData.interests || "",
             nestLocation: profileDocData.nestLocation || "",
           }));
-          
+  
           // Set the photos if available
           if (profileDocData.photos) {
             setPhotos(profileDocData.photos);
@@ -93,9 +93,10 @@ useEffect(() => {
         console.error("Error fetching profile data:", error);
       }
     };
-
+  
     fetchProfileData();
   }, [currentUser.uid]);
+  
 
 
 
