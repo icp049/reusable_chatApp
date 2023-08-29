@@ -269,7 +269,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
 
                 {activeStep === 2 && (
                     
-                 <form onSubmit={handleNext}>
+                 <form onSubmit={handleFormSubmit}>
              
                 <div>
                     <h2>Amenities</h2>
@@ -450,7 +450,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
 
 
 
-                <button type="submit" onClick={handleFormSubmit}>Next</button>
+                <button type="submit">Add Listing</button>
             </form>
             )}
             </Box>
