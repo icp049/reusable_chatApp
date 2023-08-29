@@ -14,6 +14,13 @@ const [selectedAmenities, setSelectedAmenities] = useState({
         wifi: false,
         parking: false,
         pool: false,
+        airconditioning : false,
+        washer: false,
+        dryer: false,
+        shower: false,
+        bathtub: false,
+        privatebathroom: false,
+        kitchen: false,
         
     });
 
