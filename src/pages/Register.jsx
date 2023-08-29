@@ -17,7 +17,10 @@ const Register = () => {
     const displayName = e.target[0].value;
     const email = e.target[1].value;
     const password = e.target[2].value;
-    const file = e.target[3].files[0];
+    const firstName = e.target[3].value;
+    const lastName = e.target[3].value;
+    const location = e.target[4].value;
+    const file = e.target[5].files[0];
 
     try {
       //Create user
@@ -40,6 +43,9 @@ const Register = () => {
               uid: res.user.uid,
               displayName,
               email,
+              firstName,
+              lastName,
+              location,
               photoURL: downloadURL,
             });
 
@@ -68,6 +74,9 @@ const Register = () => {
           <input required type="text" placeholder="display name" />
           <input required type="email" placeholder="email" />
           <input required type="password" placeholder="password" />
+          <input required type="firstName" placeholder="First Name" />
+          <input required type="lastName" placeholder="Last Name" />
+          <input required type="location" placeholder="Location" />
           <input required style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
             <img src={Add} alt="" />
