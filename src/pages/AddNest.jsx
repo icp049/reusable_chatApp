@@ -19,9 +19,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
 
 
     const [selectedRules, setSelectedRules] = useState({
-        wifi: false,
-        parking: false,
-        pool: false,
+        
         
     });
 
@@ -166,6 +164,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                         <input
                             type="text"
                             placeholder="Listing Name"
+                            name = "listingName"
                         />
                         <textarea
                             placeholder="Description"
