@@ -15,6 +15,7 @@ const AddNest = ({ onClose }) => {
     const [photos, setPhotos] = useState([]);
 
   const rentalTypes = ["Entire Home", "Private Room", "Shared Room", "Bedspace"];
+  const lookingFor = ["Tenant", "Roomie", "Housemate"];
 
 
    
@@ -282,19 +283,25 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             value={formData.description}
             onChange={handleFormInputChange}
         ></textarea>
-        <textarea
-            placeholder="Looking for..."
+          <select
             name="lookingFor"
             value={formData.lookingFor}
             onChange={handleFormInputChange}
-        ></textarea>
+        >
+            <option value=""> Looking for..</option>
+            {rentalTypes.map((type, index) => (
+                <option key={index} value={type}>
+                    {type}
+                </option>
+            ))}
+        </select>
         <select
             name="rentalType"
             value={formData.rentalType}
             onChange={handleFormInputChange}
         >
             <option value=""> Select Accomodation Type</option>
-            {rentalTypes.map((type, index) => (
+            {lookingFor.map((type, index) => (
                 <option key={index} value={type}>
                     {type}
                 </option>
