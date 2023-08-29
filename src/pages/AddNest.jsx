@@ -26,7 +26,11 @@ const [selectedAmenities, setSelectedAmenities] = useState({
 
 
     const [selectedRules, setSelectedRules] = useState({
-        
+        parties: false,
+        visitors: false,
+        npopets: false,
+        noisehours: false,
+        smoking: false,
         
     });
 
