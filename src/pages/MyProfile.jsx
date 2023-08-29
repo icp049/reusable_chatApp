@@ -19,7 +19,7 @@ const MyProfile = () => {
   // const userDetailsQuery = useUserDetailsQuery(currentUser.id);
 
   const [userProfile, setUserProfile] = useState(null);
-
+  const [userMyPosts, setUserMyPosts] = useState([]);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -42,6 +42,32 @@ const MyProfile = () => {
     fetchUserProfile();
   }, [currentUser.uid]);
 
+
+  useEffect(() => {
+    const fetchUserMyPosts = async () => {
+      try {
+        const userMyPostsCollectionRef = collection(
+          db,
+          "users",
+          currentUser.uid,
+          "myPosts"
+        );
+
+        const userMyPostsSnapshot = await getDocs(userMyPostsCollectionRef);
+
+        const userMyPostsData = userMyPostsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setUserMyPosts(userMyPostsData);
+      } catch (error) {
+        console.error("Error fetching user's myPosts:", error);
+      }
+    };
+
+    fetchUserMyPosts();
+  }, [currentUser.uid]);
   
   const getGreetingMessage = () => {
     if (currentUser) {
@@ -175,13 +201,22 @@ const MyProfile = () => {
 
 
           <Box>
-            <Typography variant="h5">Ian's Nest</Typography>
-            {/* Add query result here */}
-            {/* <Typography>
-              {userDetailsQuery.data?.interests || ""}
-            </Typography> */}
-            Put container boxes here later on
-          </Box>
+        <Typography variant="h5">Ian's Nest</Typography>
+        {userMyPosts.length > 0 ? (
+          <ul>
+            {userMyPosts.map((post) => (
+              <li key={post.id}>
+                {/* Display post content */}
+                <h3>{post.listingName}</h3>
+                <p>{post.description}</p>
+                {/* ... Other post details ... */}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No posts in Ian's Nest yet.</p>
+        )}
+      </Box>
 
          
           
