@@ -342,12 +342,17 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             max="5"
             name="photos" 
         />
-        <div className="photo-grid">
-            {photos.map((photo, index) => (
-                <img key={index} src={photo} alt={`Uploaded ${index}`} />
-            ))}
-        </div>
-        <button type="submit">Next</button>
+       <div className="photo-grid">
+    {photos.map((photo, index) => (
+        <img
+            key={index}
+            src={photo}
+            alt={`Uploaded ${index}`}
+            style={{ width: '200px', height: 'auto', marginRight: '10px' }}
+        />
+    ))}
+</div>
+
     </form>
 )}
 
