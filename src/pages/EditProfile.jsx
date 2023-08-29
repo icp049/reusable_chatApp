@@ -15,9 +15,12 @@ import { doc, setDoc,updateDoc, collection } from "firebase/firestore";
 
 
 
+
 const EditProfile = () => {
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate(); 
+
+  const [photos, setPhotos] = useState([]);
   // State to store the user's profile data
   const [profileData, setProfileData] = useState({
     displayName: currentUser.displayName || "",
@@ -35,6 +38,30 @@ const EditProfile = () => {
       [field]: value,
     }));
   };
+
+
+  const handlePhotoUpload = (event) => {
+    const newPhotos = [...photos];
+    const files = event.target.files;
+
+    for (let i = 0; i < files.length && i < 5; i++) {
+        newPhotos.push(URL.createObjectURL(files[i]));
+    }
+
+    setPhotos(newPhotos);
+};
+
+
+
+
+
+
+
+
+
+
+
+
 
   // Function to save profile data (you need to implement saving logic)
   const saveProfile = async () => {
@@ -125,6 +152,20 @@ const EditProfile = () => {
 
           <Box>
             <Typography variant="h5">Snaps</Typography>
+            <input
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            onChange={handlePhotoUpload}
+                            // Limit the number of photos to 5
+                            max="4"
+                            name = "photos"
+                        />
+                        <div className="photo-grid">
+                            {photos.map((photo, index) => (
+                                <img key={index} src={photo} alt={`Uploaded ${index}`} />
+                            ))}
+                        </div>
            
           </Box>
 
