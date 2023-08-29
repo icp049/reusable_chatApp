@@ -188,6 +188,12 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 noisehours: false,
                 smoking: false,
             });
+
+
+            setSelectedInclude({
+                includeutilities: false,
+                noutilities: false,
+            })
     
             setPhotos([]);
     
