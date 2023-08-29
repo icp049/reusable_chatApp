@@ -23,6 +23,7 @@ const AddNest = ({ onClose }) => {
         listingName: "",
         description: "",
         lookingFor: "",
+        preference: "",
         rentalType: "",
         occupants: "",
         streetNumber: "",
@@ -166,6 +167,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 listingName: "",
                 description: "",
                 lookingFor: "",
+                preference: "",
                 rentalType: "",
                 occupants: "",
                 price: "",
@@ -295,6 +297,14 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 </option>
             ))}
         </select>
+        <input
+            type="text"
+            placeholder="Preferences"
+            name="preference"
+            value={formData.preference}
+            onChange={handleFormInputChange}
+        />
+
         <select
             name="rentalType"
             value={formData.rentalType}
