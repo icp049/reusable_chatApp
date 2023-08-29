@@ -59,8 +59,10 @@ const LandingPage = () => {
                 {gridData.map((post) => (
                     <div key={post.id} style={{ border: "1px solid #ccc", borderRadius: "5px", padding: "10px" }}>
                         {/* Display post content */}
-                        <h3>{post.listingName}</h3>
-                        <p>{post.description}</p>
+                        <h3>{post.rentalType} in {post.city} </h3>
+                        <p>{post.price} / Month</p>
+
+                        
                         {/* ... Other post details ... */}
 
 
