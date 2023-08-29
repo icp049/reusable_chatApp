@@ -53,7 +53,7 @@ const LandingPage = () => {
                     }}
                 />
             </div>
-            <h1 style={{ marginBottom: "20px", textAlign: "center" }}>Place Nest HomePage here</h1>
+           
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
                 {gridData.map(item => (
@@ -62,6 +62,13 @@ const LandingPage = () => {
                     </div>
                 ))}
             </div>
+
+
+
+
+
+
+
 
             <div
                 style={{
