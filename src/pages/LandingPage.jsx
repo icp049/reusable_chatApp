@@ -34,7 +34,7 @@ const LandingPage = () => {
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "100px" }}>
                 <input
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Where do you want to go?"
                     style={{
                         padding: "10px",
                         borderRadius: "5px",
