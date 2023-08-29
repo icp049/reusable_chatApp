@@ -57,6 +57,14 @@ const [selectedAmenities, setSelectedAmenities] = useState({
         
     });
 
+
+
+    const [selectedInclude, setSelectedInclude] = useState({
+        includeutilities: false,
+        noutilities: false,
+        
+    });
+
     const handleFormInputChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevFormData) => ({
@@ -118,7 +126,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
     const handleIncludeChange = (event) => {
         const { name, checked } = event.target;
         setSelectedInclude((prevInclude) => ({
-            ...prevRules,
+            ...prevInclude,
             [name]: checked,
         }));
     };
@@ -306,6 +314,25 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             value={formData.price}
             onChange={handleFormInputChange}
         />
+
+<label>
+                        <input
+                            type="checkbox"
+                            name="includeutilities"
+                            checked={selectedInclude.includeutilities}
+                            onChange={handleIncludeChange}
+                        />
+                        Utilities included
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="noutilities"
+                            checked={selectedInclude.noutilities}
+                            onChange={handleIncludeChange}
+                        />
+                        Utilities NOT included
+                    </label>
         <input
             type="file"
             accept="image/*"
