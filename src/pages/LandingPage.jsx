@@ -62,6 +62,17 @@ const LandingPage = () => {
                         <h3>{post.listingName}</h3>
                         <p>{post.description}</p>
                         {/* ... Other post details ... */}
+
+
+
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
+                {post.photos && post.photos.map((photo, index) => (
+                    <img key={index} src={photo} alt={`Posted ${index}`} style={{ maxWidth: "100px" }} />
+                ))}
+            </div>
+
+
+
                     </div>
                 ))}
             </div>
