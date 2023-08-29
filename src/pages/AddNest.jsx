@@ -3,8 +3,12 @@ import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import { getAuth, doc, setDoc } from "firebase/auth";
-import { db } from "./firebaseConfig"; // Import your Firebase Firestore instance here
+import { auth, db, storage} from "../firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
+import { useNavigate, Link } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+
 
 const AddNest = ({ onClose }) => {
     const [activeStep, setActiveStep] = useState(0);
