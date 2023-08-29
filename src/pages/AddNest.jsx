@@ -5,7 +5,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import { auth, db, storage} from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, collection } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 
@@ -119,27 +119,62 @@ const [selectedAmenities, setSelectedAmenities] = useState({
         e.preventDefault();
     
         try {
-          const user = auth.currentUser; // Get the currently logged-in user
-          if (!user) {
-            // Handle case where user is not logged in
-            return;
-          }
+            const finalFormData = {
+                ...formData,
+                photos: photos,
+                amenities: selectedAmenities,
+                rules: selectedRules,
+            };
     
-          const finalFormData = {
-            ...formData,
-            amenities: selectedAmenities,
-            rules: selectedRules,
-        };
+            // Create a new "Posts" document in Firestore
+            const newPostRef = doc(collection(db, "Posts"));
+            await setDoc(newPostRef, finalFormData);
     
-          // Create a new "Posts" document in Firestore
-          await setDoc(doc(db, "Posts", user.uid), finalFormData);
+            // Clear the form data after submitting
+            setFormData({
+                listingName: "",
+                description: "",
+                lookingFor: "",
+                rentalType: "",
+                occupants: "",
+                streetNumber: "",
+                streetName: "",
+                city: "",
+                state: "",
+                country: "",
+                zipCode: "",
+            });
     
-          onClose(); // Close the form after successfully creating the post
+            setSelectedAmenities({
+                wifi: false,
+                parking: false,
+                pool: false,
+                airconditioning: false,
+                washer: false,
+                dryer: false,
+                shower: false,
+                bathtub: false,
+                privatebathroom: false,
+                kitchen: false,
+            });
+    
+            setSelectedRules({
+                parties: false,
+                visitors: false,
+                npopets: false,
+                noisehours: false,
+                smoking: false,
+            });
+    
+            setPhotos([]);
+    
+            onClose(); // Close the form after successfully creating the post
         } catch (err) {
-          console.error(err);
-          // Handle error if needed
+            console.error(err);
+            // Handle error if needed
         }
-      };
+    };
+    
 
 
 
