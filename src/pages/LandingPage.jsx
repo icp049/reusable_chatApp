@@ -23,6 +23,7 @@ const LandingPage = () => {
                     id: doc.id,
                     ...doc.data(),
                 }));
+                console.log(data)
                 setGridData(data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -41,23 +42,10 @@ const LandingPage = () => {
     };
 
     return (
-        <div style={{ position: "relative", minHeight: "100vh" }}>
-            <Landingpagenavbar/>
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "100px" }}>
-                <input
-                    type="text"
-                    placeholder="Where do you want to go?"
-                    style={{
-                        padding: "10px",
-                        borderRadius: "5px",
-                        border: "1px solid #ccc",
-                        width: "300px",
-                    }}
-                />
-            </div>
+       
            
 
-            return (
+            
     <div style={{ position: "relative", minHeight: "100vh" }}>
         <Landingpagenavbar />
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "100px" }}>
@@ -72,6 +60,7 @@ const LandingPage = () => {
                 }}
             />
         </div>
+       <div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
             {gridData.map((post) => (
