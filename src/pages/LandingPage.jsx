@@ -79,6 +79,7 @@ const LandingPage = () => {
                         display: "grid",
                         gridTemplateColumns: "repeat(3, 1fr)",
                         gap: "20px",
+                        paddingTop: "40px",
                     }}
                 >
                     {filteredGridData.map((post) => (
@@ -96,8 +97,8 @@ const LandingPage = () => {
                             <h2>
                                 {post.rentalType} in {post.city}
                             </h2>
-                            <h3>{post.lookingFor}</h3>
-                            <p>{post.price} / Month</p>
+
+
                             <div
                                 style={{
                                     display: "flex",
@@ -115,6 +116,12 @@ const LandingPage = () => {
                                         />
                                     ))}
                             </div>
+
+
+
+                            <h3>{post.lookingFor}</h3>
+                            <p>{post.price} / Month</p>
+                            
                         </Link>
                     ))}
                 </div>
