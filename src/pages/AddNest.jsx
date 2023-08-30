@@ -10,6 +10,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 
 
+import { getDisplayName } from "firebase/auth";
+
+
 const AddNest = ({ onClose }) => {
     const [activeStep, setActiveStep] = useState(0);
     const [photos, setPhotos] = useState([]);
@@ -145,12 +148,14 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             if (!user) {
                 return;
             }
+            const displayName = getDisplayName(user);
 
             const finalFormData = {
                 ...formData,
                 photos: photos,
                 amenities: selectedAmenities,
                 rules: selectedRules,
+                postedBy: displayName,
             };
     
             // Create a new "Posts" document in Firestore
