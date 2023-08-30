@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Landingpagenavbar from "../navbars/Landingpagenavbar";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import "./ViewNest.css"
 
 const ViewNest = () => {
     const { id } = useParams();
@@ -28,13 +29,20 @@ const ViewNest = () => {
     return (
         <div>
             <Landingpagenavbar />
-            {/* Display queried content */}
             {selectedNest ? (
-                <div>
-                    <h2>{selectedNest.rentalType} in {selectedNest.city}</h2>
-                    <h3>{selectedNest.lookingFor}</h3>
-                    <p>{selectedNest.price} / Month</p>
-                    {/* ... Other post details ... */}
+                <div className="nest-container">
+                    <div className="nest-images">
+                        {/* Display nest images */}
+                        {selectedNest.photos && selectedNest.photos.map((photo, index) => (
+                            <img key={index} src={photo} alt={`Nest ${index}`} />
+                        ))}
+                    </div>
+                    <div className="nest-details">
+                        <h1>{selectedNest.rentalType} in {selectedNest.city}</h1>
+                        <p className="nest-price">${selectedNest.price} / Month</p>
+                        <p className="nest-description">{selectedNest.description}</p>
+                        {/* Other nest details */}
+                    </div>
                 </div>
             ) : (
                 <div>No nest found with ID: {id}</div>

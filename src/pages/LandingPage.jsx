@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import Landingpagenavbar from "../navbars/Landingpagenavbar";
 import AddNest from "./AddNest";
 
-import {Link} from "react-router-dom";
-
-
+import { Link } from "react-router-dom";
 
 import { doc, getDocs, collection } from "firebase/firestore";
 import { db, auth } from "../firebase";
@@ -12,18 +10,18 @@ import { db, auth } from "../firebase";
 const LandingPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [gridData, setGridData] = useState([]);
+    const [searchTerm, setSearchTerm] = useState(""); // New state for search term
 
     useEffect(() => {
         // Fetch data from Firestore when component mounts
         const fetchData = async () => {
             try {
-                const postsCollection = collection(db, "Posts"); // Replace "Posts" with your collection name
+                const postsCollection = collection(db, "Posts");
                 const snapshot = await getDocs(postsCollection);
-                const data = snapshot.docs.map(doc => ({
+                const data = snapshot.docs.map((doc) => ({
                     id: doc.id,
                     ...doc.data(),
                 }));
-                console.log(data)
                 setGridData(data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -41,59 +39,84 @@ const LandingPage = () => {
         setIsModalOpen(false);
     };
 
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const filteredGridData = gridData.filter((post) => {
+        const cityLowerCase = post.city.toLowerCase();
+        const searchTermLowerCase = searchTerm.toLowerCase();
+        return cityLowerCase.includes(searchTermLowerCase);
+    });
+
     return (
-       
-           
-
-            
-    <div style={{ position: "relative", minHeight: "100vh" }}>
-        <Landingpagenavbar />
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "100px" }}>
-            <input
-                type="text"
-                placeholder="Where do you want to go?"
+        <div style={{ position: "relative", minHeight: "100vh" }}>
+            <Landingpagenavbar />
+            <div
                 style={{
-                    padding: "10px",
-                    borderRadius: "5px",
-                    border: "1px solid #ccc",
-                    width: "300px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "100px",
                 }}
-            />
-        </div>
-       <div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-            {gridData.map((post) => (
-                <Link key={post.id} to={`/viewnest/${post.id}`} style={{ border: "1px solid #ccc", borderRadius: "5px", padding: "10px" }}>
-                    {/* Display post content */}
-                    <h2>{post.rentalType} in {post.city}</h2>
-                    <h3>{post.lookingFor}</h3>
-                    <p>{post.price} / Month</p>
-
-                    {/* ... Other post details ... */}
-
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
-                        {post.photos && post.photos.map((photo, index) => (
-                            <img key={index} src={photo} alt={`Posted ${index}`} style={{ maxWidth: "100px" }} />
-                        ))}
-                    </div>
-                </Link>
-            ))}
-        </div>
-    </div>
-
-
-
-           
-
-
-
-
-
-
-
-
-
+            >
+                <input
+                    type="text"
+                    placeholder="Where do you want to go?"
+                    style={{
+                        padding: "10px",
+                        borderRadius: "5px",
+                        border: "1px solid #ccc",
+                        width: "300px",
+                    }}
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                />
+            </div>
+            <div>
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(3, 1fr)",
+                        gap: "20px",
+                    }}
+                >
+                    {filteredGridData.map((post) => (
+                        <Link
+                            key={post.id}
+                            to={`/viewnest/${post.id}`}
+                            style={{
+                                border: "1px solid #ccc",
+                                borderRadius: "5px",
+                                padding: "10px",
+                            }}
+                        >
+                            <h2>
+                                {post.rentalType} in {post.city}
+                            </h2>
+                            <h3>{post.lookingFor}</h3>
+                            <p>{post.price} / Month</p>
+                            <div
+                                style={{
+                                    display: "flex",
+                                    flexWrap: "wrap",
+                                    gap: "5px",
+                                }}
+                            >
+                                {post.photos &&
+                                    post.photos.map((photo, index) => (
+                                        <img
+                                            key={index}
+                                            src={photo}
+                                            alt={`Posted ${index}`}
+                                            style={{ maxWidth: "100px" }}
+                                        />
+                                    ))}
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </div>
             <div
                 style={{
                     position: "fixed",
@@ -110,7 +133,6 @@ const LandingPage = () => {
             >
                 Add Listing
             </div>
-
             {isModalOpen && (
                 <div
                     style={{

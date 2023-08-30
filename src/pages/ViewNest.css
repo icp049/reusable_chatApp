@@ -1,0 +1,50 @@
+/* CSS for ViewNest component */
+.nest-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .nest-images {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .nest-images img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .nest-details {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nest-details h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .nest-price {
+    font-size: 18px;
+    color: #e67e22;
+  }
+  
+  .nest-description {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  
+  /* Navbar styles (assuming you're using Landingpagenavbar) */
+  .landing-page-navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+  }
+  
