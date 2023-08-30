@@ -11,6 +11,10 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+
+  const role = ["Student", "Professional", "Leasor"];
+
+
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -18,9 +22,10 @@ const Register = () => {
     const email = e.target[1].value;
     const password = e.target[2].value;
     const firstName = e.target[3].value;
-    const lastName = e.target[3].value;
-    const location = e.target[4].value;
-    const file = e.target[5].files[0];
+    const lastName = e.target[4].value;
+    const role = e.target[5].value;
+    const location = e.target[6].value;
+    const file = e.target[7].files[0];
 
     try {
       //Create user
@@ -45,6 +50,7 @@ const Register = () => {
               email,
               firstName,
               lastName,
+              role,
               location,
               photoURL: downloadURL,
             });
@@ -76,6 +82,15 @@ const Register = () => {
           <input required type="password" placeholder="password" />
           <input required type="firstName" placeholder="First Name" />
           <input required type="lastName" placeholder="Last Name" />
+          <select
+            >
+            <option value=""> I am a..</option>
+            {role.map((type, index) => (
+                <option key={index} value={type}>
+                    {type}
+                </option>
+            ))}
+        </select>
           <input required type="location" placeholder="Location" />
           <input required style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
