@@ -73,12 +73,19 @@ const LandingPage = () => {
                     <img key={index} src={photo} alt={`Posted ${index}`} style={{ maxWidth: "100px" }} />
                 ))}
             </div>
+                 
 
-
-
+         
                     </div>
                 ))}
+
+
+
+                
             </div>
+
+
+           
 
 
 
