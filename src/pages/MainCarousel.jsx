@@ -32,7 +32,7 @@ const MainCarousel = ({ photos }) => {
                         left: "0",
                         color: "white",
                         padding: "5px",
-                        zIndex: "10",
+                        zIndex: "2",
                     }}
                 >
                     <NavigateBeforeIcon sx={{ fontSize: 40 }} />
@@ -47,7 +47,7 @@ const MainCarousel = ({ photos }) => {
                         right: "0",
                         color: "white",
                         padding: "5px",
-                        zIndex: "10",
+                        zIndex: "2",
                     }}
                 >
                     <NavigateNextIcon sx={{ fontSize: 40 }} />

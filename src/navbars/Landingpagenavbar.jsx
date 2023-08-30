@@ -36,7 +36,7 @@ const Landingpagenavbar = () => {
       position="fixed"
       top="0"
       left="0"
-      zIndex="2"
+      zIndex="3"
     >
       <Box
         width="80%"
