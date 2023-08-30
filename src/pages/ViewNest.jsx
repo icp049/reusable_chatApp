@@ -31,14 +31,14 @@ const ViewNest = () => {
             <Landingpagenavbar />
             {selectedNest ? (
                 <div className="nest-container">
-                    <div className="nest-images">
+                   <div className="nest-images">
                         {/* Display nest images */}
                         {selectedNest.photos && selectedNest.photos.map((photo, index) => (
                             <img key={index} src={photo} alt={`Nest ${index}`} />
                         ))}
                     </div>
                     <div className="nest-details">
-                        <h1>{selectedNest.rentalType} in {selectedNest.city}</h1>
+                        <h1>{selectedNest.listingName}</h1>
                         <p className="nest-price">${selectedNest.price} / Month</p>
                         <p className="nest-description">{selectedNest.description}</p>
                         <p className = "nest-poster" >{selectedNest.postedBy}</p>
@@ -50,7 +50,7 @@ const ViewNest = () => {
                 <div>No nest found with ID: {id}</div>
             )}
         </div>
-    );
+    ); 
 };
 
 export default ViewNest;
