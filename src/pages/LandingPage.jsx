@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import { doc, getDocs, collection } from "firebase/firestore";
 import { db, auth } from "../firebase";
-
+import MainCarousel from "./MainCarousel";
 const LandingPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [gridData, setGridData] = useState([]);
@@ -83,47 +83,28 @@ const LandingPage = () => {
                     }}
                 >
                     {filteredGridData.map((post) => (
-                        <Link
-                            key={post.id}
-                            to={`/viewnest/${post.id}`}
-                            style={{
-                                border: "1px solid #ccc",
-                                borderRadius: "5px",
-                                padding: "10px",
-                                textDecoration: "none",  // Add this line to remove the underline
-                                color: "black",         // Add your preferred color here
-                            }}
-                        >
-                            <h2>
-                                {post.rentalType} in {post.city}
-                            </h2>
-
-
-                            <div
-                                style={{
-                                    display: "flex",
-                                    flexWrap: "wrap",
-                                    gap: "5px",
-                                }}
-                            >
-                                {post.photos &&
-                                    post.photos.map((photo, index) => (
-                                        <img
-                                            key={index}
-                                            src={photo}
-                                            alt={`Posted ${index}`}
-                                            style={{ maxWidth: "100px" }}
-                                        />
-                                    ))}
-                            </div>
-
-
-
-                            <h3>{post.lookingFor}</h3>
-                            <p>{post.price} / Month</p>
-                            
-                        </Link>
-                    ))}
+    <Link
+        key={post.id}
+        to={`/viewnest/${post.id}`}
+        style={{
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+            padding: "10px",
+            textDecoration: "none",
+            color: "black",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+        }}
+    >
+        <h2>
+            {post.rentalType} in {post.city}
+        </h2>
+        <h3>{post.lookingFor}</h3>
+        <p>{post.price} / Month</p>
+        <MainCarousel photos={post.photos} />
+    </Link>
+))}
                 </div>
             </div>
             <div
