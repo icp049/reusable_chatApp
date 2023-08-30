@@ -76,10 +76,9 @@ const LandingPage = () => {
             <div>
                 <div
                     style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(3, 1fr)",
+                        gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
                         gap: "20px",
-                        paddingTop: "40px",
+                        padding: "40px 20px", // Adjust padding
                     }}
                 >
                     {filteredGridData.map((post) => (
@@ -88,13 +87,13 @@ const LandingPage = () => {
         to={`/viewnest/${post.id}`}
         style={{
             border: "1px solid #ccc",
-            borderRadius: "5px",
-            padding: "10px",
-            textDecoration: "none",
-            color: "black",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+                            borderRadius: "5px",
+                            padding: "10px",
+                            textDecoration: "none",
+                            color: "black",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
         }}
     >
         <h2>
