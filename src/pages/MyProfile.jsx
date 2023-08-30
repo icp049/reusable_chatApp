@@ -133,7 +133,7 @@ const MyProfile = () => {
           </Typography>
 
           <Typography variant="body1">
-              Regina, SK
+             {currentUser.location}
           </Typography>
 
           <Box sx={{ marginTop: "20px" }}>
@@ -160,7 +160,7 @@ const MyProfile = () => {
         >
           {/* About Me */}
           <Box>
-            <Typography variant="h5">Ian is...</Typography>
+            <Typography variant="h5">{currentUser.firstName} is...</Typography>
             <Typography>{userProfile?.aboutMe || ""}</Typography>
           </Box>
 
