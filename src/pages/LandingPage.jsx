@@ -76,33 +76,39 @@ const LandingPage = () => {
             <div>
                 <div
                     style={{
-                        gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
                         gap: "20px",
                         padding: "40px 20px", // Adjust padding
+                        justifyContent: "center", // Center the items
                     }}
+                   
                 >
                     {filteredGridData.map((post) => (
-    <Link
-        key={post.id}
-        to={`/viewnest/${post.id}`}
-        style={{
-            border: "1px solid #ccc",
-                            borderRadius: "5px",
-                            padding: "10px",
-                            textDecoration: "none",
-                            color: "black",
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-        }}
-    >
-        <h2>
-            {post.rentalType} in {post.city}
-        </h2>
-        <h3>{post.lookingFor}</h3>
-        <p>{post.price} / Month</p>
-        <MainCarousel photos={post.photos} />
-    </Link>
+   <Link
+   key={post.id}
+   to={`/viewnest/${post.id}`}
+   style={{
+       border: "1px solid #ccc",
+       borderRadius: "5px",
+       padding: "10px",
+       textDecoration: "none",
+       color: "black",
+       display: "flex",
+       flexDirection: "column",
+       alignItems: "center",
+   }}
+>
+   <h2>
+       {post.rentalType} in {post.city}
+   </h2>
+   <h3>{post.lookingFor}</h3>
+   <p>{post.price} / Month</p>
+   <div style={{ width: "300px", height: "300px" }}>
+       <MainCarousel photos={post.photos} />
+   </div>
+</Link>
+
 ))}
                 </div>
             </div>

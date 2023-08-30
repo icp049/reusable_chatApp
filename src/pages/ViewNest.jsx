@@ -7,7 +7,7 @@ import "./ViewNest.css";
 
 const ViewNest = () => {
     const { id } = useParams();
-    const [selectedNest, setSelectedNest] = useState(null);
+    const [selectedNest, setSelectedNest] = useState(null); // Initialize to null
 
     useEffect(() => {
         const fetchNestDetails = async () => {
