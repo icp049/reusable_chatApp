@@ -89,6 +89,8 @@ const LandingPage = () => {
                                 border: "1px solid #ccc",
                                 borderRadius: "5px",
                                 padding: "10px",
+                                textDecoration: "none",  // Add this line to remove the underline
+                                color: "black",         // Add your preferred color here
                             }}
                         >
                             <h2>

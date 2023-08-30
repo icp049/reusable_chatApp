@@ -38,6 +38,7 @@ const ViewNest = () => {
                     </div>
                     <div className="nest-details">
                         <h1>{selectedNest.listingName}</h1>
+                        <h3>Proximity: {selectedNest.streetName} Area</h3>
                         <h2>{selectedNest.rentalType} by {selectedNest.firstName}</h2>
                         <p className="nest-price">${selectedNest.price} / Month</p>
                         <p className="nest-description">{selectedNest.description}</p>
