@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Landingpagenavbar from "../navbars/Landingpagenavbar";
 import AddNest from "./AddNest";
 
+import {Link} from "react-router-dom";
+
 
 
 import { doc, getDocs, collection } from "firebase/firestore";
@@ -55,34 +57,42 @@ const LandingPage = () => {
             </div>
            
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-                {gridData.map((post) => (
-                    <div key={post.id} style={{ border: "1px solid #ccc", borderRadius: "5px", padding: "10px" }}>
-                        {/* Display post content */}
-                        <h2>{post.rentalType} in {post.city} </h2>
-                        <h3>{post.lookingFor}</h3>
-                        <p>{post.price} / Month</p>
+            return (
+    <div style={{ position: "relative", minHeight: "100vh" }}>
+        <Landingpagenavbar />
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "100px" }}>
+            <input
+                type="text"
+                placeholder="Where do you want to go?"
+                style={{
+                    padding: "10px",
+                    borderRadius: "5px",
+                    border: "1px solid #ccc",
+                    width: "300px",
+                }}
+            />
+        </div>
 
-                        
-                        {/* ... Other post details ... */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+            {gridData.map((post) => (
+                <Link key={post.id} to={`/viewnest/${post.id}`} style={{ border: "1px solid #ccc", borderRadius: "5px", padding: "10px" }}>
+                    {/* Display post content */}
+                    <h2>{post.rentalType} in {post.city}</h2>
+                    <h3>{post.lookingFor}</h3>
+                    <p>{post.price} / Month</p>
 
+                    {/* ... Other post details ... */}
 
-
-                        <div style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
-                {post.photos && post.photos.map((photo, index) => (
-                    <img key={index} src={photo} alt={`Posted ${index}`} style={{ maxWidth: "100px" }} />
-                ))}
-            </div>
-                 
-
-         
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
+                        {post.photos && post.photos.map((photo, index) => (
+                            <img key={index} src={photo} alt={`Posted ${index}`} style={{ maxWidth: "100px" }} />
+                        ))}
                     </div>
-                ))}
+                </Link>
+            ))}
+        </div>
+    </div>
 
-
-
-                
-            </div>
 
 
            
