@@ -37,7 +37,7 @@ function App() {
         {/* Public Routes */}
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path= "viewnest" elemet = {ViewNest />} />
+        <Route path= "viewnest" element = {<ViewNest />} />
       </Routes>
     </BrowserRouter>
   );
