@@ -10,7 +10,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 
 
-import { getDisplayName } from "firebase/auth";
+
 
 
 const AddNest = ({ onClose }) => {
@@ -148,7 +148,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             if (!user) {
                 return;
             }
-            const displayName = getDisplayName(user);
+            const displayName = user.displayName;
 
             const finalFormData = {
                 ...formData,
