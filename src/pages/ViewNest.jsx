@@ -42,6 +42,7 @@ const ViewNest = () => {
                         <p className="nest-price">${selectedNest.price} / Month</p>
                         <p className="nest-description">{selectedNest.description}</p>
                         <p className = "nest-poster" >{selectedNest.postedBy}</p>
+                        <button>Message @{selectedNest.postedBy} </button>
                         {/* Other nest details */}
                     </div>
                 </div>
