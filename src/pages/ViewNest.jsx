@@ -39,9 +39,16 @@ const ViewNest = () => {
                     </div>
                     <div className="nest-details">
                         <h1>{selectedNest.listingName}</h1>
+
+                        <h2>{selectedNest.rentalType} by {selectedNest.firstName}</h2>
+
                         <p className="nest-price">${selectedNest.price} / Month</p>
+
+
                         <p className="nest-description">{selectedNest.description}</p>
-                        <p className = "nest-poster" >{selectedNest.postedBy}</p>
+                        <h2>Amenities</h2>
+
+                        <h2>Rules</h2>
                         <button>Message @{selectedNest.postedBy} </button>
                         {/* Other nest details */}
                     </div>
