@@ -9,10 +9,6 @@ import { doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 
-
-import ImageCompressor from 'image-compressor';
-
-
 import {
     
     getStorage,
@@ -34,21 +30,6 @@ const AddNest = ({ onClose }) => {
 
   const rentalTypes = ["Entire Home", "Private Room", "Shared Room", "Bedspace"];
   const lookingFor = ["Tenant", "Roomie", "Housemate"];
-
-
-  const compressAndUploadImages = async (images) => {
-    const compressedImages = [];
-    
-    for (const image of images) {
-        const compressedImage = await new ImageCompressor(image, {
-            quality: 0.5, // Adjust the quality as needed (0 to 1)
-        }).compress();
-
-        compressedImages.push(compressedImage);
-    }
-
-    return compressedImages;
-};
 
 
    
@@ -125,19 +106,16 @@ const [selectedAmenities, setSelectedAmenities] = useState({
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    const handlePhotoUpload = async (event) => {
+    const handlePhotoUpload = (event) => {
         const newPhotos = [...photos];
         const files = event.target.files;
     
-        const compressedFiles = await compressAndUploadImages(files);
-    
-        for (let i = 0; i < compressedFiles.length && i < 5; i++) {
-            newPhotos.push(URL.createObjectURL(compressedFiles[i]));
+        for (let i = 0; i < files.length && i < 5; i++) {
+            newPhotos.push(URL.createObjectURL(files[i]));
         }
     
         setPhotos(newPhotos);
     };
-    
     
 
     
