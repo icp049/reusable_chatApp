@@ -9,8 +9,17 @@ import { doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 
+import {
+    
+    getStorage,
+    ref as storageRef,
+    uploadBytes,
+ 
+} from "firebase/storage";
 
-import imageCompression from "browser-image-compression"; // Import the library
+
+
+
 
 
 
@@ -98,14 +107,14 @@ const [selectedAmenities, setSelectedAmenities] = useState({
     const handlePhotoUpload = (event) => {
         const newPhotos = [...photos];
         const files = event.target.files;
-
+    
         for (let i = 0; i < files.length && i < 5; i++) {
             newPhotos.push(URL.createObjectURL(files[i]));
         }
-
+    
         setPhotos(newPhotos);
     };
-
+    
 
     
 
@@ -152,17 +161,35 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             }
             const displayName = user.displayName;
 
+
+            const storage = getStorage();
+  
+            // Upload photos and get their download URLs
+            const uploadedPhotoURLs = await Promise.all(
+              photos.map(async (photo, index) => {
+                const photoRef = storageRef(storage, `listingPhotos/${user.uid}/photo_${index}`);
+                const photoBlob = await fetch(photo).then((res) => res.blob());
+                await uploadBytes(photoRef, photoBlob);
+                return getDownloadURL(photoRef);
+              })
+            );
+          
+
             const finalFormData = {
                 ...formData,
                 photos: photos,
                 amenities: selectedAmenities,
                 rules: selectedRules,
                 postedBy: displayName,
+                photos: uploadedPhotoURLs, // Save the photo URLs in the document
             };
+
+
+            
     
             // Create a new "Posts" document in Firestore
             const newPostRef = doc(collection(db, "Posts"));
-            await setDoc(newPostRef, finalFormData);
+            await setDoc(newPostRef, finalFormData) // Save the photo URLs in the document);
 
             const myPostsCollectionRef = collection(db, "users", user.uid, "myPosts");
 
