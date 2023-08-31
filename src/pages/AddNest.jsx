@@ -40,6 +40,8 @@ const AddNest = ({ onClose }) => {
         preference: "",
         rentalType: "",
         occupants: "",
+        price: "",
+        deposit: "",
         streetNumber: "",
         streetName: "",
         city: "",
