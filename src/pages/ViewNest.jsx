@@ -31,9 +31,11 @@ const ViewNest = () => {
             <Landingpagenavbar />
             {selectedNest ? (
                 <div className="nest-container">
-                    <div className="nest-images">
+                    <div className="nest-images photo-collage">
                         {selectedNest.photos && selectedNest.photos.map((photo, index) => (
-                            <img key={index} src={photo} alt={`Nest ${index}`} />
+                            <div key={index} className="photo-item">
+                                <img src={photo} alt={`Nest ${index}`} />
+                            </div>
                         ))}
                     </div>
                     <div className="nest-details">
