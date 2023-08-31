@@ -21,7 +21,59 @@ const MyProfile = () => {
   const [userProfile, setUserProfile] = useState(null);
   const [userMyPosts, setUserMyPosts] = useState([]);
 
-  useEffect(() => {
+
+
+    useEffect(() => {
+      const fetchUserDetails = async () => {
+        try {
+          const userDocRef = doc(db, "users", currentUser.uid);
+          const userDoc = await getDoc(userDocRef);
+  
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            // Here you can extract and set specific fields like first name, last name, location, etc.
+            // For example:
+           
+            // Set the extracted fields to state or use them as needed
+
+            const { firstName, lastName, location } = userData;
+
+            // Set the extracted fields to state or use them as needed
+            // For example, you can set them to state variables like this:
+            // setUserFirstName(firstName);
+            // setUserLastName(lastName);
+            // setUserLocation(location);
+    
+            // Since you're using state, you can update your state for these fields
+            setUserProfile({
+              ...userProfile,
+              firstName: firstName,
+              lastName: lastName,
+              location: location
+            });
+          }
+        } catch (error) {
+          console.error("Error fetching user details:", error);
+        }
+      };
+  
+      fetchUserDetails();
+    }, [currentUser.uid]);
+  
+
+
+
+
+
+
+
+
+
+
+
+
+    useEffect(() => {
+
     const fetchUserProfile = async () => {
       try {
         // Get a reference to the user's Firestore document
@@ -41,6 +93,10 @@ const MyProfile = () => {
 
     fetchUserProfile();
   }, [currentUser.uid]);
+
+
+
+
 
 
   function UserPostsComponent({ currentUser }) {
@@ -130,11 +186,11 @@ const MyProfile = () => {
 
 
           <Typography variant="body1">
-              Ian Jericho Pedeglorio
+          {userProfile ? userProfile.firstName : "No FirstName"}   {userProfile ? userProfile.lastName : "No last Name"}
           </Typography>
 
           <Typography variant="body1">
-             {currentUser.location}
+          {userProfile ? userProfile.location : "Location not available"}
           </Typography>
 
           <Box sx={{ marginTop: "20px" }}>
@@ -161,13 +217,16 @@ const MyProfile = () => {
         >
           {/* About Me */}
           <Box>
-            <Typography variant="h5">{currentUser.firstName} is...</Typography>
+            <Typography variant="h5">{userProfile.firstName} is...</Typography>
             <Typography>{userProfile?.aboutMe || ""}</Typography>
           </Box>
 
 
           <Box>
-  <Typography variant="h5">Ian's Snaps</Typography>
+  <Typography variant="h5">
+    {userProfile? userProfile.firstName: ""}'s
+    
+    Snaps</Typography>
   <div
     className="photo-grid"
     sx={{
@@ -213,7 +272,7 @@ const MyProfile = () => {
 
 
           <Box>
-      <Typography variant="h5">Ian's Nest</Typography>
+      <Typography variant="h5">{userProfile.firstName}'s' Nest</Typography>
       {userMyPosts.length > 0 ? (
         <ul>
           {userMyPosts.map((post) => (
