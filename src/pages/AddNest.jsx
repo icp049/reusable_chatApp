@@ -10,6 +10,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 
 
+import imageCompression from "browser-image-compression"; // Import the library
+
 
 
 
