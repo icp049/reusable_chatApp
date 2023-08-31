@@ -142,7 +142,7 @@ onMouseLeave={(e) => {
     e.currentTarget.style.backgroundColor = "white"; // Back to white after hover out
         }}
 >
-<div style={{ width: "400px", height: "300px", maxWidth: "100%", maxHeight: "100%", borderRadius: "20px" }}>
+<div style={{ width: "400px", height: "300px", maxWidth: "100%", maxHeight: "100%" }}>
        <MainCarousel photos={post.photos} />
    </div>
 <h2 style={{ margin: "0", padding: "10px 0" }}>
