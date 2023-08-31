@@ -98,6 +98,7 @@ const MyProfile = () => {
           alignItems: "flex-start",
           padding: "20px",
           gap: "40px", // Add spacing between columns
+          marginTop: "40px"
         }}
       >
         {/* Left Column: Profile Picture */}
