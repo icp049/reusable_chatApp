@@ -205,6 +205,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 rentalType: "",
                 occupants: "",
                 price: "",
+                deposit: "",
                 streetNumber: "",
                 streetName: "",
                 city: "",
