@@ -26,12 +26,6 @@ const EditProfile = () => {
 
 
 
-
-
-
-
-
-
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate(); 
 

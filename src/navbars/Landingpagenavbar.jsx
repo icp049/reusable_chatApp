@@ -1,21 +1,18 @@
-import { Box, IconButton } from '@mui/material';
-import {
-  
-  SearchOutlined,
-  ExitToAppOutlined, // 1. Import the ExitToAppOutlined icon
-} from '@mui/icons-material';
+import { Box, IconButton, Menu, MenuItem } from '@mui/material';
+import { MenuOutlined, SearchOutlined, ExitToAppOutlined } from '@mui/icons-material';
 import { useNavigate, Link } from 'react-router-dom';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import {auth} from "../firebase"
-const Landingpagenavbar = () => {
-  const navigate = useNavigate(); // Hook to access the navigation function
+import { auth } from "../firebase";
 
+const Landingpagenavbar = () => {
+  const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
+  const [menuAnchor, setMenuAnchor] = useState(null);
 
   const handleLogout = () => {
     if (currentUser) {
-      auth.signOut() // Assuming you have access to auth here
+      auth.signOut()
         .then(() => {
           navigate('/login');
         })
@@ -23,6 +20,14 @@ const Landingpagenavbar = () => {
           console.error('Error logging out:', error);
         });
     }
+  };
+
+  const handleMenuOpen = (event) => {
+    setMenuAnchor(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setMenuAnchor(null);
   };
 
   return (
@@ -49,8 +54,8 @@ const Landingpagenavbar = () => {
           sx={{ ':hover': { cursor: "pointer" } }}
           color="blue"
         >
-          <Link to = "/" >
-          NestMates
+          <Link to="/" >
+            NestMates
           </Link>
         </Box>
 
@@ -60,18 +65,63 @@ const Landingpagenavbar = () => {
           columnGap="20px"
           zIndex="2"
         >
-          <Link to="/myprofile">My Profile</Link>
-          <Link to="/message">Messages</Link>
-          <Link to="">My Nest</Link>
+          <Box
+            display={{ xs: 'block', md: 'none' }}
+          >
+            {/* Hamburger Menu */}
+            <IconButton
+              sx={{ color: "black" }}
+              onClick={handleMenuOpen}
+            >
+              <MenuOutlined />
+            </IconButton>
+            {/* Menu for small screens */}
+            <Menu
+              anchorEl={menuAnchor}
+              open={Boolean(menuAnchor)}
+              onClose={handleMenuClose}
+            >
+              <MenuItem component={Link} to="/myprofile" onClick={handleMenuClose}>
+                My Profile
+              </MenuItem>
+              <MenuItem component={Link} to="/message" onClick={handleMenuClose}>
+                Messages
+              </MenuItem>
+              <MenuItem component={Link} to="" onClick={handleMenuClose}>
+                My Nest
+              </MenuItem>
+              <MenuItem onClick={handleMenuClose}>
+                <IconButton sx={{ color: "black" }}>
+                  <SearchOutlined />
+                </IconButton>
+              </MenuItem>
+              <MenuItem onClick={() => { handleLogout(); handleMenuClose(); }}>
+                <IconButton sx={{ color: "black" }}>
+                  <ExitToAppOutlined />
+                </IconButton>
+              </MenuItem>
+            </Menu>
+          </Box>
+          
+          {/* Navigation Links (Visible on larger screens) */}
+          <Box
+            display={{ xs: 'none', md: 'flex' }}
+            justifyContent="space-between"
+            columnGap="20px"
+            zIndex="2"
+          >
+            <Link to="/myprofile">My Profile</Link>
+            <Link to="/message">Messages</Link>
+            <Link to="">My Nest</Link>
 
-          <IconButton sx={{ color: "black" }}>
-            <SearchOutlined />
-          </IconButton>
+            <IconButton sx={{ color: "black" }}>
+              <SearchOutlined />
+            </IconButton>
 
-          {/* Logout Button */}
-          <IconButton sx={{ color: "black" }} onClick={handleLogout}>
-            <ExitToAppOutlined />
-          </IconButton>
+            <IconButton sx={{ color: "black" }} onClick={handleLogout}>
+              <ExitToAppOutlined />
+            </IconButton>
+          </Box>
         </Box>
       </Box>
     </Box>
