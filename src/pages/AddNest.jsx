@@ -366,6 +366,13 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             value={formData.price}
             onChange={handleFormInputChange}
         />
+        <input
+            type="text"
+            placeholder="Deposit"
+            name="deposit"
+            value={formData.deposit}
+            onChange={handleFormInputChange}
+        />
 
 <label>
                         <input
