@@ -36,7 +36,7 @@ const Landingpagenavbar = () => {
       alignItems="center"
       width="100%"
       height="60px"
-      backgroundColor="grey"
+      backgroundColor="rgba(204, 204, 0, 0.5);"
       color="black"
       position="fixed"
       top="0"
