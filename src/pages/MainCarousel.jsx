@@ -60,8 +60,8 @@ const MainCarousel = ({ photos }) => {
                         src={photo}
                         alt={`carousel-${index}`}
                         style={{
-                            width: "200px",
-                            height: "200px",
+                            width: "100%",
+                            height: "400px",
                             objectFit: "cover",
                             backgroundAttachment: "fixed",
                         }}
