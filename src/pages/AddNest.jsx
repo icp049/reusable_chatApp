@@ -9,6 +9,10 @@ import { doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 
+
+import ImageCompressor from 'image-compressor';
+
+
 import {
     
     getStorage,
