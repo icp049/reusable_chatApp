@@ -1,41 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 const MainCarousel = ({ photos }) => {
-    const [isHovered, setIsHovered] = useState(false);
-
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
-
     const handlePrevArrowClick = (e, onClickHandler) => {
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault(); // Prevent default link behavior
+        e.stopPropagation(); // Stop event propagation
         onClickHandler();
     };
 
     const handleNextArrowClick = (e, onClickHandler) => {
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault(); // Prevent default link behavior
+        e.stopPropagation(); // Stop event propagation
         onClickHandler();
     };
 
     return (
-        <div
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            style={{ position: "relative" }}
-        >
-            {isHovered && (
+        <Carousel
+            infiniteLoop={true}
+            showThumbs={false}
+            showIndicators={false}
+            showStatus={false}
+            renderArrowPrev={(onClickHandler) => (
                 <div
-                    onClick={(e) => handlePrevArrowClick(e, () => {})}
+                    onClick={(e) => handlePrevArrowClick(e, onClickHandler)}
                     style={{
                         position: "absolute",
                         top: "50%",
@@ -48,9 +38,9 @@ const MainCarousel = ({ photos }) => {
                     <NavigateBeforeIcon sx={{ fontSize: 20 }} />
                 </div>
             )}
-            {isHovered && (
+            renderArrowNext={(onClickHandler) => (
                 <div
-                    onClick={(e) => handleNextArrowClick(e, () => {})}
+                    onClick={(e) => handleNextArrowClick(e, onClickHandler)}
                     style={{
                         position: "absolute",
                         top: "50%",
@@ -63,30 +53,23 @@ const MainCarousel = ({ photos }) => {
                     <NavigateNextIcon sx={{ fontSize: 20 }} />
                 </div>
             )}
-            <Carousel
-                infiniteLoop={true}
-                showThumbs={false}
-                showIndicators={false}
-                showStatus={false}
-                renderArrowPrev={() => null} // Disable default arrow
-                renderArrowNext={() => null} // Disable default arrow
-            >
-                {photos.map((photo, index) => (
-                    <div key={`carousel-image-${index}`}>
-                        <img
-                            src={photo}
-                            alt={`carousel-${index}`}
-                            style={{
-                                width: "100%",
-                                height: "300px",
-                                objectFit: "cover",
-                                backgroundAttachment: "fixed",
-                            }}
-                        />
-                    </div>
-                ))}
-            </Carousel>
-        </div>
+        >
+            {photos.map((photo, index) => (
+                <div key={`carousel-image-${index}`}>
+                    <img
+                        src={photo}
+                        alt={`carousel-${index}`}
+                        style={{
+                            width: "100%",
+                            height: "300px",
+                            objectFit: "cover",
+                            backgroundAttachment: "fixed",
+                           
+                        }}
+                    />
+                </div>
+            ))}
+        </Carousel>
     );
 };
 
