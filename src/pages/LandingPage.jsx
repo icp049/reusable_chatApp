@@ -125,8 +125,8 @@ const LandingPage = () => {
    key={post.id}
    to={`/viewnest/${post.id}`}
    style={{
-       border: "1px solid #ccc",
-       borderRadius: "5px",
+       border: "2px solid grey",
+          
        textDecoration: "none",
        color: "black",
        display: "flex",
@@ -134,7 +134,7 @@ const LandingPage = () => {
        alignItems: "center",
    }}
 >
-<div style={{ width: "400px", height: "300px", maxWidth: "100%", maxHeight: "100%" }}>
+<div style={{ width: "400px", height: "300px", maxWidth: "100%", maxHeight: "100%", borderRadius: "20px" }}>
        <MainCarousel photos={post.photos} />
    </div>
 <h2 style={{ margin: "0", padding: "10px 0" }}>

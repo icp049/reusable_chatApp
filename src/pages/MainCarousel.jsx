@@ -64,6 +64,7 @@ const MainCarousel = ({ photos }) => {
                             height: "300px",
                             objectFit: "cover",
                             backgroundAttachment: "fixed",
+                           
                         }}
                     />
                 </div>
