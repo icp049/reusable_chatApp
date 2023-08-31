@@ -12,6 +12,13 @@ const LandingPage = () => {
     const [gridData, setGridData] = useState([]);
     const [searchTerm, setSearchTerm] = useState(""); // New state for search term
 
+
+    const [selectedRentalType, setSelectedRentalType] = useState("all");
+
+
+
+
+
     useEffect(() => {
         // Fetch data from Firestore when component mounts
         const fetchData = async () => {
@@ -43,11 +50,20 @@ const LandingPage = () => {
         setSearchTerm(event.target.value);
     };
 
+
+    const handleTabChange = (rentalType) => {
+        setSelectedRentalType(rentalType);
+    }
+
+
+    const rentalTypes = ["all", "Private Room", "Shared Room", "BedSpace" ];
+
     const filteredGridData = gridData.filter((post) => {
         const cityLowerCase = post.city.toLowerCase();
         const searchTermLowerCase = searchTerm.toLowerCase();
         return cityLowerCase.includes(searchTermLowerCase);
     });
+
 
     return (
         <div style={{ position: "relative", minHeight: "100vh" }}>
@@ -73,6 +89,23 @@ const LandingPage = () => {
                     onChange={handleSearchChange}
                 />
             </div>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "20px" }}>
+                {rentalTypes.map((rentalType) => (
+                    <div
+                        key={rentalType}
+                        style={{
+                            cursor: "pointer",
+                            margin: "0 10px",
+                            textDecoration: selectedRentalType === rentalType ? "underline" : "none",
+                            fontWeight: selectedRentalType === rentalType ? "bold" : "normal",
+                        }}
+                        onClick={() => handleTabChange(rentalType)}
+                    >
+                        {rentalType.toUpperCase()}
+                    </div>
+                ))}
+            </div>
+            <div></div>
             <div>
                 <div
                     style={{
@@ -84,7 +117,10 @@ const LandingPage = () => {
                     }}
                    
                 >
-                    {filteredGridData.map((post) => (
+                    {filteredGridData
+                    .filter((post) => selectedRentalType === "all" || post.rentalType === selectedRentalType)
+                    .map((post) => (
+                    
    <Link
    key={post.id}
    to={`/viewnest/${post.id}`}
