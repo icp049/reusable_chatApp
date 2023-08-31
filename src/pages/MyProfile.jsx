@@ -217,7 +217,7 @@ const MyProfile = () => {
         >
           {/* About Me */}
           <Box>
-            <Typography variant="h5">{userProfile.firstName} is...</Typography>
+            <Typography variant="h5">{userProfile? userProfile.firstName: ""} is...</Typography>
             <Typography>{userProfile?.aboutMe || ""}</Typography>
           </Box>
 
@@ -272,7 +272,7 @@ const MyProfile = () => {
 
 
           <Box>
-      <Typography variant="h5">{userProfile.firstName}'s' Nest</Typography>
+      <Typography variant="h5">{userProfile? userProfile.firstName: ""}'s Nest</Typography>
       {userMyPosts.length > 0 ? (
         <ul>
           {userMyPosts.map((post) => (
