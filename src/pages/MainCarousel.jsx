@@ -35,7 +35,7 @@ const MainCarousel = ({ photos }) => {
                         zIndex: "2",
                     }}
                 >
-                    <NavigateBeforeIcon sx={{ fontSize: 40 }} />
+                    <NavigateBeforeIcon sx={{ fontSize: 20 }} />
                 </div>
             )}
             renderArrowNext={(onClickHandler) => (
@@ -50,7 +50,7 @@ const MainCarousel = ({ photos }) => {
                         zIndex: "2",
                     }}
                 >
-                    <NavigateNextIcon sx={{ fontSize: 40 }} />
+                    <NavigateNextIcon sx={{ fontSize: 20 }} />
                 </div>
             )}
         >

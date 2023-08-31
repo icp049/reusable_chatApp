@@ -140,7 +140,7 @@ const LandingPage = () => {
    </h2>
    <h3>{post.lookingFor}</h3>
    <p>{post.price} / Month</p>
-   <div style={{ width: "300px", height: "300px" }}>
+   <div style={{ width: "300px", height: "400px" ,maxWidth: "100%", maxHeight: "100%" }}>
        <MainCarousel photos={post.photos} />
    </div>
 </Link>
