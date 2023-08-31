@@ -127,7 +127,6 @@ const LandingPage = () => {
    style={{
        border: "1px solid #ccc",
        borderRadius: "5px",
-       padding: "10px",
        textDecoration: "none",
        color: "black",
        display: "flex",
@@ -135,14 +134,15 @@ const LandingPage = () => {
        alignItems: "center",
    }}
 >
-   <h2>
-       {post.rentalType} in {post.city}
-   </h2>
-   <h3>{post.lookingFor}</h3>
-   <p>{post.price} / Month</p>
-   <div style={{ width: "300px", height: "400px" ,maxWidth: "100%", maxHeight: "100%" }}>
+<div style={{ width: "400px", height: "300px", maxWidth: "100%", maxHeight: "100%" }}>
        <MainCarousel photos={post.photos} />
    </div>
+<h2 style={{ margin: "0", padding: "10px 0" }}>
+        {post.rentalType} in {post.city}
+    </h2>
+    <h3 style={{ margin: "0", padding: "5px 0" }}>{post.lookingFor}</h3>
+    <p style={{ margin: "0", padding: "5px 0" }}>{post.price} / Month</p>
+    
 </Link>
 
 ))}
