@@ -42,6 +42,7 @@ const Landingpagenavbar = () => {
       top="0"
       left="0"
       zIndex="3"
+      
     >
       <Box
         width="80%"
@@ -49,10 +50,12 @@ const Landingpagenavbar = () => {
         display="flex"
         justifyContent="space-between"
         alignItems="center"
+        
       >
         <Box
           sx={{ ':hover': { cursor: "pointer" } }}
           color="blue"
+         
         >
           <Link to="/" >
             NestMates
@@ -64,13 +67,17 @@ const Landingpagenavbar = () => {
           justifyContent="space-between"
           columnGap="20px"
           zIndex="2"
+          marginTop="20px"
+          
+        
         >
           <Box
+           
             display={{ xs: 'block', md: 'none' }}
           >
             {/* Hamburger Menu */}
             <IconButton
-              sx={{ color: "black" }}
+              sx={{ color: "black"  }}
               onClick={handleMenuOpen}
             >
               <MenuOutlined />
