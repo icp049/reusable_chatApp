@@ -1,87 +1,76 @@
 import React, { useState, useEffect } from "react";
 import Landingpagenavbar from "../navbars/Landingpagenavbar";
 import AddNest from "./AddNest";
-
 import { Link } from "react-router-dom";
-
-import { doc, getDocs, collection } from "firebase/firestore";
-import { db, auth } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
 import MainCarousel from "./MainCarousel";
 
-
-
-
-
-import EntireHomeIcon from "../icons/entirehome.png";
-import PrivateRoomIcon from "../icons/privateroom.png";
-import SharedRoomIcon from "../icons/sharedroom.png";
-import BedSpaceIcon from "../icons/bedspace.png";
-
-
-
-
-
-
+const rentalTypes = ["all", "Entire Home", "Private Room", "Shared Room", "BedSpace"];
 
 const LandingPage = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [gridData, setGridData] = useState([]);
-    const [searchTerm, setSearchTerm] = useState(""); // New state for search term
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [gridData, setGridData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedRentalType, setSelectedRentalType] = useState("all");
 
-
-    const [selectedRentalType, setSelectedRentalType] = useState("all");
-
-
-
-
-
-    useEffect(() => {
-        // Fetch data from Firestore when component mounts
-        const fetchData = async () => {
-            try {
-                const postsCollection = collection(db, "Posts");
-                const snapshot = await getDocs(postsCollection);
-                const data = snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }));
-                setGridData(data);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-
-    const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value);
-    };
-
-
-    const handleTabChange = (rentalType) => {
-        setSelectedRentalType(rentalType);
+  // Load data from local storage when the component mounts
+  useEffect(() => {
+    const cachedData = localStorage.getItem("gridData");
+    if (cachedData) {
+      setGridData(JSON.parse(cachedData));
     }
+  }, []);
+
+  // Fetch data from Firestore and cache it
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const postsCollection = collection(db, "Posts");
+        const snapshot = await getDocs(postsCollection);
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        // Cache the data in local storage
+        localStorage.setItem("gridData", JSON.stringify(data));
+
+        setGridData(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleTabChange = (rentalType) => {
+    setSelectedRentalType(rentalType);
+  };
+
+  const filteredGridData = gridData.filter((post) => {
+    const cityLowerCase = post.city.toLowerCase();
+    const searchTermLowerCase = searchTerm.toLowerCase();
+    return cityLowerCase.includes(searchTermLowerCase);
+  });
+  
 
 
-    const rentalTypes = ["all", "Entire Home", "Private Room", "Shared Room", "BedSpace" ];
 
-    const filteredGridData = gridData.filter((post) => {
-        const cityLowerCase = post.city.toLowerCase();
-        const searchTermLowerCase = searchTerm.toLowerCase();
-        return cityLowerCase.includes(searchTermLowerCase);
-    });
-
-
-    return (
+ return (
         <div style={{ position: "relative", minHeight: "100vh" }}>
             <Landingpagenavbar />
             <div
@@ -204,6 +193,6 @@ onMouseLeave={(e) => {
             )}
         </div>
     );
-};
+}; 
 
 export default LandingPage;

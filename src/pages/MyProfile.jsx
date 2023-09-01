@@ -1,141 +1,66 @@
 import React, { useContext, useEffect, useState } from "react";
-// ... other imports ...
-
-
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import Landingpagenavbar from "../navbars/Landingpagenavbar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-
-import { db, auth } from "../firebase";
-import { doc, getDocs, getDoc, collection } from "firebase/firestore";
-
+import { db } from "../firebase";
+import { doc, getDoc, collection, getDocs, query, where } from "firebase/firestore";
 
 const MyProfile = () => {
   const { currentUser } = useContext(AuthContext);
-
-  // Add your query to fetch additional user details here
-  // const userDetailsQuery = useUserDetailsQuery(currentUser.id);
-
   const [userProfile, setUserProfile] = useState(null);
-  const [userMyPosts, setUserMyPosts] = useState([]);
+  const [userPosts, setUserPosts] = useState([]);
 
-
-
-    useEffect(() => {
-      const fetchUserDetails = async () => {
-        try {
-          const userDocRef = doc(db, "users", currentUser.uid);
-          const userDoc = await getDoc(userDocRef);
-  
-          if (userDoc.exists()) {
-            const userData = userDoc.data();
-            // Here you can extract and set specific fields like first name, last name, location, etc.
-            // For example:
-           
-            // Set the extracted fields to state or use them as needed
-
-            const { firstName, lastName, location } = userData;
-
-            // Set the extracted fields to state or use them as needed
-            // For example, you can set them to state variables like this:
-            // setUserFirstName(firstName);
-            // setUserLastName(lastName);
-            // setUserLocation(location);
-    
-            // Since you're using state, you can update your state for these fields
-            setUserProfile({
-              ...userProfile,
-              firstName: firstName,
-              lastName: lastName,
-              location: location
-            });
-          }
-        } catch (error) {
-          console.error("Error fetching user details:", error);
-        }
-      };
-  
-      fetchUserDetails();
-    }, [currentUser.uid]);
-  
-
-
-
-
-
-
-
-
-
-
-
-
-    useEffect(() => {
-
-    const fetchUserProfile = async () => {
+  useEffect(() => {
+    const fetchUserDetails = async () => {
       try {
-        // Get a reference to the user's Firestore document
-        const userDocRef = doc(db, "users", currentUser.uid, "profileDetails", "your-document-id");
-        
-        // Fetch the user's profile details
-        const userProfileDoc = await getDoc(userDocRef);
+        // Fetch user details from the "profileDetails" collection
+        const userDetailsQuery = query(
+          collection(db, "users", currentUser.uid, "profileDetails")
+        );
+        const userDetailsQuerySnapshot = await getDocs(userDetailsQuery);
 
-        if (userProfileDoc.exists()) {
-          const userProfileData = userProfileDoc.data();
-          setUserProfile(userProfileData);
+        if (!userDetailsQuerySnapshot.empty) {
+          // Assuming there is only one document in "profileDetails" collection
+          const userDoc = userDetailsQuerySnapshot.docs[0];
+          setUserProfile(userDoc.data());
         }
       } catch (error) {
-        console.error("Error fetching user profile:", error);
+        console.error("Error fetching user details:", error);
       }
     };
 
-    fetchUserProfile();
-  }, [currentUser.uid]);
+    if (currentUser) {
+      fetchUserDetails();
+    }
+  }, [currentUser]);
 
+  useEffect(() => {
+    const fetchUserPosts = async () => {
+      try {
+        // Create a query to fetch all posts where "postedBy" matches the current user's username
+        const postsQuery = query(
+          collection(db, "Posts"),
+          where("postedBy", "==", currentUser.displayName) // Assuming displayName matches the username
+        );
 
+        const postsQuerySnapshot = await getDocs(postsQuery);
 
-
-
-
-  function UserPostsComponent({ currentUser }) {
-    const [userMyPosts, setUserMyPosts] = useState([]);
-  }
-    useEffect(() => {
-      const fetchUserMyPosts = async () => {
-        try {
-          // Get a reference to the user's myPosts subcollection
-          const myPostsCollectionRef = collection(db, 'users', currentUser.uid, 'myPosts');
-          const myPostsQuerySnapshot = await getDocs(myPostsCollectionRef);
-  
-          // Extract the post IDs from the myPosts documents
-          const postIds = myPostsQuerySnapshot.docs.map((doc) => doc.id);
-  
-          // Fetch post content using the IDs
-          const userMyPostsData = await Promise.all(
-            postIds.map(async (postId) => {
-              const postDocRef = doc(db, 'Posts', postId);
-              const postDoc = await getDoc(postDocRef);
-              if (postDoc.exists()) {
-                return { id: postId, ...postDoc.data() };
-              }
-              return null;
-            })
-          );
-  
-          setUserMyPosts(userMyPostsData.filter((post) => post !== null));
-        } catch (error) {
-          console.error("Error fetching user's myPosts:", error);
-        }
-      };
-  
-      if (currentUser && currentUser.uid) {
-        fetchUserMyPosts();
+        // Extract and set the user's posts
+        const userPostsData = postsQuerySnapshot.docs.map((doc) => doc.data());
+        setUserPosts(userPostsData);
+      } catch (error) {
+        console.error("Error fetching user's posts:", error);
       }
-    }, [currentUser]);
-  
-  
+    };
+
+    if (currentUser && currentUser.displayName) {
+      fetchUserPosts();
+    }
+  }, [currentUser]);
+
+
   const getGreetingMessage = () => {
     if (currentUser) {
       return `Hi, ${currentUser.displayName || "there"}`;
@@ -153,8 +78,8 @@ const MyProfile = () => {
           flexDirection: "row",
           alignItems: "flex-start",
           padding: "20px",
-          gap: "40px", // Add spacing between columns
-          marginTop: "40px"
+          gap: "40px",
+          marginTop: "40px",
         }}
       >
         {/* Left Column: Profile Picture */}
@@ -171,26 +96,26 @@ const MyProfile = () => {
             src={currentUser.photoURL}
             alt="Profile"
             style={{
-              width: "400px", // Increase the size of the profile picture
-              height: "400px", // Increase the size of the profile picture
+              width: "400px",
+              height: "400px",
               borderRadius: "50%",
               border: "2px solid #fff",
             }}
           />
-           
+
           <Typography variant="h4">{getGreetingMessage()}</Typography>
           {/* Small Details */}
           <Typography variant="body1">
             {currentUser.email || "No email available"}
           </Typography>
 
-
           <Typography variant="body1">
-          {userProfile ? userProfile.firstName : "No FirstName"}   {userProfile ? userProfile.lastName : "No last Name"}
+            {userProfile ? userProfile.firstName : "No FirstName"}{" "}
+            {userProfile ? userProfile.lastName : "No last Name"}
           </Typography>
 
           <Typography variant="body1">
-          {userProfile ? userProfile.location : "Location not available"}
+            {userProfile ? userProfile.location : "Location not available"}
           </Typography>
 
           <Box sx={{ marginTop: "20px" }}>
@@ -198,11 +123,6 @@ const MyProfile = () => {
               <button>Edit My Profile</button>
             </Link>
           </Box>
-
-
-
-
-          {/* Add more small details here */}
         </Box>
 
         {/* Right Column: Description, Interests, etc. */}
@@ -217,80 +137,75 @@ const MyProfile = () => {
         >
           {/* About Me */}
           <Box>
-            <Typography variant="h5">{userProfile? userProfile.firstName: ""} is...</Typography>
+            <Typography variant="h5">
+              {userProfile ? userProfile.firstName : ""} is...
+            </Typography>
             <Typography>{userProfile?.aboutMe || ""}</Typography>
           </Box>
 
-
+          {/* Snaps */}
           <Box>
-  <Typography variant="h5">
-    {userProfile? userProfile.firstName: ""}'s
-    
-    Snaps</Typography>
-  <div
-    className="photo-grid"
-    sx={{
-      display: "grid",
-      gridTemplateColumns: "repeat(3, 1fr)", // Adjust the number of columns
-      gap: "10px", // Adjust the gap between photos
-    }}
-  >
-    {userProfile?.photos?.map((photoURL, index) => (
-      <img
-        key={index}
-        src={photoURL}
-        alt={`Uploaded ${index}`}
-        style={{
-          maxWidth: "250px",
-          height: "auto",
-          borderRadius: "10px",
-          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)", // Add a subtle shadow
-        }}
-      />
-    ))}
-  </div>
-</Box>
+            <Typography variant="h5">
+              {userProfile ? userProfile.firstName : ""}'s Snaps
+            </Typography>
+            <div
+              className="photo-grid"
+              sx={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: "10px",
+              }}
+            >
+              {userProfile?.photos?.map((photoURL, index) => (
+                <img
+                  key={index}
+                  src={photoURL}
+                  alt={`Uploaded ${index}`}
+                  style={{
+                    maxWidth: "250px",
+                    height: "auto",
+                    borderRadius: "10px",
+                    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              ))}
+            </div>
+          </Box>
 
-
-          {/* Roommate Preferences */}
+          {/* Interests */}
           <Box>
             <Typography variant="h5">Interests</Typography>
             <Typography>{userProfile?.interests || ""}</Typography>
           </Box>
 
-          {/* Interests */}
+          {/* NestMate Preferences */}
           <Box>
             <Typography variant="h5">NestMate Preferences</Typography>
             <Typography>{userProfile?.nest || ""}</Typography>
           </Box>
 
-
           <Box>
             <Typography variant="h5">Nest Location</Typography>
             <Typography>{userProfile?.nestLocation || ""}</Typography>
           </Box>
-
-
           <Box>
-      <Typography variant="h5">{userProfile? userProfile.firstName: ""}'s Nest</Typography>
-      {userMyPosts.length > 0 ? (
-        <ul>
-          {userMyPosts.map((post) => (
-            <li key={post.id}>
-              {/* Display post content */}
-              <h3>{post.listingName}</h3>
-              <p>{post.description}</p>
-              {/* ... Other post details ... */}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No posts in Ian's Nest yet.</p>
-      )}
-    </Box>
+            <Typography variant="h5">My Posts</Typography>
+            {userPosts.length > 0 ? (
+              <ul>
+                {userPosts.map((post, index) => (
+                  <li key={index}>
+                    <h3>{post.listingName}</h3>
+                    <p>{post.postContent}</p>
+                    {/* ... Other post details ... */}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No posts by you yet.</p>
+            )}
+          </Box>
 
          
-          
         </Box>
       </Box>
     </Box>
