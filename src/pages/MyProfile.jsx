@@ -7,6 +7,8 @@ import Typography from "@mui/material/Typography";
 import { db } from "../firebase";
 import { doc, getDoc, collection, getDocs, query, where } from "firebase/firestore";
 
+
+import MyNest from "./MyNest"; 
 const MyProfile = () => {
   const { currentUser } = useContext(AuthContext);
   const [userProfile, setUserProfile] = useState(null);
@@ -204,9 +206,12 @@ const MyProfile = () => {
               <p>No posts by you yet.</p>
             )}
           </Box>
-
+          <Link to = "mynest">
+          <button> Go to my posts</button>
+          </Link>
          
         </Box>
+        
       </Box>
     </Box>
   );

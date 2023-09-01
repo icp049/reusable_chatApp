@@ -9,6 +9,7 @@ import MyProfile from "./pages/MyProfile";
 import LandingPage from "./pages/LandingPage";
 import EditProfile from "./pages/EditProfile";
 import ViewNest from "./pages/ViewNest";
+import MyNest from "./pages/ViewNest"
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -38,6 +39,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="viewnest/:id" element={<ViewNest />} />
+        <Route path = "mynest" element = {<MyNest />} />
 
       </Routes>
     </BrowserRouter>
