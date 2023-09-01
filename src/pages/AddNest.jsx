@@ -27,6 +27,7 @@ import {
 const AddNest = ({ onClose }) => {
     const [activeStep, setActiveStep] = useState(0);
     const [photos, setPhotos] = useState([]);
+    
 
   const rentalTypes = ["Entire Home", "Private Room", "Shared Room", "Bedspace"];
   const lookingFor = ["Tenant", "Roomie", "Housemate"];
