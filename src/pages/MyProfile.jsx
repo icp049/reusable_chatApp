@@ -205,9 +205,8 @@ const MyProfile = () => {
                 {userPosts.map((post, index) => (
                   <li key={index} style = {{backgroundColor: "skyblue", borderRadius: "20px", width: "500px", height: "70px" }}>
 
-                    <h3 style = {{padding: "10px"}}>{post.listingName}</h3>
-                    <p>{post.postContent}</p>
-                 
+                    <h3 style = {{paddingTop: "10px"}}>{post.listingName}</h3>
+                    <ToggleSwitch />
 
 
                     {/* ... Other post details ... */}
