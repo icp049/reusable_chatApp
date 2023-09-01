@@ -8,6 +8,8 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import { getAuth } from "firebase/auth";
+import { v4 as uuidv4 } from 'uuid';
+
 
 import {
     
@@ -27,6 +29,7 @@ import {
 const AddNest = ({ onClose }) => {
     const [activeStep, setActiveStep] = useState(0);
     const [photos, setPhotos] = useState([]);
+    const [uploadedPhotoURLs, setUploadedPhotoURLs] = useState([]);
     
 
   const rentalTypes = ["Entire Home", "Private Room", "Shared Room", "Bedspace"];
@@ -113,11 +116,21 @@ const [selectedAmenities, setSelectedAmenities] = useState({
         const files = event.target.files;
     
         for (let i = 0; i < files.length && i < 5; i++) {
-            newPhotos.push(URL.createObjectURL(files[i]));
+            const uniqueId = uuidv4(); // Generate a unique identifier for the photo
+            const photoObject = {
+                id: uniqueId,
+                file: files[i],
+                url: URL.createObjectURL(files[i]),
+            };
+            newPhotos.push(photoObject);
         }
     
         setPhotos(newPhotos);
     };
+
+    
+    
+    
     
 
     
@@ -170,13 +183,20 @@ const [selectedAmenities, setSelectedAmenities] = useState({
   
             // Upload photos and get their download URLs
             const uploadedPhotoURLs = await Promise.all(
-              photos.map(async (photo, index) => {
-                const photoRef = storageRef(storage, `listingPhotos/${user.uid}/photo_${index}`);
-                const photoBlob = await fetch(photo).then((res) => res.blob());
-                await uploadBytes(photoRef, photoBlob);
-                return getDownloadURL(photoRef);
-              })
-            );
+                photos.map(async (photoObject, index) => {
+                  const { id, file } = photoObject;
+                  const photoRef = storageRef(
+                    storage,
+                    `listingPhotos/${user.uid}/${id}`
+                  );
+        
+                  const photoBlob = await fetch(photoObject.url).then((res) =>
+                    res.blob()
+                  );
+                  await uploadBytes(photoRef, photoBlob);
+                  return getDownloadURL(photoRef);
+                })
+              );
           
 
             const finalFormData = {
@@ -408,14 +428,14 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             name="photos" 
         />
        <div className="photo-grid">
-    {photos.map((photo, index) => (
-        <img
-            key={index}
-            src={photo}
-            alt={`Uploaded ${index}`}
-            style={{ width: '100px', height: 'auto', marginRight: '10px' }}
-        />
-    ))}
+       {photos.map((photoData, index) => (
+    <img
+        key={index}
+        src={photoData.url}
+        alt={`Uploaded ${index}`}
+        style={{ width: '100px', height: 'auto', marginRight: '10px' }}
+    />
+))}
          </div>
                         </div>
                     )}
