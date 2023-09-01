@@ -7,6 +7,22 @@ import { Link } from "react-router-dom";
 import { doc, getDocs, collection } from "firebase/firestore";
 import { db, auth } from "../firebase";
 import MainCarousel from "./MainCarousel";
+
+
+
+
+
+import EntireHomeIcon from "../icons/entirehome.png";
+import PrivateRoomIcon from "../icons/privateroom.png";
+import SharedRoomIcon from "../icons/sharedroom.png";
+import BedSpaceIcon from "../icons/bedspace.png";
+
+
+
+
+
+
+
 const LandingPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [gridData, setGridData] = useState([]);
