@@ -56,7 +56,7 @@ const LandingPage = () => {
     }
 
 
-    const rentalTypes = ["all", "Private Room", "Shared Room", "BedSpace" ];
+    const rentalTypes = ["all", "Entire Home", "Private Room", "Shared Room", "BedSpace" ];
 
     const filteredGridData = gridData.filter((post) => {
         const cityLowerCase = post.city.toLowerCase();
