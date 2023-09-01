@@ -206,9 +206,9 @@ const MyProfile = () => {
               <p>No posts by you yet.</p>
             )}
           </Box>
-          <Link to = "mynest">
-          <button> Go to my posts</button>
-          </Link>
+          <Link to="/mynest" state={{ userPosts }}>
+  <button>Go to My Nest</button>
+</Link>
          
         </Box>
         

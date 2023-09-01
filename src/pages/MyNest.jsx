@@ -1,9 +1,11 @@
 import React from "react";
 
-const MyNest = ({ userPosts }) => {
+const MyNest = (props) => {
+  const { location } = props;
+  const userPosts = location.state ? location.state.userPosts : [];
+
   return (
     <div>
-      {/* Render the user's posts here */}
       <h1>My Nest</h1>
       {userPosts.length > 0 ? (
         <ul>

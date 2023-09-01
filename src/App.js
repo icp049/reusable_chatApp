@@ -39,7 +39,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="viewnest/:id" element={<ViewNest />} />
-        <Route path = "mynest" element = {<MyNest />} />
+        <Route path = "/mynest" component = {<MyNest />} />
 
       </Routes>
     </BrowserRouter>
