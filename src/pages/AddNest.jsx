@@ -10,6 +10,10 @@ import { useNavigate, Link } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { v4 as uuidv4 } from 'uuid';
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+
 
 import {
     
@@ -165,6 +169,8 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             [name]: checked,
         }));
     };
+
+    
 
 
 
@@ -389,6 +395,20 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             value={formData.occupants}
             onChange={handleFormInputChange}
         />
+        <div>
+            Available On:
+            <DatePicker
+                selected={formData.availableOn}
+                onChange={(date) =>
+                    setFormData({
+                        ...formData,
+                        availableOn: date,
+                    })
+                }
+                dateFormat="MM/dd/yyyy" // You can customize the date format
+                placeholderText="Select a date"
+            />
+        </div>
          <input
             type="text"
             placeholder="Price per month"
