@@ -6,13 +6,18 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { db } from "../firebase";
 import { doc, getDoc, collection, getDocs, query, where } from "firebase/firestore";
+import ToggleSwitch from "../semicomponents/ToggleSwitch";
+
+import MyNest from "./MyNest";
 
 
-import MyNest from "./MyNest"; 
+
 const MyProfile = () => {
   const { currentUser } = useContext(AuthContext);
   const [userProfile, setUserProfile] = useState(null);
   const [userPosts, setUserPosts] = useState([]);
+
+
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -198,9 +203,10 @@ const MyProfile = () => {
             {userPosts.length > 0 ? (
               <ul style = {{listStyleType: "none"}}>
                 {userPosts.map((post, index) => (
-                  <li key={index} style = {{backgroundColor: "skyblue", borderRadius: "20px", width: "500px" }}>
+                  <li key={index} style = {{backgroundColor: "skyblue", borderRadius: "20px", width: "500px", height: "70px" }}>
                     <h3>{post.listingName}</h3>
                     <p>{post.postContent}</p>
+                    <ToggleSwitch />
 
 
                     {/* ... Other post details ... */}
