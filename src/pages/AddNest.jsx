@@ -99,6 +99,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
     const steps = ["General Info", "Location", "Amenities/Rules"];
 
     const handleNext = () => {
+        
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
@@ -267,49 +268,51 @@ const [selectedAmenities, setSelectedAmenities] = useState({
     
 
     return (
-        <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            minHeight="100vh"
-            bgcolor="orange"
-        >
-            <h2>Add a New Listing</h2>
-
-            {/* Close Button */}
-            <button
-                onClick={onClose}
-                style={{
-                    position: "absolute",
-                    top: "10px",
-                    right: "10px",
-                    backgroundColor: "white",
-                    border: "none",
-                    cursor: "pointer",
-                }}
-            >
-                Close
-            </button>
-
-            <Stepper activeStep={activeStep} orientation="horizontal">
-                {steps.map((label) => (
-                    <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
-                    </Step>
-                ))}
-            </Stepper>
-
+        <form onSubmit={handleFormSubmit}>
             <Box
-                width="400px"
-                padding="20px"
-                borderRadius="5px"
-                bgcolor="white"
-                boxShadow="0 2px 5px rgba(0, 0, 0, 0.3)"
-                boxSizing="border-box"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                minHeight="100vh"
+                bgcolor="orange"
             >
-               {activeStep === 0 && (
-    <form onSubmit={handleNext}>
-        <input
+                <h2>Add a New Listing</h2>
+    
+                {/* Close Button */}
+                <button
+                    onClick={onClose}
+                    style={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "10px",
+                        backgroundColor: "white",
+                        border: "none",
+                        cursor: "pointer",
+                    }}
+                >
+                    Close
+                </button>
+    
+                <Stepper activeStep={activeStep} orientation="horizontal">
+                    {steps.map((label) => (
+                        <Step key={label}>
+                            <StepLabel>{label}</StepLabel>
+                        </Step>
+                    ))}
+                </Stepper>
+    
+                <Box
+                    width="400px"
+                    padding="20px"
+                    borderRadius="5px"
+                    bgcolor="white"
+                    boxShadow="0 2px 5px rgba(0, 0, 0, 0.3)"
+                    boxSizing="border-box"
+                >
+                    {/* Content of your first step */}
+                    {activeStep === 0 && (
+                        <div>
+                        <input
             type="text"
             placeholder="Listing Name"
             name="listingName"
@@ -412,16 +415,14 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             style={{ width: '100px', height: 'auto', marginRight: '10px' }}
         />
     ))}
-</div>
-<button type="submit">Next</button>
-
-    </form>
-)}
-
-{activeStep === 1 && (
-    <form onSubmit={handleNext}>
-        {/* Location inputs */}
-        <input
+         </div>
+                        </div>
+                    )}
+    
+                    {/* Content of your second step */}
+                    {activeStep === 1 && (
+                        <div>
+                        <input
             type="text"
             placeholder="Street Number"
             name="streetNumber"
@@ -463,16 +464,13 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             value={formData.zipCode}
             onChange={handleFormInputChange}
         />
-        <button type="submit">Next</button>
-    </form>
-)}
-
-
-                {activeStep === 2 && (
-                    
-                 <form onSubmit={handleFormSubmit}>
-             
-                <div>
+                        </div>
+                    )}
+    
+                    {/* Content of your third step */}
+                    {activeStep === 2 && (
+                        <div>
+                       <div>
                     <h2>Amenities</h2>
                     <label>
                         <input
@@ -648,15 +646,21 @@ const [selectedAmenities, setSelectedAmenities] = useState({
 
                     {/* Add more amenities checkboxes here */}
                 </div>
-
-
-
-                <button type="submit">Add Listing</button>
-            </form>
-            )}
+                        </div>
+                    )}
+    
+                    {/* Buttons for navigating between steps */}
+                    {activeStep < 2 && (
+                        <button type="button" onClick={handleNext}>Next</button>
+                    )}
+    
+                    {activeStep === 2 && (
+                        <button type="submit">Add Listing</button>
+                    )}
+                </Box>
             </Box>
-        </Box>
+        </form>
     );
 };
-
+                    
 export default AddNest;
