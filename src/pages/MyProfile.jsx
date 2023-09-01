@@ -190,14 +190,19 @@ const MyProfile = () => {
             <Typography variant="h5">Nest Location</Typography>
             <Typography>{userProfile?.nestLocation || ""}</Typography>
           </Box>
+
+
+          
           <Box>
             <Typography variant="h5">My Posts</Typography>
             {userPosts.length > 0 ? (
-              <ul>
+              <ul style = {{listStyleType: "none"}}>
                 {userPosts.map((post, index) => (
-                  <li key={index}>
+                  <li key={index} style = {{backgroundColor: "skyblue", borderRadius: "20px", width: "500px" }}>
                     <h3>{post.listingName}</h3>
                     <p>{post.postContent}</p>
+
+
                     {/* ... Other post details ... */}
                   </li>
                 ))}
