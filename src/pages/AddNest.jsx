@@ -52,6 +52,8 @@ const AddNest = ({ onClose }) => {
         state: "",
         country: "",
         zipCode: "",
+        availableOn: "",
+        isAvailable: true,
     
     });
 
