@@ -204,9 +204,10 @@ const MyProfile = () => {
               <ul style = {{listStyleType: "none"}}>
                 {userPosts.map((post, index) => (
                   <li key={index} style = {{backgroundColor: "skyblue", borderRadius: "20px", width: "500px", height: "70px" }}>
-                    <h3>{post.listingName}</h3>
+
+                    <h3 style = {{padding: "10px"}}>{post.listingName}</h3>
                     <p>{post.postContent}</p>
-                    <ToggleSwitch />
+                 
 
 
                     {/* ... Other post details ... */}
