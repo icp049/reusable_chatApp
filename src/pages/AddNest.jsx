@@ -177,6 +177,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 return;
             }
             const displayName = user.displayName;
+            const posterPhoto = user.photoURL;
 
 
             const storage = getStorage();
@@ -205,6 +206,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 amenities: selectedAmenities,
                 rules: selectedRules,
                 postedBy: displayName,
+                posterImage: posterPhoto,
                 photos: uploadedPhotoURLs, // Save the photo URLs in the document
             };
 
