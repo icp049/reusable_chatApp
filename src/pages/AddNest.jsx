@@ -135,7 +135,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
           // Use Compressor to compress the image before adding it to the newPhotos array
           const compressedFile = await new Promise((resolve) => {
             new Compressor(photoObject.file, {
-              quality: 0.8,
+              quality: 0.005,
               success: (result) => {
                 resolve(result);
               },

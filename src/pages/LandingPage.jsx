@@ -119,8 +119,7 @@ const LandingPage = () => {
                         gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
                         gap: "20px",
                         padding: "40px 20px", // Adjust padding
-                        justifyContent: "center",
-                        minWidth: "300px"// Center the items
+                        justifyContent: "center", // Center the items
                     }}
                    
                 >
@@ -132,7 +131,7 @@ const LandingPage = () => {
    key={post.id}
    to={`/viewnest/${post.id}`}
    style={{
-       border: "2px solid grey",
+       border: "2px solid red",
           
        textDecoration: "none",
        color: "black",
@@ -141,6 +140,7 @@ const LandingPage = () => {
        alignItems: "center",
        transition: "background-color 0.3s ease", // Add transition for smooth effect
         backgroundColor: "white", 
+        
    }}onMouseEnter={(e) => {
     e.currentTarget.style.backgroundColor = "rgba(0, 0, 255, 0.2)"; // Change to orange on hover
 }}
