@@ -119,7 +119,8 @@ const LandingPage = () => {
                         gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
                         gap: "20px",
                         padding: "40px 20px", // Adjust padding
-                        justifyContent: "center", // Center the items
+                        justifyContent: "center",
+                        minWidth: "300px"// Center the items
                     }}
                    
                 >
