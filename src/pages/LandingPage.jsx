@@ -161,6 +161,7 @@ const LandingPage = () => {
                         gap: "20px",
                         padding: "40px 20px", // Adjust padding
                         justifyContent: "center", // Center the items
+                        alignItems: "center"
                     }}
                    
                 >
@@ -181,6 +182,8 @@ const LandingPage = () => {
        alignItems: "center",
        transition: "background-color 0.3s ease", // Add transition for smooth effect
         backgroundColor: "white", 
+        width: "300px", // Add a fixed width to prevent resizing
+   
         
    }}
 >
