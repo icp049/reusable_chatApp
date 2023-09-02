@@ -322,8 +322,10 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 height="500px"
                 width = "500px"
                 bgcolor="rgba(255, 159, 64, 1)"
+                borderRadius= "15px"
+                border = "solid 3px black"
             >
-                <h2>Add a New Listing</h2>
+                <h1>Add a New Listing</h1>
     
                 {/* Close Button */}
                 <button
