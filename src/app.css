@@ -1,0 +1,13 @@
+/* app.css */
+
+/* Import the Poppins font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Apply the Poppins font to the body element and specify other styles */
+body {
+  font-family: 'Poppins', sans-serif;
+
+  /* Other styles for the body element */
+}
+
+/* Add additional styles for your application elements here */

@@ -36,13 +36,12 @@ const Landingpagenavbar = () => {
       alignItems="center"
       width="100%"
       height="60px"
-      backgroundColor="rgba(204, 204, 0, 0.5);"
+      backgroundColor="skyblue;"
       color="black"
       position="fixed"
       top="0"
       left="0"
       zIndex="3"
-      
     >
       <Box
         width="80%"
@@ -50,14 +49,11 @@ const Landingpagenavbar = () => {
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        
       >
         <Box
-          sx={{ ':hover': { cursor: "pointer" } }}
-          color="blue"
-         
+          sx={{ ':hover': { cursor: "pointer", textDecoration: "none", color: "black" } }}
         >
-          <Link to="/" >
+          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
             NestMates
           </Link>
         </Box>
@@ -68,11 +64,8 @@ const Landingpagenavbar = () => {
           columnGap="20px"
           zIndex="2"
           marginTop="20px"
-          
-        
         >
           <Box
-           
             display={{ xs: 'block', md: 'none' }}
           >
             {/* Hamburger Menu */}
@@ -109,7 +102,7 @@ const Landingpagenavbar = () => {
               </MenuItem>
             </Menu>
           </Box>
-          
+
           {/* Navigation Links (Visible on larger screens) */}
           <Box
             display={{ xs: 'none', md: 'flex' }}
@@ -117,9 +110,9 @@ const Landingpagenavbar = () => {
             columnGap="20px"
             zIndex="2"
           >
-            <Link to="/myprofile">My Profile</Link>
-            <Link to="/message">Messages</Link>
-            <Link to="">My Nest</Link>
+            <Link to="/myprofile" style={{ textDecoration: "none", color: "black" }}>My Profile</Link>
+            <Link to="/message" style={{ textDecoration: "none", color: "black" }}>Messages</Link>
+            <Link to="" style={{ textDecoration: "none", color: "black" }}>My Nest</Link>
 
             <IconButton sx={{ color: "black" }}>
               <SearchOutlined />

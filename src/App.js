@@ -11,6 +11,10 @@ import EditProfile from "./pages/EditProfile";
 import ViewNest from "./pages/ViewNest";
 import MyNest from "./pages/ViewNest"
 
+
+
+import './app.css'; // Import your app.css file
+
 function App() {
   const { currentUser } = useContext(AuthContext);
 
