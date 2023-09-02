@@ -131,7 +131,7 @@ const LandingPage = () => {
    key={post.id}
    to={`/viewnest/${post.id}`}
    style={{
-       border: "2px solid red",
+       
           
        textDecoration: "none",
        color: "black",
@@ -141,12 +141,7 @@ const LandingPage = () => {
        transition: "background-color 0.3s ease", // Add transition for smooth effect
         backgroundColor: "white", 
         
-   }}onMouseEnter={(e) => {
-    e.currentTarget.style.backgroundColor = "rgba(0, 0, 255, 0.2)"; // Change to orange on hover
-}}
-onMouseLeave={(e) => {
-    e.currentTarget.style.backgroundColor = "white"; // Back to white after hover out
-        }}
+   }}
 >
 <div style={{ width: "400px", height: "300px", maxWidth: "100%", maxHeight: "100%" }}>
        <MainCarousel photos={post.photos} />
