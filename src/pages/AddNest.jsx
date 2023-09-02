@@ -10,6 +10,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { v4 as uuidv4 } from 'uuid';
 
+import Compressor from 'compressorjs';
+
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -117,23 +120,35 @@ const [selectedAmenities, setSelectedAmenities] = useState({
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    const handlePhotoUpload = (event) => {
+    const handlePhotoUpload = async (event) => {
         const newPhotos = [...photos];
         const files = event.target.files;
-    
+      
         for (let i = 0; i < files.length && i < 5; i++) {
-            const uniqueId = uuidv4(); // Generate a unique identifier for the photo
-            const photoObject = {
-                id: uniqueId,
-                file: files[i],
-                url: URL.createObjectURL(files[i]),
-            };
-            newPhotos.push(photoObject);
+          const uniqueId = uuidv4(); // Generate a unique identifier for the photo
+          const photoObject = {
+            id: uniqueId,
+            file: files[i],
+            url: URL.createObjectURL(files[i]),
+          };
+      
+          // Use Compressor to compress the image before adding it to the newPhotos array
+          const compressedFile = await new Promise((resolve) => {
+            new Compressor(photoObject.file, {
+              quality: 0.8,
+              success: (result) => {
+                resolve(result);
+              },
+            });
+          });
+      
+          photoObject.file = compressedFile;
+          newPhotos.push(photoObject);
         }
-    
+      
         setPhotos(newPhotos);
-    };
-
+      };
+      
     
     
     
