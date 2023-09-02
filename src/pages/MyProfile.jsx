@@ -203,9 +203,9 @@ const MyProfile = () => {
             {userPosts.length > 0 ? (
               <ul style = {{listStyleType: "none"}}>
                 {userPosts.map((post, index) => (
-                  <li key={index} style = {{backgroundColor: "skyblue", borderRadius: "20px", width: "500px", height: "70px" }}>
+                  <li key={index} style = {{backgroundColor: "skyblue", borderRadius: "20px", width: "400px", height: "70px" }}>
 
-                    <h3 style = {{paddingTop: "10px"}}>{post.listingName}</h3>
+                    <h3 style = {{paddingTop: "2px"}}>{post.listingName}</h3>
                     <ToggleSwitch />
 
 
