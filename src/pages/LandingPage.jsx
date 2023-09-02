@@ -11,6 +11,7 @@ import entireHomeIcon from "../icons/entirehome.png";
 import privateRoomIcon from "../icons/privateroom.png";
 import sharedRoomIcon from "../icons/sharedroom.png";
 import bedSpaceIcon from "../icons/bedspace.png";
+import allIcon from "../icons/all.png";
 
 const rentalTypes = ["all", "Entire Home", "Private Room", "Shared Room", "BedSpace"];
 
