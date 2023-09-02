@@ -319,8 +319,9 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 display="flex"
                 flexDirection="column"
                 alignItems="center"
-                minHeight="100vh"
-                bgcolor="orange"
+                height="500px"
+                width = "500px"
+                bgcolor="rgba(255, 159, 64, 1)"
             >
                 <h2>Add a New Listing</h2>
     
