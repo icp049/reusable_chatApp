@@ -70,7 +70,7 @@ const MyProfile = () => {
 
   const getGreetingMessage = () => {
     if (currentUser) {
-      return `Hi, ${currentUser.displayName || "there"}`;
+      return ` @${currentUser.displayName}`;
     } else {
       return "Welcome!";
     }
