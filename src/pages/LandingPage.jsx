@@ -120,8 +120,8 @@ const LandingPage = () => {
     style={{
       cursor: "pointer",
       margin: "0 20px",
-      textDecoration: selectedRentalType === rentalType ? "underline" : "none",
       fontWeight: selectedRentalType === rentalType ? "bold" : "normal",
+      color: selectedRentalType === rentalType ? "skyblue" : "black",
     }}
     onClick={() => handleTabChange(rentalType)}
   >
