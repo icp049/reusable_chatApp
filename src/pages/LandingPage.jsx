@@ -6,7 +6,24 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import MainCarousel from "./MainCarousel";
 
+
+import entireHomeIcon from "../icons/entirehome.png";
+import privateRoomIcon from "../icons/privateroom.png";
+import sharedRoomIcon from "../icons/sharedroom.png";
+import bedSpaceIcon from "../icons/bedspace.png";
+
 const rentalTypes = ["all", "Entire Home", "Private Room", "Shared Room", "BedSpace"];
+
+const rentalTypeIcons = {
+    all: null, // You can set a default icon or leave it as null
+    "Entire Home": entireHomeIcon,
+    "Private Room": privateRoomIcon,
+    "Shared Room": sharedRoomIcon,
+    BedSpace: bedSpaceIcon,
+  };
+  
+
+
 
 const LandingPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -96,20 +113,28 @@ const LandingPage = () => {
                 />
             </div>
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "20px" }}>
-                {rentalTypes.map((rentalType) => (
-                    <div
-                        key={rentalType}
-                        style={{
-                            cursor: "pointer",
-                            margin: "0 10px",
-                            textDecoration: selectedRentalType === rentalType ? "underline" : "none",
-                            fontWeight: selectedRentalType === rentalType ? "bold" : "normal",
-                        }}
-                        onClick={() => handleTabChange(rentalType)}
-                    >
-                        {rentalType.toUpperCase()}
-                    </div>
-                ))}
+            {rentalTypes.map((rentalType) => (
+  <div
+    key={rentalType}
+    style={{
+      cursor: "pointer",
+      margin: "0 10px",
+      textDecoration: selectedRentalType === rentalType ? "underline" : "none",
+      fontWeight: selectedRentalType === rentalType ? "bold" : "normal",
+    }}
+    onClick={() => handleTabChange(rentalType)}
+  >
+    {rentalTypeIcons[rentalType] && (
+      <img
+        src={rentalTypeIcons[rentalType]}
+        alt={`${rentalType} Icon`}
+        style={{ width: "20px", height: "20px", marginRight: "5px" }}
+      />
+    )}
+    {rentalType.toUpperCase()}
+  </div>
+))}
+
             </div>
             <div></div>
             <div>
