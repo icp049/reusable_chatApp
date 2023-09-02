@@ -16,11 +16,11 @@ import allIcon from "../icons/all.png";
 const rentalTypes = ["all", "Entire Home", "Private Room", "Shared Room", "BedSpace"];
 
 const rentalTypeIcons = {
-    all: null, // You can set a default icon or leave it as null
+    "all": allIcon , // You can set a default icon or leave it as null
     "Entire Home": entireHomeIcon,
     "Private Room": privateRoomIcon,
     "Shared Room": sharedRoomIcon,
-    BedSpace: bedSpaceIcon,
+    "BedSpace": bedSpaceIcon,
   };
   
 
@@ -113,13 +113,13 @@ const LandingPage = () => {
                     onChange={handleSearchChange}
                 />
             </div>
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "20px" }}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "35px" }}>
             {rentalTypes.map((rentalType) => (
   <div
     key={rentalType}
     style={{
       cursor: "pointer",
-      margin: "0 10px",
+      margin: "0 20px",
       textDecoration: selectedRentalType === rentalType ? "underline" : "none",
       fontWeight: selectedRentalType === rentalType ? "bold" : "normal",
     }}
