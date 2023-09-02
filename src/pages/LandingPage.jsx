@@ -15,6 +15,18 @@ import allIcon from "../icons/all.png";
 
 const rentalTypes = ["all", "Entire Home", "Private Room", "Shared Room", "BedSpace"];
 
+const blurBackgroundStyle = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Adjust the background color and opacity
+    backdropFilter: "blur(5px)", // Adjust the blur amount
+    zIndex: 999, // Ensure it appears above other elements
+  };
+  
+
 const rentalTypeIcons = {
     "all": allIcon , // You can set a default icon or leave it as null
     "Entire Home": entireHomeIcon,
@@ -90,6 +102,9 @@ const LandingPage = () => {
 
  return (
         <div style={{ position: "relative", minHeight: "100vh" }}>
+            {isModalOpen && (
+        <div style={blurBackgroundStyle}></div>
+      )}
             <Landingpagenavbar />
             <div
                 style={{
