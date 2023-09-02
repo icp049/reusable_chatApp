@@ -58,8 +58,24 @@ const ViewNest = () => {
                                 value && <li key={key}>{key}</li>
                             ))}
                         </ul>
-
-                        <button>Message @{selectedNest.postedBy}</button>
+                         
+                        <div
+                style={{
+                    position: "relative",
+                    width: "250px",
+                    backgroundColor: "rgba(255, 159, 64, 0.7)",
+                    color: "white",
+                    padding: "10px 20px",
+                    borderRadius: "10px",
+                    border: "solid 3px black",
+                    cursor: "pointer",
+                    boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+                    zIndex: "3", 
+                }}
+            
+            >
+                Message @{selectedNest.postedBy}
+            </div>
                     </div>
                 </div>
             ) : (
