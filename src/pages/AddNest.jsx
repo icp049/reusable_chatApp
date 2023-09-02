@@ -351,7 +351,8 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 </Stepper>
     
                 <Box
-                    width="400px"
+                    width="450px"
+                    height= "350px"
                     padding="20px"
                     borderRadius="5px"
                     bgcolor="white"
