@@ -27,7 +27,7 @@ const ViewNest = () => {
     }, [id]);
 
     return (
-        <div>
+        <div className = "nest-details-container">
             <Landingpagenavbar />
             {selectedNest ? (
                 <div className="nest-container">
@@ -42,6 +42,9 @@ const ViewNest = () => {
                         <h1>{selectedNest.listingName}</h1>
                         <h3>Proximity: {selectedNest.streetName} Area</h3>
                         <h2>{selectedNest.rentalType} by {selectedNest.firstName}</h2>
+                        <div>
+                            {selectedNest.posterImage}
+                            </div>
                         <p className="nest-price">${selectedNest.price} / Month</p>
                         <p className="nest-description">{selectedNest.description}</p>
 
