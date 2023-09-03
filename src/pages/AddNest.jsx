@@ -364,7 +364,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 >
                     {/* Content of your first step */}
                     {activeStep === 0 && (
-                        <div>
+                        <div className = "step1container">
                         <input
             type="text"
             placeholder="Listing Name"
@@ -484,6 +484,12 @@ const [selectedAmenities, setSelectedAmenities] = useState({
 ))}
          </div>
                         </div>
+
+
+
+
+
+
                     )}
     
                     {/* Content of your second step */}
