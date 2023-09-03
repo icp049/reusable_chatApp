@@ -135,19 +135,29 @@ const LandingPage = () => {
     style={{
       cursor: "pointer",
       margin: "0 20px",
-      fontWeight: selectedRentalType === rentalType ? "bold" : "normal",
-      color: selectedRentalType === rentalType ? "skyblue" : "black",
+      textAlign: "center", // Center the text and icon
     }}
     onClick={() => handleTabChange(rentalType)}
   >
     {rentalTypeIcons[rentalType] && (
-      <img
-        src={rentalTypeIcons[rentalType]}
-        alt={`${rentalType} Icon`}
-        style={{ width: "20px", height: "20px", marginRight: "5px" }}
-      />
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <img
+          src={rentalTypeIcons[rentalType]}
+          alt={`${rentalType} Icon`}
+          style={{ width: "28px", height: "28px" }}
+        />
+        <span
+          style={{
+            paddingTop: "5px",
+            fontSize: "11px",
+            fontWeight: selectedRentalType === rentalType ? "bold" : "normal",
+            color: selectedRentalType === rentalType ? "skyblue" : "black",
+          }}
+        >
+          {rentalType.toUpperCase()}
+        </span>
+      </div>
     )}
-    {rentalType.toUpperCase()}
   </div>
 ))}
 
