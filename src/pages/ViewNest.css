@@ -1,79 +1,151 @@
+/* Main layout container */
+.main-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Two columns with a 2:1 ratio */
+  gap: 20px; /* Adjust the gap between columns */
+  max-width: 1200px; /* Set a maximum width for the entire layout */
+  margin: 0 auto; /* Center the layout */
+  padding: 20px; /* Add padding as needed */
+}
 
+/* Left column styles */
+.left-column {
+  /* Add styles for the left column here */
+  padding: 20px; /* Add padding to the left column */
+}
+
+/* Right column styles */
+.right-column {
+  /* Add styles for the right column here */
+  padding: 20px; /* Add padding to the right column */
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px; /* Adjust the width as needed */
+}
+
+/* Styles for the nest container */
 .nest-container {
-  margin-top: 100px;
   background-color: black; /* You can adjust the background color for the nest details */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width: 800px; /* You can adjust the maximum width to your preference */
   width: 100%;
-  }
-  
-  .nest-images {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  .nest-images img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .nest-details {
-   
-    margin-top: 20px;
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .nest-details h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .nest-price {
-    font-size: 18px;
-    color: #e67e22;
-  }
-  
-  .nest-description {
-    margin-top: 10px;
-    font-size: 16px;
-  }
-  
-  /* Navbar styles (assuming you're using Landingpagenavbar) */
-  .landing-page-navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-  }
-  
-
-
-
- .photo-collage {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
-    max-width: 800px; /* Set a maximum width for the collage */
-    margin: 0 auto; /* Center the collage */
+  max-width: 600px; /* Adjust the maximum width to your preference */
+  margin: 0 auto; /* Center the nest container */
 }
 
-.photo-item {
-    position: relative;
-    padding-bottom: 100%; /* Maintain aspect ratio for the photo */
-    overflow: hidden;
+/* Styles for the photo collage */
+.nest-images {
+  display: flex;
+  flex-wrap: wrap; /* Ensure proper wrapping of images */
+  justify-content: center;
+  gap: 10px;
 }
 
-.photo-item img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%; 
-    height: 100%;
-    object-fit: cover;
+.nest-images img {
+  max-width: 100%;
+  height: auto;
 }
+
+/* Styles for the nest details */
+.nest-details {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nest-details h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.nest-price {
+  font-size: 18px;
+  color: #e67e22;
+}
+
+.nest-description {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+/* Styles for the navbar */
+/* Main layout container */
+.main-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Two columns with a 2:1 ratio */
+  gap: 20px; /* Adjust the gap between columns */
+  max-width: 1200px; /* Set a maximum width for the entire layout */
+  margin: 0 auto; /* Center the layout */
+  padding: 20px; /* Add padding as needed */
+}
+
+/* Left column styles */
+.left-column {
+  /* Add styles for the left column here */
+  padding: 20px; /* Add padding to the left column */
+}
+
+/* Right column styles */
+.right-column {
+  /* Add styles for the right column here */
+  padding: 20px; /* Add padding to the right column */
+  background-color: red;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px; /* Adjust the width as needed */
+}
+
+/* Styles for the nest container */
+.nest-container {
+  background-color: black; /* You can adjust the background color for the nest details */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 600px; /* Adjust the maximum width to your preference */
+  margin: 0 auto; /* Center the nest container */
+}
+
+/* Styles for the photo collage */
+.nest-images {
+  display: flex;
+  flex-wrap: wrap; /* Ensure proper wrapping of images */
+  justify-content: center;
+  gap: 10px;
+}
+
+.nest-images img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Styles for the nest details */
+.nest-details {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nest-details h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.nest-price {
+  font-size: 18px;
+  color: #e67e22;
+}
+
+.nest-description {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+/* Styles for the navbar */
+
+
+/* Add any other styles as needed */
+
+/* Add any other styles as needed */

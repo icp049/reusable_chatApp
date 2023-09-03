@@ -365,7 +365,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 >
                     {/* Content of your first step */}
                     {activeStep === 0 && (
-                        <div className = {styles.step1container} style={{ height: '350px', overflow: 'auto' }}>
+                        <div className = {styles.step1container} style={{ height: '400px', overflow: 'auto' }}>
                         <input
             type="text"
             placeholder="Listing Name"
