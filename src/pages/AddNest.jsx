@@ -731,7 +731,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                             position: "relative",
                             marginTop: "10px",
                         left: "340px",
-                        backgroundColor: "rgba(255, 159, 64, 0.7)",
+                        backgroundColor: "rgba(255, 100, 100, 0.7)",
                         color: "white",
                         padding: "10px 20px",
                         borderRadius: "10px",
