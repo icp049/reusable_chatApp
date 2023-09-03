@@ -357,7 +357,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 <Box
                     marginTop="20px"
                     width="450px"
-                    height= "400px"
+                    height= "430px"
                     padding="20px"
                     borderRadius="15px"
                     bgcolor="white"
@@ -726,7 +726,20 @@ const [selectedAmenities, setSelectedAmenities] = useState({
     
                     {/* Buttons for navigating between steps */}
                     {activeStep < 2 && (
-                        <button type="button" onClick={handleNext}>Next</button>
+                        <button type="button"
+                        style = {{  
+                            position: "relative",
+                            marginTop: "10px",
+                        left: "340px",
+                        backgroundColor: "rgba(255, 159, 64, 0.7)",
+                        color: "white",
+                        padding: "10px 20px",
+                        borderRadius: "10px",
+                        border: "solid 3px black",
+                        cursor: "pointer",
+                        boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+                         }}
+                        onClick={handleNext}>Next</button>
                     )}
     
                     {activeStep === 2 && (
