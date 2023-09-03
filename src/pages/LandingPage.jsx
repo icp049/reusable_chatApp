@@ -12,6 +12,7 @@ import privateRoomIcon from "../icons/privateroom.png";
 import sharedRoomIcon from "../icons/sharedroom.png";
 import bedSpaceIcon from "../icons/bedspace.png";
 import allIcon from "../icons/all.png";
+import worldIcon from "../icons/worldIcon.png";
 
 const rentalTypes = ["all", "Entire Home", "Private Room", "Shared Room", "BedSpace"];
 
@@ -125,8 +126,11 @@ const LandingPage = () => {
                         width: "300px",
                     }}
                     value={searchTerm}
-                    onChange={handleSearchChange}
-                />
+                    onChange={handleSearchChange}   
+                /> 
+
+                
+                
             </div>
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "35px" }}>
             {rentalTypes.map((rentalType) => (
