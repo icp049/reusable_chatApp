@@ -495,8 +495,9 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                     )}
     
                     {/* Content of your second step */}
+                   
                     {activeStep === 1 && (
-                        <div>
+                        <div className = {styles.step2container}>
                         <input
             type="text"
             placeholder="Street Number"
@@ -540,6 +541,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             onChange={handleFormInputChange}
         />
                         </div>
+
                     )}
     
                     {/* Content of your third step */}
