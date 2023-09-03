@@ -10,6 +10,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { v4 as uuidv4 } from 'uuid';
 
+import styles from "../styles/Addnest.module.css";
+
 import Compressor from 'compressorjs';
 
 
@@ -321,7 +323,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 display="flex"
                 flexDirection="column"
                 alignItems="center"
-                height="500px"
+                height="600px"
                 width = "500px"
                 bgcolor="rgba(255, 159, 64, 1)"
                 borderRadius= "15px"
@@ -355,7 +357,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 <Box
                     marginTop="20px"
                     width="450px"
-                    height= "350px"
+                    height= "400px"
                     padding="20px"
                     borderRadius="15px"
                     bgcolor="white"
@@ -364,7 +366,7 @@ const [selectedAmenities, setSelectedAmenities] = useState({
                 >
                     {/* Content of your first step */}
                     {activeStep === 0 && (
-                        <div className = "step1container">
+                        <div className = {styles.step1container} style={{ height: '350px', overflow: 'auto' }}>
                         <input
             type="text"
             placeholder="Listing Name"
