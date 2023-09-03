@@ -44,9 +44,10 @@
     box-sizing: border-box;
 }
 
-.step1container input{
+.step2container input{
     width: 100%;
     padding: 10px;
+    height: 20.5px;
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
