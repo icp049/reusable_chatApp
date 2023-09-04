@@ -78,6 +78,7 @@ const MainCarousel = ({ photos }) => {
                                 objectFit: "cover",
                                 backgroundAttachment: "fixed",
                             }}
+                            loading = "lazy"
                         />
                     </div>
                 ))}
