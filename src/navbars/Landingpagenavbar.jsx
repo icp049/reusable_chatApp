@@ -112,7 +112,7 @@ const Landingpagenavbar = () => {
           >
             <Link to="/myprofile" style={{ textDecoration: "none", color: "black" }}>My Profile</Link>
             <Link to="/message" style={{ textDecoration: "none", color: "black" }}>Messages</Link>
-            <Link to="" style={{ textDecoration: "none", color: "black" }}>My Nest</Link>
+            
 
             <IconButton sx={{ color: "black" }}>
               <SearchOutlined />
