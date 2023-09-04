@@ -198,7 +198,7 @@ const MyProfile = () => {
 
 
           
-          <Box>
+          <Box >
             <Typography variant="h5">My Posts</Typography>
             {userPosts.length > 0 ? (
               <ul style = {{listStyleType: "none"}}>
@@ -217,10 +217,7 @@ const MyProfile = () => {
               <p>No posts by you yet.</p>
             )}
           </Box>
-          <Link to="/mynest" state={{ userPosts }}>
-  <button>Go to My Nest</button>
-</Link>
-         
+ 
         </Box>
         
       </Box>
