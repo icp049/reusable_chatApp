@@ -47,7 +47,7 @@ const ViewNest = () => {
               <h2>
                 {selectedNest.rentalType} by {selectedNest.firstName}
               </h2>
-              <div>{selectedNest.posterImage}</div>
+              <div><img src={selectedNest.posterImage} alt="Poster" /></div>
               <p className="nest-price">${selectedNest.price} / Month</p>
               <p className="nest-description">{selectedNest.description}</p>
               <h2>Amenities</h2>
