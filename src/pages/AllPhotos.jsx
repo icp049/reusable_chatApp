@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import Landingpagenavbar from "../navbars/Landingpagenavbar";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import "./AllPhotos.css"; // You can create a CSS file for styling if needed
 
 const AllPhotos = () => {
   const { id } = useParams();
