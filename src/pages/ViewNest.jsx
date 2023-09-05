@@ -4,6 +4,7 @@ import Landingpagenavbar from "../navbars/Landingpagenavbar";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import "./ViewNest.css";
+import {Link} from "react-router-dom";
 
 const ViewNest = () => {
   const { id } = useParams();
