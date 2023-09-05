@@ -22,11 +22,23 @@ const Input = () => {
   const { data } = useContext(ChatContext);
 
   const handleSend = async () => {
+
+    if (currentUser) {
+      // Create the message object
+      const message = {
+        id: uuid(),
+        text,
+        senderId: currentUser.uid,
+        date: Timestamp.now(),
+        receiverId: data.user.uid, // Assuming data.user.uid is the receiver's ID
+      };
+    }
+
     if (img) {
       const storageRef = ref(storage, uuid());
 
       const uploadTask = uploadBytesResumable(storageRef, img);
-
+       
       uploadTask.on(
         (error) => {
           //TODO:Handle Error

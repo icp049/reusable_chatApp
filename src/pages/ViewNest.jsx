@@ -4,7 +4,8 @@ import Landingpagenavbar from "../navbars/Landingpagenavbar";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import "./ViewNest.css";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import Input from "../components/Input";
 
 const ViewNest = () => {
   const { id } = useParams();
@@ -31,8 +32,8 @@ const ViewNest = () => {
     <div className="main-container">
       <Landingpagenavbar />
 
-      <div className="left-column">
-        {selectedNest ? (
+      {selectedNest ? (
+        <div className="left-column">
           <div className="nest-container">
             <div className="nest-images photo-collage">
               {selectedNest.photos &&
@@ -41,9 +42,9 @@ const ViewNest = () => {
                     <img src={photo} alt={`Nest ${index}`} />
                   </div>
                 ))}
-                <Link to = {`/allphotos/${id}`}>
-                  <button> Show all photos </button>
-                  </Link>
+              <Link to={`/allphotos/${id}`}>
+                <button> Show all photos </button>
+              </Link>
             </div>
             <div className="nest-details">
               <h1>{selectedNest.listingName}</h1>
@@ -51,19 +52,21 @@ const ViewNest = () => {
               <h2>
                 {selectedNest.rentalType} by {selectedNest.firstName}
               </h2>
-              <div><img src={selectedNest.posterImage} alt="Poster" /></div>
+              <div>
+                <img src={selectedNest.posterImage} alt="Poster" />
+              </div>
               <p className="nest-price">${selectedNest.price} / Month</p>
               <p className="nest-description">{selectedNest.description}</p>
               <h2>Amenities</h2>
               <ul>
-                {Object.entries(selectedNest.amenities).map(
-                  ([key, value]) => value && <li key={key}>{key}</li>
+                {Object.entries(selectedNest.amenities).map(([key, value]) =>
+                  value ? <li key={key}>{key}</li> : null
                 )}
               </ul>
               <h2>Rules</h2>
               <ul>
-                {Object.entries(selectedNest.rules).map(
-                  ([key, value]) => value && <li key={key}>{key}</li>
+                {Object.entries(selectedNest.rules).map(([key, value]) =>
+                  value ? <li key={key}>{key}</li> : null
                 )}
               </ul>
               <div
@@ -84,14 +87,15 @@ const ViewNest = () => {
               </div>
             </div>
           </div>
-        ) : (
-          <div>No nest found with ID: {id}</div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div>No nest found with ID: {id}</div>
+      )}
 
       <div className="right-column">
         <div className="right-container">Container 1</div>
         <div className="right-container">Container 2</div>
+        {selectedNest && <Input receiverId={selectedNest.postedBy} />}
       </div>
     </div>
   );
