@@ -44,6 +44,7 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="viewnest/:id" element={<ViewNest />} />
         <Route path = "/mynest" component = {<MyNest />} />
+        <Route path ="allphotos" component = {<MyNest />} />
 
       </Routes>
     </BrowserRouter>
