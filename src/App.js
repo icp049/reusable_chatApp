@@ -10,7 +10,7 @@ import LandingPage from "./pages/LandingPage";
 import EditProfile from "./pages/EditProfile";
 import ViewNest from "./pages/ViewNest";
 import MyNest from "./pages/ViewNest"
-
+import AllPhotos from "./pages/AllPhotos";
 
 
 import './app.css'; // Import your app.css file
