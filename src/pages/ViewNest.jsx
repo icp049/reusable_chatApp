@@ -40,6 +40,9 @@ const ViewNest = () => {
                     <img src={photo} alt={`Nest ${index}`} />
                   </div>
                 ))}
+                <Link to = "/viewphotos">
+                  <button> Show all photos </button>
+                  </Link>
             </div>
             <div className="nest-details">
               <h1>{selectedNest.listingName}</h1>
