@@ -15,8 +15,19 @@
     box-sizing: border-box;
 }
 
+
+.textarea1{
+    /* Styles for textarea elements */
+    resize: none; /* Prevent height adjustment */
+    background-color: blue;
+    height: 90px !important; 
+
+}
+
+.step1container select {
+    margin-top: 30px;
+}
 .step1container input,
-.step1container textarea,
 .step1container select {
     width: 100%;
     padding: 10px;

@@ -377,7 +377,8 @@ const [selectedAmenities, setSelectedAmenities] = useState({
             value={formData.listingName}
             onChange={handleFormInputChange}
         />
-        <textarea
+        <textarea 
+        className = {styles.textarea1}
             placeholder="Description"
             name="description"
             value={formData.description}
