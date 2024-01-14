@@ -297,13 +297,14 @@ const AddNest = ({ onClose }) => {
                   value={formData.listingName}
                   onChange={handleFormInputChange}
                 />
-                <textarea
-                  className={styles.textarea1}
-                  placeholder="Description"
-                  name="description"
-                  value={formData.description}
-                  onChange={handleFormInputChange}
-                ></textarea>
+               <textarea
+  className={styles.textarea1}
+  placeholder="Description"
+  name="description"
+  value={formData.description}
+  onChange={handleFormInputChange}
+  style={{ height: `${Math.max(50, formData.description.split('\n').length * 100)}px` }}
+></textarea>
                 <select
                   name="lookingFor"
                   value={formData.lookingFor}
