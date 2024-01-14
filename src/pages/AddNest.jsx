@@ -272,7 +272,7 @@ const AddNest = ({ onClose }) => {
   style={{
     position: "absolute",
     top: "10px",
-    right: "10px",
+    right: "20px",
     width: "20px",  // Set the width as needed
     height: "20px", // Set the height as needed
     cursor: "pointer",
@@ -474,8 +474,8 @@ const AddNest = ({ onClose }) => {
 
         {/* Content of your third step */}
         {activeStep === 2 && (
-          <div>
-            <div>
+          < div className={styles.step3container}>
+            <div className = {styles.amenitiescontainer}>
               <h2>Amenities</h2>
               <label>
                 <input
@@ -587,7 +587,7 @@ const AddNest = ({ onClose }) => {
               {/* Add more amenities checkboxes here */}
             </div>
 
-            <div>
+            <div className = {styles.rulescontainer}>
               <h2>Rules</h2>
               <label>
                 <input
@@ -637,7 +637,7 @@ const AddNest = ({ onClose }) => {
                 Smoking
               </label>
 
-              {/* Add more amenities checkboxes here */}
+     
             </div>
           </div>
         )}

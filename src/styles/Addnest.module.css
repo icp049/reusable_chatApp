@@ -3,10 +3,11 @@ display: flex;
 flex-direction: column;
 align-items: center;
 height: 800px;
-width: 500px;
+width: 600px;
 background-color: rgba(255, 159, 64, 1);
 border-radius: 15px;
 border: solid 3px black;
+overflow-y: auto;
 }
 
 .step1container {
@@ -28,4 +29,51 @@ border: solid 3px black;
     
 
 
+}
+
+
+.step2container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+
+}
+
+
+.step2container input[type="text"]{
+    margin-bottom: 10px; 
+    height: 30px; 
+    font-size: 16px; 
+   
+}
+
+
+.step3container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+ 
+
+}
+
+.step3container input[type="checkbox"] {
+    margin-bottom: 10px; 
+    height: 30px; 
+    font-size: 16px; 
+   
+    
+
+
+}
+
+.amenitiescontainer{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.rulescontainer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
 }
