@@ -5,6 +5,10 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { auth } from "../firebase";
 
+
+
+import BeeHive from '../icons/beehive.png';
+
 const Landingpagenavbar = () => {
   const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
@@ -50,13 +54,19 @@ const Landingpagenavbar = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Box
-          sx={{ ':hover': { cursor: "pointer", textDecoration: "none", color: "black" } }}
-        >
-          <Link to="/" style={{ textDecoration: "none", color: "black" ,fontWeight: "bold", fontSize: "30px", }}>
-            NestMates
-          </Link>
-        </Box>
+       <Box
+  sx={{
+    ':hover': { cursor: "pointer", textDecoration: "none", color: "black" },
+    display: "flex", // Use flexbox to align items horizontally
+    alignItems: "center", // Center items vertically
+  }}
+>
+<img src={BeeHive} alt="Beehive" style={{ marginRight: "10px", width: "30px", height: "30px" }} />
+  <Link to="/" style={{ textDecoration: "none", color: "black", fontWeight: "bold", fontSize: "30px" }}>
+    NestMates
+  </Link>
+ 
+</Box>
 
         <Box
           display="flex"
