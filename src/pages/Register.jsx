@@ -5,6 +5,7 @@ import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
+import Compressor from 'compressorjs';
 
 const Register = () => {
   const [err, setErr] = useState(false);
@@ -31,11 +32,22 @@ const Register = () => {
       //Create user
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
+
+      const compressedFile = await new Promise((resolve) => {
+        new Compressor(file, {
+          quality: 0.8,
+          success: (compressedResult) => {
+            resolve(compressedResult);
+          },
+        });
+      });
+
+
       //Create a unique image name
       const date = new Date().getTime();
       const storageRef = ref(storage, `userDisplayPhotos/${displayName + date}`);
 
-      await uploadBytesResumable(storageRef, file).then(() => {
+      await uploadBytesResumable(storageRef, compressedFile).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
             //Update profile

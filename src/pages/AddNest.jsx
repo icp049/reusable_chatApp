@@ -108,7 +108,7 @@ const AddNest = ({ onClose }) => {
       // Compress the photo before adding it to the state
       const compressedFile = await new Promise((resolve) => {
         new Compressor(files[i], {
-          quality: 0.2,
+          quality: 0.1,
           success: (compressedResult) => {
             resolve(compressedResult);
           },
