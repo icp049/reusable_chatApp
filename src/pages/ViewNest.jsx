@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Landingpagenavbar from "../navbars/Landingpagenavbar";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import "./ViewNest.css";
-import { Link } from "react-router-dom";
-import Input from "../components/Input";
+import MessagePoster from "./MessagePoster";
 
 const ViewNest = () => {
   const { id } = useParams();
+
+  const [postedBy, setPostedBy] = useState("");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [selectedNest, setSelectedNest] = useState(null);
 
   useEffect(() => {
@@ -17,6 +21,7 @@ const ViewNest = () => {
         const nestDoc = await getDoc(doc(db, "Posts", id));
         if (nestDoc.exists()) {
           setSelectedNest({ id, ...nestDoc.data() });
+          setPostedBy({postedBy, ...nestDoc.data() });
         } else {
           setSelectedNest(null);
         }
@@ -27,6 +32,14 @@ const ViewNest = () => {
 
     fetchNestDetails();
   }, [id]);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="main-container">
@@ -82,22 +95,32 @@ const ViewNest = () => {
                   boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
                   zIndex: "3",
                 }}
+                onClick={openModal}
               >
                 Message @{selectedNest.postedBy}
               </div>
+              {isModalOpen && (
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            zIndex: "1000",
+          }}
+        >
+          <MessagePoster onClose={closeModal} postedBy={postedBy}  />
+        </div>
+      )}
             </div>
           </div>
         </div>
       ) : (
         <div>No nest found with ID: {id}</div>
       )}
-
-      <div className="right-column">
-        <div className="right-container">Container 1</div>
-        <div className="right-container">Container 2</div>
-        {selectedNest && <Input receiverId={selectedNest.postedBy} />}
-      </div>
     </div>
+
+    
   );
 };
 
