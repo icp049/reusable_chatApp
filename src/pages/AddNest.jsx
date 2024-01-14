@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import styles from "../styles/Addnest.module.css";
 
-import Compressor from "compressorjs";
+import Compressor from 'compressorjs';
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -23,6 +23,7 @@ const AddNest = ({ onClose }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [photos, setPhotos] = useState([]);
   const [uploadedPhotoURLs, setUploadedPhotoURLs] = useState([]);
+
 
   const rentalTypes = [
     "Entire Home",
@@ -100,29 +101,29 @@ const AddNest = ({ onClose }) => {
   const handlePhotoUpload = async (event) => {
     const newPhotos = [...photos];
     const files = event.target.files;
-
+  
     for (let i = 0; i < files.length && i < 5; i++) {
       const uniqueId = uuidv4(); // Generate a unique identifier for the photo
-      const photoObject = {
-        id: uniqueId,
-        file: files[i],
-        url: URL.createObjectURL(files[i]),
-      };
-
-      // Use Compressor to compress the image before adding it to the newPhotos array
+  
+      // Compress the photo before adding it to the state
       const compressedFile = await new Promise((resolve) => {
-        new Compressor(photoObject.file, {
-          quality: 0.005,
-          success: (result) => {
-            resolve(result);
+        new Compressor(files[i], {
+          quality: 0.2,
+          success: (compressedResult) => {
+            resolve(compressedResult);
           },
         });
       });
-
-      photoObject.file = compressedFile;
+  
+      const photoObject = {
+        id: uniqueId,
+        file: compressedFile,
+        url: URL.createObjectURL(compressedFile),
+      };
+  
       newPhotos.push(photoObject);
     }
-
+  
     setPhotos(newPhotos);
   };
 
