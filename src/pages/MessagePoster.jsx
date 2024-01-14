@@ -6,6 +6,9 @@ import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { setDoc, doc, serverTimestamp, Timestamp  } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
+
+
 const MessagePoster = ({ onClose, postedBy }) => {
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
@@ -25,8 +28,7 @@ const MessagePoster = ({ onClose, postedBy }) => {
         text,
         senderId: currentUser.uid,
         date: Timestamp.now(),
-        receiverId: currentUser.uid, // Assuming sender and receiver are the same for a new chat
-        postedBy,
+        receiverId: postedBy, // Set receiverId to postedBy (user id)
       };
 
       // Handle image upload if an image is provided

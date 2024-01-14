@@ -20,8 +20,23 @@ const ViewNest = () => {
       try {
         const nestDoc = await getDoc(doc(db, "Posts", id));
         if (nestDoc.exists()) {
-          setSelectedNest({ id, ...nestDoc.data() });
-          setPostedBy({postedBy, ...nestDoc.data() });
+          const nestData = nestDoc.data();
+          setSelectedNest({ id, ...nestData });
+  
+          // Extract the postedBy field from the nestData
+          const nestPostedBy = nestData.postedBy;
+  
+          // Fetch the user document separately to get the user id
+          const userDoc = await getDoc(doc(db, "Users", nestPostedBy));
+  
+          if (userDoc.exists()) {
+            const userId = userDoc.id;
+  
+            // Now set the postedBy state to the user id
+            setPostedBy(userId);
+          } else {
+            console.error("User document not found");
+          }
         } else {
           setSelectedNest(null);
         }
@@ -29,9 +44,10 @@ const ViewNest = () => {
         console.error("Error fetching nest details:", error);
       }
     };
-
+  
     fetchNestDetails();
   }, [id]);
+  
 
   const openModal = () => {
     setIsModalOpen(true);

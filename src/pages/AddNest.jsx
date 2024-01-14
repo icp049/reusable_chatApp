@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import styles from "../styles/Addnest.module.css";
 
-import Compressor from 'compressorjs';
+import Compressor from "compressorjs";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -23,7 +23,6 @@ const AddNest = ({ onClose }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [photos, setPhotos] = useState([]);
   const [uploadedPhotoURLs, setUploadedPhotoURLs] = useState([]);
-
 
   const rentalTypes = [
     "Entire Home",
@@ -101,10 +100,10 @@ const AddNest = ({ onClose }) => {
   const handlePhotoUpload = async (event) => {
     const newPhotos = [...photos];
     const files = event.target.files;
-  
+
     for (let i = 0; i < files.length && i < 5; i++) {
       const uniqueId = uuidv4(); // Generate a unique identifier for the photo
-  
+
       // Compress the photo before adding it to the state
       const compressedFile = await new Promise((resolve) => {
         new Compressor(files[i], {
@@ -114,16 +113,16 @@ const AddNest = ({ onClose }) => {
           },
         });
       });
-  
+
       const photoObject = {
         id: uniqueId,
         file: compressedFile,
         url: URL.createObjectURL(compressedFile),
       };
-  
+
       newPhotos.push(photoObject);
     }
-  
+
     setPhotos(newPhotos);
   };
 
@@ -256,418 +255,413 @@ const AddNest = ({ onClose }) => {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        height="600px"
-        width="500px"
-        bgcolor="rgba(255, 159, 64, 1)"
-        borderRadius="15px"
-        border="solid 3px black"
-      >
-        <h1>Add a New Listing</h1>
+   
+      <div className = {styles.maincontainer}>
+          
+            <h1>Add a New Listing</h1>
+       
 
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          style={{
-            position: "absolute",
-            top: "10px",
-            right: "10px",
-            backgroundColor: "white",
-            border: "none",
-            cursor: "pointer",
-          }}
-        >
-          Close
-        </button>
+        
+          <button
+            onClick={onClose}
+            style={{
+              position: "absolute",
+              top: "10px",
+              right: "10px",
+              backgroundColor: "white",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            Close
+          </button>
 
-        <Stepper activeStep={activeStep} orientation="horizontal">
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
+            <Stepper activeStep={activeStep} orientation="horizontal">
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          
 
-        <Box
-      >
-          {activeStep === 0 && (
-            <div
-              className={styles.step1container}
-              style={{ height: "400px", overflow: "auto" }}
-            >
-              <input
-                type="text"
-                placeholder="Listing Name"
-                name="listingName"
-                value={formData.listingName}
-                onChange={handleFormInputChange}
-              />
-              <textarea
-                className={styles.textarea1}
-                placeholder="Description"
-                name="description"
-                value={formData.description}
-                onChange={handleFormInputChange}
-              ></textarea>
-              <select
-                name="lookingFor"
-                value={formData.lookingFor}
-                onChange={handleFormInputChange}
+       
+            {activeStep === 0 && (
+              <div
+                className={styles.step1container}
               >
-                <option value=""> Looking for..</option>
-                {lookingFor.map((type, index) => (
-                  <option key={index} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-              <input
-                type="text"
-                placeholder="Preferences"
-                name="preference"
-                value={formData.preference}
-                onChange={handleFormInputChange}
-              />
+                <input
+                  type="text"
+                  placeholder="Listing Name"
+                  name="listingName"
+                  value={formData.listingName}
+                  onChange={handleFormInputChange}
+                />
+                <textarea
+                  className={styles.textarea1}
+                  placeholder="Description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleFormInputChange}
+                ></textarea>
+                <select
+                  name="lookingFor"
+                  value={formData.lookingFor}
+                  onChange={handleFormInputChange}
+                >
+                  <option value=""> Looking for..</option>
+                  {lookingFor.map((type, index) => (
+                    <option key={index} value={type}>
+                      {type}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="text"
+                  placeholder="Preferences"
+                  name="preference"
+                  value={formData.preference}
+                  onChange={handleFormInputChange}
+                />
 
-              <select
-                name="rentalType"
-                value={formData.rentalType}
-                onChange={handleFormInputChange}
+                <select
+                  name="rentalType"
+                  value={formData.rentalType}
+                  onChange={handleFormInputChange}
+                >
+                  <option value=""> Select Accomodation Type</option>
+                  {rentalTypes.map((type, index) => (
+                    <option key={index} value={type}>
+                      {type}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="text"
+                  placeholder="Number of Occupants"
+                  name="occupants"
+                  value={formData.occupants}
+                  onChange={handleFormInputChange}
+                />
+                <div className = {styles.datepickercontainer}>
+                  Available On:
+                  <DatePicker
+                    selected={formData.availableOn}
+                    onChange={(date) =>
+                      setFormData({
+                        ...formData,
+                        availableOn: date,
+                      })
+                    }
+                    dateFormat="MM/dd/yyyy" // You can customize the date format
+                    placeholderText="Select a date"
+                  />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Price per month"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleFormInputChange}
+                />
+                <input
+                  type="text"
+                  placeholder="Deposit"
+                  name="deposit"
+                  value={formData.deposit}
+                  onChange={handleFormInputChange}
+                />
+
+                <label>
+                  <input
+                    type="checkbox"
+                    name="includeutilities"
+                    checked={selectedInclude.includeutilities}
+                    onChange={handleIncludeChange}
+                  />
+                  Utilities included
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="noutilities"
+                    checked={selectedInclude.noutilities}
+                    onChange={handleIncludeChange}
+                  />
+                  Utilities NOT included
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={handlePhotoUpload}
+                  // Limit the number of photos to 5
+                  max="5"
+                  name="photos"
+                />
+                <div className="photo-grid">
+                  {photos.map((photoData, index) => (
+                    <img
+                      key={index}
+                      src={photoData.url}
+                      alt={`Uploaded ${index}`}
+                      style={{
+                        width: "100px",
+                        height: "auto",
+                        marginRight: "10px",
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+            
+
+            {/* Content of your second step */}
+
+            {activeStep === 1 && (
+              <div className={styles.step2container}>
+                <input
+                  type="text"
+                  placeholder="Street Number"
+                  name="streetNumber"
+                  value={formData.streetNumber}
+                  onChange={handleFormInputChange}
+                />
+                <input
+                  type="text"
+                  placeholder="Street Name"
+                  name="streetName"
+                  value={formData.streetName}
+                  onChange={handleFormInputChange}
+                />
+                <input
+                  type="text"
+                  placeholder="City"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleFormInputChange}
+                />
+                <input
+                  type="text"
+                  placeholder="State/Province"
+                  name="state"
+                  value={formData.state}
+                  onChange={handleFormInputChange}
+                />
+                <input
+                  type="text"
+                  placeholder="Country"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleFormInputChange}
+                />
+                <input
+                  type="text"
+                  placeholder="Zip Code"
+                  name="zipCode"
+                  value={formData.zipCode}
+                  onChange={handleFormInputChange}
+                />
+              </div>
+            )}
+
+            {/* Content of your third step */}
+            {activeStep === 2 && (
+              <div>
+                <div>
+                  <h2>Amenities</h2>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="wifi"
+                      checked={selectedAmenities.wifi}
+                      onChange={handleAmenitiesChange}
+                    />
+                    WiFi
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="parking"
+                      checked={selectedAmenities.parking}
+                      onChange={handleAmenitiesChange}
+                    />
+                    Parking
+                  </label>
+
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="furnished"
+                      checked={selectedAmenities.parking}
+                      onChange={handleAmenitiesChange}
+                    />
+                    Furnished
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="pool"
+                      checked={selectedAmenities.pool}
+                      onChange={handleAmenitiesChange}
+                    />
+                    Pool
+                  </label>
+
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="airconditioning"
+                      checked={selectedAmenities.airconditioning}
+                      onChange={handleAmenitiesChange}
+                    />
+                    Air Conditioning
+                  </label>
+
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="washer"
+                      checked={selectedAmenities.washer}
+                      onChange={handleAmenitiesChange}
+                    />
+                    Washer
+                  </label>
+
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="dryer"
+                      checked={selectedAmenities.dryer}
+                      onChange={handleAmenitiesChange}
+                    />
+                    Dryer
+                  </label>
+
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="hotcoldshower"
+                      checked={selectedAmenities.shower}
+                      onChange={handleAmenitiesChange}
+                    />
+                    Hot & Cold Shower
+                  </label>
+
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="bathtub"
+                      checked={selectedAmenities.bathtub}
+                      onChange={handleAmenitiesChange}
+                    />
+                    Bathtub
+                  </label>
+
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="privatebathroom"
+                      checked={selectedAmenities.privatebathroom}
+                      onChange={handleAmenitiesChange}
+                    />
+                    Private Bathroom
+                  </label>
+
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="kitchen"
+                      checked={selectedAmenities.kitchen}
+                      onChange={handleAmenitiesChange}
+                    />
+                    Kitchen
+                  </label>
+                  {/* Add more amenities checkboxes here */}
+                </div>
+
+                <div>
+                  <h2>Rules</h2>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="parties"
+                      checked={selectedRules.parties}
+                      onChange={handleRulesChange}
+                    />
+                    No parties
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="visitors"
+                      checked={selectedAmenities.visitors}
+                      onChange={handleRulesChange}
+                    />
+                    Visitors Allowed
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="nopets"
+                      checked={selectedAmenities.nopets}
+                      onChange={handleRulesChange}
+                    />
+                    No Pets
+                  </label>
+
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="noisehours"
+                      checked={selectedAmenities.noisehours}
+                      onChange={handleRulesChange}
+                    />
+                    Noise Hours
+                  </label>
+
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="smoking"
+                      checked={selectedAmenities.smoking}
+                      onChange={handleRulesChange}
+                    />
+                    Smoking
+                  </label>
+
+                  {/* Add more amenities checkboxes here */}
+                </div>
+              </div>
+            )}
+
+            {/* Buttons for navigating between steps */}
+            {activeStep < 2 && (
+              <button
+                type="button"
+                style={{
+                  position: "relative",
+                  marginTop: "10px",
+                  left: "340px",
+                  backgroundColor: "rgba(255, 100, 100, 0.7)",
+                  color: "white",
+                  padding: "10px 20px",
+                  borderRadius: "10px",
+                  border: "solid 3px black",
+                  cursor: "pointer",
+                  boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+                }}
+                onClick={handleNext}
               >
-                <option value=""> Select Accomodation Type</option>
-                {rentalTypes.map((type, index) => (
-                  <option key={index} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-              <input
-                type="text"
-                placeholder="Number of Occupants"
-                name="occupants"
-                value={formData.occupants}
-                onChange={handleFormInputChange}
-              />
-              <div>
-                Available On:
-                <DatePicker
-                  selected={formData.availableOn}
-                  onChange={(date) =>
-                    setFormData({
-                      ...formData,
-                      availableOn: date,
-                    })
-                  }
-                  dateFormat="MM/dd/yyyy" // You can customize the date format
-                  placeholderText="Select a date"
-                />
-              </div>
-              <input
-                type="text"
-                placeholder="Price per month"
-                name="price"
-                value={formData.price}
-                onChange={handleFormInputChange}
-              />
-              <input
-                type="text"
-                placeholder="Deposit"
-                name="deposit"
-                value={formData.deposit}
-                onChange={handleFormInputChange}
-              />
+                Next
+              </button>
+            )}
 
-              <label>
-                <input
-                  type="checkbox"
-                  name="includeutilities"
-                  checked={selectedInclude.includeutilities}
-                  onChange={handleIncludeChange}
-                />
-                Utilities included
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="noutilities"
-                  checked={selectedInclude.noutilities}
-                  onChange={handleIncludeChange}
-                />
-                Utilities NOT included
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={handlePhotoUpload}
-                // Limit the number of photos to 5
-                max="5"
-                name="photos"
-              />
-              <div className="photo-grid">
-                {photos.map((photoData, index) => (
-                  <img
-                    key={index}
-                    src={photoData.url}
-                    alt={`Uploaded ${index}`}
-                    style={{
-                      width: "100px",
-                      height: "auto",
-                      marginRight: "10px",
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Content of your second step */}
-
-          {activeStep === 1 && (
-            <div className={styles.step2container}>
-              <input
-                type="text"
-                placeholder="Street Number"
-                name="streetNumber"
-                value={formData.streetNumber}
-                onChange={handleFormInputChange}
-              />
-              <input
-                type="text"
-                placeholder="Street Name"
-                name="streetName"
-                value={formData.streetName}
-                onChange={handleFormInputChange}
-              />
-              <input
-                type="text"
-                placeholder="City"
-                name="city"
-                value={formData.city}
-                onChange={handleFormInputChange}
-              />
-              <input
-                type="text"
-                placeholder="State/Province"
-                name="state"
-                value={formData.state}
-                onChange={handleFormInputChange}
-              />
-              <input
-                type="text"
-                placeholder="Country"
-                name="country"
-                value={formData.country}
-                onChange={handleFormInputChange}
-              />
-              <input
-                type="text"
-                placeholder="Zip Code"
-                name="zipCode"
-                value={formData.zipCode}
-                onChange={handleFormInputChange}
-              />
-            </div>
-          )}
-
-          {/* Content of your third step */}
-          {activeStep === 2 && (
-            <div>
-              <div>
-                <h2>Amenities</h2>
-                <label>
-                  <input
-                    type="checkbox"
-                    name="wifi"
-                    checked={selectedAmenities.wifi}
-                    onChange={handleAmenitiesChange}
-                  />
-                  WiFi
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    name="parking"
-                    checked={selectedAmenities.parking}
-                    onChange={handleAmenitiesChange}
-                  />
-                  Parking
-                </label>
-
-                <label>
-                  <input
-                    type="checkbox"
-                    name="furnished"
-                    checked={selectedAmenities.parking}
-                    onChange={handleAmenitiesChange}
-                  />
-                  Furnished
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    name="pool"
-                    checked={selectedAmenities.pool}
-                    onChange={handleAmenitiesChange}
-                  />
-                  Pool
-                </label>
-
-                <label>
-                  <input
-                    type="checkbox"
-                    name="airconditioning"
-                    checked={selectedAmenities.airconditioning}
-                    onChange={handleAmenitiesChange}
-                  />
-                  Air Conditioning
-                </label>
-
-                <label>
-                  <input
-                    type="checkbox"
-                    name="washer"
-                    checked={selectedAmenities.washer}
-                    onChange={handleAmenitiesChange}
-                  />
-                  Washer
-                </label>
-
-                <label>
-                  <input
-                    type="checkbox"
-                    name="dryer"
-                    checked={selectedAmenities.dryer}
-                    onChange={handleAmenitiesChange}
-                  />
-                  Dryer
-                </label>
-
-                <label>
-                  <input
-                    type="checkbox"
-                    name="hotcoldshower"
-                    checked={selectedAmenities.shower}
-                    onChange={handleAmenitiesChange}
-                  />
-                  Hot & Cold Shower
-                </label>
-
-                <label>
-                  <input
-                    type="checkbox"
-                    name="bathtub"
-                    checked={selectedAmenities.bathtub}
-                    onChange={handleAmenitiesChange}
-                  />
-                  Bathtub
-                </label>
-
-                <label>
-                  <input
-                    type="checkbox"
-                    name="privatebathroom"
-                    checked={selectedAmenities.privatebathroom}
-                    onChange={handleAmenitiesChange}
-                  />
-                  Private Bathroom
-                </label>
-
-                <label>
-                  <input
-                    type="checkbox"
-                    name="kitchen"
-                    checked={selectedAmenities.kitchen}
-                    onChange={handleAmenitiesChange}
-                  />
-                  Kitchen
-                </label>
-                {/* Add more amenities checkboxes here */}
-              </div>
-
-              <div>
-                <h2>Rules</h2>
-                <label>
-                  <input
-                    type="checkbox"
-                    name="parties"
-                    checked={selectedRules.parties}
-                    onChange={handleRulesChange}
-                  />
-                  No parties
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    name="visitors"
-                    checked={selectedAmenities.visitors}
-                    onChange={handleRulesChange}
-                  />
-                  Visitors Allowed
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    name="nopets"
-                    checked={selectedAmenities.nopets}
-                    onChange={handleRulesChange}
-                  />
-                  No Pets
-                </label>
-
-                <label>
-                  <input
-                    type="checkbox"
-                    name="noisehours"
-                    checked={selectedAmenities.noisehours}
-                    onChange={handleRulesChange}
-                  />
-                  Noise Hours
-                </label>
-
-                <label>
-                  <input
-                    type="checkbox"
-                    name="smoking"
-                    checked={selectedAmenities.smoking}
-                    onChange={handleRulesChange}
-                  />
-                  Smoking
-                </label>
-
-                {/* Add more amenities checkboxes here */}
-              </div>
-            </div>
-          )}
-
-          {/* Buttons for navigating between steps */}
-          {activeStep < 2 && (
-            <button
-              type="button"
-              style={{
-                position: "relative",
-                marginTop: "10px",
-                left: "340px",
-                backgroundColor: "rgba(255, 100, 100, 0.7)",
-                color: "white",
-                padding: "10px 20px",
-                borderRadius: "10px",
-                border: "solid 3px black",
-                cursor: "pointer",
-                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-              }}
-              onClick={handleNext}
-            >
-              Next
-            </button>
-          )}
-
-          {activeStep === 2 && <button type="submit">Add Listing</button>}
-        </Box>
-      </Box>
+            {activeStep === 2 && <button type="submit">Add Listing</button>}
+        
+      </div>
+      
     </form>
   );
 };
