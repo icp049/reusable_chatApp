@@ -21,7 +21,9 @@ border: solid 3px black;
 .step1container select,
 .step1container input[type="file"],
 .step1container input[type="checkbox"] {
-    margin-bottom: 10px; /* Adjust the value as needed */
+    margin-bottom: 10px; 
+    height: 30px; 
+    font-size: 16px; 
    
     
 
