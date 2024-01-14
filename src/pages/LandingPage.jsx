@@ -12,6 +12,7 @@ import sharedRoomIcon from "../icons/sharedroom.png";
 import bedSpaceIcon from "../icons/bedspace.png";
 import allIcon from "../icons/all.png";
 import worldIcon from "../icons/worldIcon.png";
+import HouseIcon from '../icons/house.png';
 
 const rentalTypes = [
   "all",
@@ -244,6 +245,7 @@ const LandingPage = () => {
         }}
         onClick={openModal}
       >
+        <img src={HouseIcon} alt="" style={{ marginRight: "5px", width: "30px", height: "30px" }} />
         Add Listing +
       </div>
       {isModalOpen && (

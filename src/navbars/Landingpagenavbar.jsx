@@ -61,7 +61,7 @@ const Landingpagenavbar = () => {
     alignItems: "center", // Center items vertically
   }}
 >
-<img src={BeeHive} alt="Beehive" style={{ marginRight: "10px", width: "30px", height: "30px" }} />
+<img src={BeeHive} alt="Beehive" style={{ marginRight: "5px", width: "45px", height: "45px" }} />
   <Link to="/" style={{ textDecoration: "none", color: "black", fontWeight: "bold", fontSize: "30px" }}>
     NestMates
   </Link>
