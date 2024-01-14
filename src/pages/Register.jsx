@@ -35,7 +35,7 @@ const Register = () => {
 
       const compressedFile = await new Promise((resolve) => {
         new Compressor(file, {
-          quality: 0.8,
+          quality: 0.1,
           success: (compressedResult) => {
             resolve(compressedResult);
           },
